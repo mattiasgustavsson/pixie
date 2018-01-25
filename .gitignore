@@ -1,0 +1,14 @@
+.runtime
+.build_temp
+.git
+.vs
+mssccprj.scc
+*.ncb
+*.sln
+*.vcproj
+*.vcxproj
+*.suo
+*.vspscc
+*.filters
+*.user
+source_data
