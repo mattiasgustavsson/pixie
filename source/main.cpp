@@ -19,18 +19,18 @@ int mygame(); // forward declare game main func
 #endif
 
 int main( int argc, char** argv )
-    {
+	{
 	(void) argc, argv;
-    #ifndef NDEBUG
-        int flag = _CrtSetDbgFlag( _CRTDBG_REPORT_FLAG ); // Get current flag
-        flag ^= _CRTDBG_LEAK_CHECK_DF; // Turn on leak-checking bit
-        _CrtSetDbgFlag( flag ); // Set flag to the new value
+	#ifndef NDEBUG
+		int flag = _CrtSetDbgFlag( _CRTDBG_REPORT_FLAG ); // Get current flag
+		flag ^= _CRTDBG_LEAK_CHECK_DF; // Turn on leak-checking bit
+		_CrtSetDbgFlag( flag ); // Set flag to the new value
 //        _CrtSetBreakAlloc( 0 );
-    #endif
+	#endif
 
 	// run game
 	return pixie::run( mygame );
-    }
+	}
 
 // pass-through so the program will build with either /SUBSYSTEM:WINDOWS or /SUBSYSTEN:CONSOLE
 #include <stdlib.h> // for __argc/__argv

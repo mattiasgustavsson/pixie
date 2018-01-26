@@ -1,6 +1,6 @@
 /*
 ------------------------------------------------------------------------------
-          Licensing information can be found at the end of the file.
+		  Licensing information can be found at the end of the file.
 ------------------------------------------------------------------------------
 
 frametimer.h - v0.1 - Framerate timer functionality.
@@ -42,20 +42,20 @@ int frametimer_frame_counter( frametimer_t* frametimer );
 #define _CRT_SECURE_NO_WARNINGS
 
 #ifdef _WIN32
-    #define _CRT_NONSTDC_NO_DEPRECATE 
-    #define _CRT_SECURE_NO_WARNINGS
+	#define _CRT_NONSTDC_NO_DEPRECATE 
+	#define _CRT_SECURE_NO_WARNINGS
 	#if !defined( _WIN32_WINNT ) || _WIN32_WINNT < 0x0501 
 	    #undef _WIN32_WINNT
 	    #define _WIN32_WINNT 0x0501 // requires Windows XP minimum
 	#endif
-    // 0x0400=Windows NT 4.0, 0x0500=Windows 2000, 0x0501=Windows XP, 0x0502=Windows Server 2003, 0x0600=Windows Vista, 
-    // 0x0601=Windows 7, 0x0602=Windows 8, 0x0603=Windows 8.1, 0x0A00=Windows 10, 
-    #define _WINSOCKAPI_
-    #pragma warning( push )
-    #pragma warning( disable: 4668 ) // 'symbol' is not defined as a preprocessor macro, replacing with '0' for 'directives'
-    #pragma warning( disable: 4255 ) // 'function' : no function prototype given: converting '()' to '(void)'
-    #include <windows.h>
-    #pragma warning( pop )
+	// 0x0400=Windows NT 4.0, 0x0500=Windows 2000, 0x0501=Windows XP, 0x0502=Windows Server 2003, 0x0600=Windows Vista, 
+	// 0x0601=Windows 7, 0x0602=Windows 8, 0x0603=Windows 8.1, 0x0A00=Windows 10, 
+	#define _WINSOCKAPI_
+	#pragma warning( push )
+	#pragma warning( disable: 4668 ) // 'symbol' is not defined as a preprocessor macro, replacing with '0' for 'directives'
+	#pragma warning( disable: 4255 ) // 'function' : no function prototype given: converting '()' to '(void)'
+	#include <windows.h>
+	#pragma warning( pop )
 	#pragma comment(lib, "winmm.lib")
 #endif
 
@@ -71,15 +71,15 @@ int frametimer_frame_counter( frametimer_t* frametimer );
 #endif
 
 #ifndef FRAMETIMER_U64
-    #define FRAMETIMER_U64 unsigned long long 
+	#define FRAMETIMER_U64 unsigned long long 
 #endif
 
-    
+	
 struct frametimer_t
 	{
 	FRAMETIMER_U64 clock_freq;
 	FRAMETIMER_U64 prev_clock;
-    void* memctx;
+	void* memctx;
 	float delta_time;
 	int initialized;
 	int frame_counter;
@@ -99,8 +99,8 @@ frametimer_t* frametimer_create( void* memctx )
 			timeBeginPeriod( tc.wPeriodMin );
 	    frametimer->waitable_timer = CreateWaitableTimer(NULL, TRUE, NULL);
 	#endif
-       
-    frametimer->memctx = memctx;
+	   
+	frametimer->memctx = memctx;
 	frametimer->initialized = 0;
 
 	#ifdef _WIN32

@@ -1,6 +1,6 @@
 /*
 ------------------------------------------------------------------------------
-          Licensing information can be found at the end of the file.
+		  Licensing information can be found at the end of the file.
 ------------------------------------------------------------------------------
 
 strpool.hpp - v0.1 - 
@@ -10,7 +10,7 @@ Do this:
 before you include this file in *one* C/C++ file to create the implementation.
 
 Dependencies: 
-    strpool.h
+	strpool.h
 */
 
 #ifndef strpool_hpp
@@ -21,7 +21,7 @@ namespace strpool {
 #ifndef STRPOOL_U64
 	typedef unsigned long long u64;
 #else
-    typedef STRPOOL_U64 u64;
+	typedef STRPOOL_U64 u64;
 #endif
 
 
@@ -63,7 +63,7 @@ struct string_type
 
 	private:
 		template< typename POOL > friend struct string_type;
-        u64 handle_;
+		u64 handle_;
 			
 		#ifndef NDEBUG
 			char debug_[ 56 ];
@@ -214,7 +214,7 @@ string_type<POOL>& string_type<POOL>::operator=( string_type const& other )
 
 	#ifndef NDEBUG
 		internal::strncpy( debug_, c_str(), sizeof( debug_ ) );
-        debug_[ sizeof( debug_ ) - 1 ] = '\0';
+		debug_[ sizeof( debug_ ) - 1 ] = '\0';
 	#endif
 
 	return *this;
@@ -228,7 +228,7 @@ string_type<POOL>::string_type( string_type const& other ):
 
 	#ifndef NDEBUG
 		internal::strncpy( debug_, c_str(), sizeof( debug_ ) );
-        debug_[ sizeof( debug_ ) - 1 ] = '\0';
+		debug_[ sizeof( debug_ ) - 1 ] = '\0';
 	#endif
 	}
 
@@ -240,7 +240,7 @@ string_type<POOL>::string_type( string_type<OTHER_POOL> const& other )
 
 	#ifndef NDEBUG
 		internal::strncpy( debug_, c_str(), sizeof( debug_ ) );
-        debug_[ sizeof( debug_ ) - 1 ] = '\0';
+		debug_[ sizeof( debug_ ) - 1 ] = '\0';
 	#endif
 	}
 
@@ -261,7 +261,7 @@ string_type<POOL>::string_type( char* str )
 
 	#ifndef NDEBUG
 		internal::strncpy( debug_, c_str(), sizeof( debug_ ) );
-        debug_[ sizeof( debug_ ) - 1 ] = '\0';
+		debug_[ sizeof( debug_ ) - 1 ] = '\0';
 	#endif
 	}
 
@@ -282,20 +282,20 @@ string_type<POOL>::string_type( char const* str )
 
 	#ifndef NDEBUG
 		internal::strncpy( debug_, c_str(), sizeof( debug_ ) );
-        debug_[ sizeof( debug_ ) - 1 ] = '\0';
+		debug_[ sizeof( debug_ ) - 1 ] = '\0';
 	#endif
 	}
 
 template< typename POOL > 	
 string_type<POOL>::string_type( char const* begin, char const* end ) :
-    handle_( 0 )
+	handle_( 0 )
 	{
-    if( !begin ) 
-        {
+	if( !begin ) 
+		{
 	    #ifndef NDEBUG
 		    internal::strcpy( debug_, "");
 	    #endif
-        }
+		}
 	size_t len = end ? (size_t)( end - begin ) : internal::strlen( begin );
 	if( len == 0 )
 		{
@@ -309,7 +309,7 @@ string_type<POOL>::string_type( char const* begin, char const* end ) :
 
 	#ifndef NDEBUG
 		internal::strncpy( debug_, c_str(), sizeof( debug_ ) );
-        debug_[ sizeof( debug_ ) - 1 ] = '\0';
+		debug_[ sizeof( debug_ ) - 1 ] = '\0';
 	#endif
 	}
 
@@ -409,9 +409,9 @@ char* string_type<POOL>::temp_buffer( int const len )
 namespace strpool { namespace internal {
 
 int entry_count( strpool_t* pool )
-    {
-    return pool->entry_count;
-    }
+	{
+	return pool->entry_count;
+	}
 
 
 string_pool::string_pool( bool case_sensitive, void* memctx ):
@@ -421,7 +421,7 @@ string_pool::string_pool( bool case_sensitive, void* memctx ):
 	strpool_config_t config = strpool_default_config;
 	config.memctx = memctx;
 	config.ignore_case = case_sensitive ? 0 : 1;
-    pool_ = (strpool_t*) STRPOOL_HPP_MALLOC( memctx, sizeof( strpool_t ) );
+	pool_ = (strpool_t*) STRPOOL_HPP_MALLOC( memctx, sizeof( strpool_t ) );
 	strpool_init( pool_, &config );
 	temp_buffer_ = (char*) STRPOOL_HPP_MALLOC( memctx, (size_t) temp_buffer_size_ );
 	}
@@ -429,7 +429,7 @@ string_pool::string_pool( bool case_sensitive, void* memctx ):
 string_pool::~string_pool()
 	{
 	strpool_term( pool_ );
-    STRPOOL_HPP_FREE( memctx_, pool_ );
+	STRPOOL_HPP_FREE( memctx_, pool_ );
 	STRPOOL_HPP_FREE( memctx_, temp_buffer_ );
 	}
 

@@ -1,6 +1,6 @@
 /*
 ------------------------------------------------------------------------------
-          Licensing information can be found at the end of the file.
+		  Licensing information can be found at the end of the file.
 ------------------------------------------------------------------------------
 
 pixie_build.hpp - v0.1 - 
@@ -46,10 +46,10 @@ typedef strpool::string_type<internal::PIXIE_BUILD_STRING_ID_POOL> string_id;
 
 template< typename T, int CAPACITY = 16 > struct array : array_ns::array_type< T, CAPACITY, array_ns::NOT_POD >
 	{ 
-    explicit array( int initial_capacity = CAPACITY );
+	explicit array( int initial_capacity = CAPACITY );
 	template< typename U > array( U const& other );
 	template< typename U > explicit array( U const* items, int count );
-    };
+	};
 
 
 template< typename T, int CAPACITY = 16 > struct pod_array : array_ns::array_type< T, CAPACITY, array_ns::IS_POD >
@@ -57,7 +57,7 @@ template< typename T, int CAPACITY = 16 > struct pod_array : array_ns::array_typ
 	explicit pod_array( int initial_capacity = CAPACITY );
 	template< typename U > pod_array( U const& other );
 	template< typename U > explicit pod_array( U const* items, int count );
-    };
+	};
 
 #pragma warning( pop ) 
 
@@ -242,29 +242,29 @@ template< typename T > void pixie_build::swap( T* a, T* b )
 	
 
 template< typename T, int CAPACITY > pixie_build::array<T, CAPACITY>::array( int initial_capacity = CAPACITY ) : 
-    array_ns::array_type<T, CAPACITY, array_ns::NOT_POD>( initial_capacity, 0 ) 
-    { }
+	array_ns::array_type<T, CAPACITY, array_ns::NOT_POD>( initial_capacity, 0 ) 
+	{ }
 
 template< typename T, int CAPACITY > template< typename U > pixie_build::array<T, CAPACITY>::array( U const& other ) : 
-    array_ns::array_type<T, CAPACITY, array_ns::NOT_POD>( other ) 
-    { }
+	array_ns::array_type<T, CAPACITY, array_ns::NOT_POD>( other ) 
+	{ }
 
 template< typename T, int CAPACITY > template< typename U > pixie_build::array<T, CAPACITY>::array( U const* items, int count ) : 
-    array_ns::array_type<T, CAPACITY, array_ns::NOT_POD>( items, count, 0 ) 
-    { }
+	array_ns::array_type<T, CAPACITY, array_ns::NOT_POD>( items, count, 0 ) 
+	{ }
 
 
 template< typename T, int CAPACITY > pixie_build::pod_array<T, CAPACITY>::pod_array( int initial_capacity = CAPACITY ) : 
-    array_ns::array_type<T, CAPACITY, array_ns::IS_POD>( initial_capacity, 0 ) 
-    { }
+	array_ns::array_type<T, CAPACITY, array_ns::IS_POD>( initial_capacity, 0 ) 
+	{ }
 
 template< typename T, int CAPACITY > template< typename U > pixie_build::pod_array<T, CAPACITY>::pod_array( U const& other ) : 
-    array_ns::array_type<T, CAPACITY, array_ns::IS_POD>( other ) 
-    { }
+	array_ns::array_type<T, CAPACITY, array_ns::IS_POD>( other ) 
+	{ }
 
 template< typename T, int CAPACITY > template< typename U > pixie_build::pod_array<T, CAPACITY>::pod_array( U const* items, int count ) : 
-    array_ns::array_type<T, CAPACITY, array_ns::IS_POD>( items, count, 0 ) 
-    { }
+	array_ns::array_type<T, CAPACITY, array_ns::IS_POD>( items, count, 0 ) 
+	{ }
 
 
 template< typename T > void pixie_build::shuffle( T* elements, int count )
@@ -320,21 +320,21 @@ template< typename T, int (*COMPARE_FUNC)( T const&, T const& ) > void pixie_bui
 
 
 template< typename T > int pixie_build::find( T const* haystack_elements, int haystack_count, T const& needle ) 
-    { 
-    for( int i = 0; i < haystack_count; ++i )
-        if( haystack_elements[ i ] == needle ) return i;
-    return -1;
-    }
+	{ 
+	for( int i = 0; i < haystack_count; ++i )
+		if( haystack_elements[ i ] == needle ) return i;
+	return -1;
+	}
 
 template< typename T > int pixie_build::find( array<T> const& haystack, T const& needle )
-    {
-    return find( haystack.data(), haystack.count(), needle );
-    }
+	{
+	return find( haystack.data(), haystack.count(), needle );
+	}
 
 template< typename T > int pixie_build::find( pod_array<T> const& haystack, T const& needle )
-    {
-    return find( haystack.data(), haystack.count(), needle );
-    }
+	{
+	return find( haystack.data(), haystack.count(), needle );
+	}
 
 
 
@@ -373,33 +373,33 @@ internals_t* internals();
 
 
 pixie_build::internal::internals_t* pixie_build::internal::internals()
-    {
-    assert( internals_tls && "Attempt to call a Pixie build function from outside a pixie_build::build block." );
-    void* ptr = thread_tls_get( internals_tls );
-    assert( ptr && "Attempt to call a Pixie build function from a thread which it is not running on." );
-    return (internals_t*) ptr;
-    }
-    
+	{
+	assert( internals_tls && "Attempt to call a Pixie build function from outside a pixie_build::build block." );
+	void* ptr = thread_tls_get( internals_tls );
+	assert( ptr && "Attempt to call a Pixie build function from a thread which it is not running on." );
+	return (internals_t*) ptr;
+	}
+	
 struct pixie_build::internal::internals_t final    
-    {
-    internals_t();
-    
-    log_t* log;
-    char* log_buffer;
-    size_t log_capacity;
+	{
+	internals_t();
+	
+	log_t* log;
+	char* log_buffer;
+	size_t log_capacity;
 
-    strpool::internal::string_pool string_pool;
-    strpool::internal::string_pool string_id_pool;
-    rnd_pcg_t rng_instance;
+	strpool::internal::string_pool string_pool;
+	strpool::internal::string_pool string_id_pool;
+	rnd_pcg_t rng_instance;
 	};
 
 
 pixie_build::internal::internals_t::internals_t() :
-    string_pool( true ),
-    string_id_pool( false )
-    { 
-    rnd_pcg_seed( &rng_instance, 0 );
-    }
+	string_pool( true ),
+	string_id_pool( false )
+	{ 
+	rnd_pcg_seed( &rng_instance, 0 );
+	}
 
 
 strpool::internal::string_pool& pixie_build::internal::string_pool()
@@ -416,7 +416,7 @@ strpool::internal::string_pool& pixie_build::internal::string_id_pool()
 
 float pixie_build::random()
 	{
-    internal::internals_t* internals = internal::internals();
+	internal::internals_t* internals = internal::internals();
 	return rnd_pcg_nextf( &internals->rng_instance);
 	}
 	
@@ -424,14 +424,14 @@ float pixie_build::random()
 
 int pixie_build::random( int min, int max )
 	{
-    internal::internals_t* internals = internal::internals();
+	internal::internals_t* internals = internal::internals();
 	return rnd_pcg_range( &internals->rng_instance, min, max );
 	}
 
 	
 void pixie_build::random_seed( u32 seed )
 	{
-    internal::internals_t* internals = internal::internals();
+	internal::internals_t* internals = internal::internals();
 	rnd_pcg_seed( &internals->rng_instance, seed );
 	}
 	
@@ -450,7 +450,7 @@ int pixie_build::random_bell_curve( int min, int max, int iterations )
 	int const range = ( max - min ) + 1;
 	if( range <= 0 ) return min;
 	int const value = (int) ( random_bell_curve( iterations ) * range );
-    return min + value; 
+	return min + value; 
 	}
 	
 		
@@ -459,14 +459,14 @@ pixie_build::float3 pixie_build::random_unit_vector()
 	float const TWO_PI_ = 6.283185307179586476925286766559f;
 
 	float phi = random() * TWO_PI_;
-    float costheta = random() * 2.0f - 1.0f;
-    float theta = acosf( costheta );
+	float costheta = random() * 2.0f - 1.0f;
+	float theta = acosf( costheta );
  
 	float x = sinf( theta ) * cosf( phi );
-    float y = sinf( theta ) * sinf( phi );
-    float z = cosf( theta );
+	float y = sinf( theta ) * sinf( phi );
+	float z = cosf( theta );
 
-    return float3( x, y, z );
+	return float3( x, y, z );
 	}
 
 
@@ -482,7 +482,7 @@ void binary_delete( void* instance )
 
 pixie_build::ref<pixie_build::binary> pixie_build::bload( string const& filename )
 	{
-    file_t* file = file_load( filename.c_str(), FILE_MODE_BINARY, 0 );
+	file_t* file = file_load( filename.c_str(), FILE_MODE_BINARY, 0 );
 	if( !file ) return ref<binary>::ref();
 	size_t file_size = file->size;
 	void* storage = malloc( sizeof( binary ) + sizeof( int ) + file_size ); 
@@ -504,7 +504,7 @@ pixie_build::ref<pixie_build::binary> pixie_build::bnew( size_t size )
 	bin->data = (u8*)( (uintptr_t)storage + sizeof( binary ) + sizeof( int ) );
 	bin->size = (size_t)size;
 	return refcount::make_ref( bin, internal::binary_delete, (int*)( (uintptr_t)storage + sizeof( binary ) ), 0 );
-    }
+	}
 
 
 pixie_build::ref<pixie_build::binary> pixie_build::bresize( ref<binary> const& bin, size_t new_size )
@@ -546,9 +546,9 @@ string path_join( string const& a, string const& b, string const& c, string cons
 void logf( string str, ... )
 	{
 	#pragma warning( push )
-    #pragma warning( disable: 4619 ) // there is no warning number '4840'
+	#pragma warning( disable: 4619 ) // there is no warning number '4840'
 	#pragma warning( disable: 4840 ) // non-portable use of class 'strpool::string_type<pixie_build::internal::PIXIE_BUILD_STRING_POOL>' as an argument to a variadic function
-    pixie_build::internal::internals_t* internals = pixie_build::internal::internals();    
+	pixie_build::internal::internals_t* internals = pixie_build::internal::internals();    
 	va_list args;
 	va_start( args, str );
 	size_t count = (size_t) _vsnprintf( internals->log_buffer, internals->log_capacity, str.c_str(), args );
@@ -645,7 +645,7 @@ struct config
 
 config read_config( build_t* build, string const& path )
 	{
-    (void) build;
+	(void) build;
 	config cfg;
 	cfg.valid = false;
 	
@@ -929,19 +929,19 @@ compile_counts build_dir( build_t* build, config cfg, string const& input, strin
 	        compiler_t* compiler = find_compiler( conditioner, asset_type );
 	        if( compiler )
 	            {
-                char source_path[ MAX_PATH ]; 
-                char build_path[ MAX_PATH ];
-                char output_path[ MAX_PATH ];
-                strcat( strcat( strcpy( source_path, conditioner->source_path ), "/" ), asset_type );
-                strcat( strcat( strcpy( build_path, conditioner->build_path ), "/" ), asset_type );
-                strcat( strcat( strcpy( output_path, conditioner->output_path ), "/" ), asset_type );
+				char source_path[ MAX_PATH ]; 
+				char build_path[ MAX_PATH ];
+				char output_path[ MAX_PATH ];
+				strcat( strcat( strcpy( source_path, conditioner->source_path ), "/" ), asset_type );
+				strcat( strcat( strcpy( build_path, conditioner->build_path ), "/" ), asset_type );
+				strcat( strcat( strcpy( output_path, conditioner->output_path ), "/" ), asset_type );
 				compile_context_t context;
 				context.asset_type = asset_type;
 				context.source_path = source_path;
 				context.build_path = build_path;
 				context.output_path = output_path;
 				context.log = conditioner->log;
-            	log_queue( conditioner->log, "\nCompiling asset type '%s'...\n", asset_type );                
+				log_queue( conditioner->log, "\nCompiling asset type '%s'...\n", asset_type );                
 				if( compiler->compile )
 					{
 		            counts += compiler->compile( &context );
@@ -955,7 +955,7 @@ compile_counts build_dir( build_t* build, config cfg, string const& input, strin
 	            }
 	        else
 	            {
-                log_print( conditioner->log, "%s(%d) : error: no compiler registered for asset type '%s'\n", __FILE__, __LINE__, asset_type );
+				log_print( conditioner->log, "%s(%d) : error: no compiler registered for asset type '%s'\n", __FILE__, __LINE__, asset_type );
 	            ++counts.failed;
 	            }
 */
@@ -1003,7 +1003,7 @@ void build_palette_lookup( string const& input_file, string const& output_file )
 		for( int x = 0; x < w; ++x )	
 			{
 			u32 pixel = ((u32*)img)[ x + y * w ];
-            if( ( pixel & 0xff000000 ) == 0 ) goto skip;
+			if( ( pixel & 0xff000000 ) == 0 ) goto skip;
 			pixel = ( pixel & 0x00ffffff ) | 0xff000000;
 			if( count < 256 ) 
 				{
@@ -1020,10 +1020,10 @@ void build_palette_lookup( string const& input_file, string const& output_file )
 			}
 		}
 	if( count > 256 ) 
-        {
-        memset( palette, 0, 256 * sizeof( u32 ) );
-        count = palettize_generate_palette_xbgr32( (PALETTIZE_U32*) img, w, h, palette, 256, 0 );        
-        }
+		{
+		memset( palette, 0, 256 * sizeof( u32 ) );
+		count = palettize_generate_palette_xbgr32( (PALETTIZE_U32*) img, w, h, palette, 256, 0 );        
+		}
 
 	stbi_image_free( img );
 
@@ -1070,8 +1070,8 @@ compilation_result compiler_pixie_palette( compile_context const* context )
 			for( int x = 0; x < w; ++x )	
 				{
 				u32 pixel = ((u32*)img)[ x + y * w ];
-                if( ( pixel & 0xff000000 ) == 0 ) goto skip;
-    			pixel = ( pixel & 0x00ffffff ) | 0xff000000;
+				if( ( pixel & 0xff000000 ) == 0 ) goto skip;
+				pixel = ( pixel & 0x00ffffff ) | 0xff000000;
 				if( count < 256 ) 
 					{
 					for( int i = 0; i < count; ++i )
@@ -1087,14 +1087,14 @@ compilation_result compiler_pixie_palette( compile_context const* context )
 				}
 			}	
 		if( count > 256 ) 
-            {
-            memset( palette, 0, 256 * sizeof( u32 ) );
-            count = palettize_generate_palette_xbgr32( (PALETTIZE_U32*) img, w, h, palette, 256, 0 );        
-            }
+			{
+			memset( palette, 0, 256 * sizeof( u32 ) );
+			count = palettize_generate_palette_xbgr32( (PALETTIZE_U32*) img, w, h, palette, 256, 0 );        
+			}
 
-        stbi_image_free( img );
+		stbi_image_free( img );
 		
-        create_path( dirname( output_file ).c_str() );
+		create_path( dirname( output_file ).c_str() );
 		file_save_data( storage, sizeof( storage ), output_file.c_str(), FILE_MODE_BINARY );		
 		}
 
@@ -1162,16 +1162,16 @@ compilation_result compiler_pixie_bitmap_single( compile_context const* context 
 		
 		int* offset_and_pitch = (int*)( output + sizeof( header ) + sizeof( version ) + 5 * sizeof ( int ) );
 		
-        paldither_type_t dither_type = PALDITHER_TYPE_DEFAULT;
-        if( dither == "none" )
-            dither_type = PALDITHER_TYPE_NONE;
-        else if( dither == "bayer" )
-            dither_type = PALDITHER_TYPE_BAYER;
+		paldither_type_t dither_type = PALDITHER_TYPE_DEFAULT;
+		if( dither == "none" )
+			dither_type = PALDITHER_TYPE_NONE;
+		else if( dither == "bayer" )
+			dither_type = PALDITHER_TYPE_BAYER;
 
 		u8* pixels = output + sizeof( header ) + sizeof( version ) + 5 * sizeof ( int ) + 4 * sizeof( int ) ;
-        if( dither == "remap" )
-            palettize_remap_xbgr32( (PALDITHER_U32*)img, w, h, pal->colortable, pal->color_count, pixels );	
-        else
+		if( dither == "remap" )
+			palettize_remap_xbgr32( (PALDITHER_U32*)img, w, h, pal->colortable, pal->color_count, pixels );	
+		else
 		    paldither_palettize( (PALDITHER_U32*)img, w, h, pal, dither_type, pixels );	
 
 		u8* mask = pixels + w * h;
@@ -1443,12 +1443,12 @@ int build( build_action action, char const* input_path, char const* build_path, 
 	{
 	(void) action, input_path, build_path, output_path, compilers, compilers_count;
 
-    static thread_atomic_int_t init_count; 
-    if( thread_atomic_int_inc( &init_count ) == 0 ) pixie_build::internal::internals_tls = thread_tls_create();
+	static thread_atomic_int_t init_count; 
+	if( thread_atomic_int_inc( &init_count ) == 0 ) pixie_build::internal::internals_tls = thread_tls_create();
 
 	u8* internals_storage = (u8*) malloc( sizeof( pixie_build::internal::internals_t ) );
-    memset( internals_storage, 0, sizeof( pixie_build::internal::internals_t ) );
-    thread_tls_set( pixie_build::internal::internals_tls, internals_storage );
+	memset( internals_storage, 0, sizeof( pixie_build::internal::internals_t ) );
+	thread_tls_set( pixie_build::internal::internals_tls, internals_storage );
 	pixie_build::internal::internals_t* internals = new (internals_storage) pixie_build::internal::internals_t();
 
 	int retval = 0;
@@ -1493,10 +1493,10 @@ int build( build_action action, char const* input_path, char const* build_path, 
 	free( internals->log_buffer );
 	}
 
-    internals->~internals_t();
-    thread_tls_set( pixie_build::internal::internals_tls, 0 );
-    free( internals_storage );
-    if( thread_atomic_int_dec( &init_count ) == 1 )thread_tls_destroy( pixie_build::internal::internals_tls );
+	internals->~internals_t();
+	thread_tls_set( pixie_build::internal::internals_tls, 0 );
+	free( internals_storage );
+	if( thread_atomic_int_dec( &init_count ) == 1 )thread_tls_destroy( pixie_build::internal::internals_tls );
 
 	return retval;
 	}
@@ -1514,22 +1514,22 @@ int pixie_build::abs( int x )
 
 
 int pixie_build::min( int x, int y )
-    {
-    return x < y ? x : y;
-    }
+	{
+	return x < y ? x : y;
+	}
 
 
 int pixie_build::max( int x, int y )
-    {
-    return x > y ? x : y;
-    }
+	{
+	return x > y ? x : y;
+	}
 
 
 #undef clamp
 int pixie_build::clamp( int x, int min_val, int max_val )
-    {
-    return x > max_val ? max_val : x < min_val ? min_val : x;
-    }
+	{
+	return x > max_val ? max_val : x < min_val ? min_val : x;
+	}
 
 
 

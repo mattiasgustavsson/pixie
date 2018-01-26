@@ -1,6 +1,6 @@
 /*
 ------------------------------------------------------------------------------
-          Licensing information can be found at the end of the file.
+		  Licensing information can be found at the end of the file.
 ------------------------------------------------------------------------------
 
 log.h - v0.1 - Simple file/console logging helper for C/C++.
@@ -43,16 +43,16 @@ int log_unmute( log_t* log );
 #include <stdio.h>
 
 #ifndef LOG_MALLOC
-    #define _CRT_NONSTDC_NO_DEPRECATE 
-    #define _CRT_SECURE_NO_WARNINGS
-    #include <stdlib.h>
-    #define LOG_MALLOC( ctx, size ) ( malloc( size ) )
-    #define LOG_FREE( ctx, ptr ) ( free( ptr ) )
+	#define _CRT_NONSTDC_NO_DEPRECATE 
+	#define _CRT_SECURE_NO_WARNINGS
+	#include <stdlib.h>
+	#define LOG_MALLOC( ctx, size ) ( malloc( size ) )
+	#define LOG_FREE( ctx, ptr ) ( free( ptr ) )
 #endif
 
 struct log_t
 	{
-    void* memctx;
+	void* memctx;
 	char* data;
 	size_t capacity;
 	size_t size;
@@ -65,7 +65,7 @@ struct log_t
 log_t* log_create( char const* const filename, void* memctx )
 	{
 	log_t* log = (log_t*) LOG_MALLOC( memctx, sizeof( log_t ) );
-    log->memctx = memctx;
+	log->memctx = memctx;
 	log->data = 0;
 	log->capacity = 0;
 	log->size = 0;
@@ -97,9 +97,9 @@ static void alloc_data( log_t* const log, int const count )
 			{
 			log->capacity *= 2; 
 			}
-        char* new_data = (char*) LOG_MALLOC( log->memctx, log->capacity );
-        memcpy( new_data, log->data, log->size + 1 );
-        LOG_FREE( log->memctx, log->data );
+		char* new_data = (char*) LOG_MALLOC( log->memctx, log->capacity );
+		memcpy( new_data, log->data, log->size + 1 );
+		LOG_FREE( log->memctx, log->data );
 		log->data = new_data;
 		}
 	else
@@ -116,7 +116,7 @@ static void alloc_data( log_t* const log, int const count )
 
 void log_print( log_t* const log, char const* const str, ... )
 	{
-  	if( !log ) return;
+	if( !log ) return;
 	if( log->muted ) return;
 
 	log->pending_point = ~(size_t) 0;

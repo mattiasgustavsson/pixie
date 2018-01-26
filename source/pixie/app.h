@@ -1,6 +1,6 @@
 /*
 ------------------------------------------------------------------------------
-          Licensing information can be found at the end of the file.
+		  Licensing information can be found at the end of the file.
 ------------------------------------------------------------------------------
 
 app.h - v0.3 - Small cross-platform base framework for graphical apps.
@@ -73,10 +73,10 @@ int app_window_y( app_t* app );
 typedef struct app_display_t 
 	{
 	char id[ 64 ];
-    int x;
-    int y;
-    int width;
-    int height;
+	int x;
+	int y;
+	int width;
+	int height;
 	} app_display_t ;
 
 typedef struct app_displays_t { app_display_t* displays; int count; } app_displays_t;
@@ -158,7 +158,7 @@ Here's a basic sample program which starts a windowed app and plots random pixel
 
 	int app_proc( app_t* app, void* user_data )
 		{
-        (void) user_data;
+		(void) user_data;
 		APP_U32 canvas[ 320 * 200 ]; // a place for us to draw stuff
 		memset( canvas, 0xC0, sizeof( canvas ) ); // clear to grey
 		app_screenmode( app, APP_SCREENMODE_WINDOW );
@@ -719,30 +719,30 @@ details.
 #ifndef APP_NULL
 
 #if defined( APP_WINDOWS )
-    #define _CRT_NONSTDC_NO_DEPRECATE 
-    #define _CRT_SECURE_NO_WARNINGS
-    #include <stddef.h>
-    #define APP_GLCALLTYPE __stdcall
-    typedef unsigned int APP_GLuint;
-    typedef int APP_GLsizei;
-    typedef unsigned int APP_GLenum;
-    typedef int APP_GLint;
-    typedef float APP_GLfloat;
-    typedef char APP_GLchar;
+	#define _CRT_NONSTDC_NO_DEPRECATE 
+	#define _CRT_SECURE_NO_WARNINGS
+	#include <stddef.h>
+	#define APP_GLCALLTYPE __stdcall
+	typedef unsigned int APP_GLuint;
+	typedef int APP_GLsizei;
+	typedef unsigned int APP_GLenum;
+	typedef int APP_GLint;
+	typedef float APP_GLfloat;
+	typedef char APP_GLchar;
 	typedef unsigned char APP_GLboolean;
-    typedef size_t APP_GLsizeiptr;
+	typedef size_t APP_GLsizeiptr;
 	typedef unsigned int APP_GLbitfield;
 #else
-    #error Undefined platform. Define APP_WINDOWS or APP_NULL.
-    #define APP_GLCALLTYPE
-    typedef int APP_GLuint;
-    typedef int APP_GLsizei;
-    typedef int APP_GLenum;
-    typedef int APP_GLint;
-    typedef int APP_GLfloat;
-    typedef int APP_GLchar;
+	#error Undefined platform. Define APP_WINDOWS or APP_NULL.
+	#define APP_GLCALLTYPE
+	typedef int APP_GLuint;
+	typedef int APP_GLsizei;
+	typedef int APP_GLenum;
+	typedef int APP_GLint;
+	typedef int APP_GLfloat;
+	typedef int APP_GLchar;
 	typedef int APP_GLboolean;
-    typedef int APP_GLsizeiptr;
+	typedef int APP_GLsizeiptr;
 	typedef int APP_GLbitfield;
 #endif
 
@@ -767,73 +767,73 @@ details.
 #define APP_GL_TRIANGLE_FAN 0x0006
 
 struct app_internal_opengl_t
-    {
-    APP_GLuint (APP_GLCALLTYPE* glCreateShader) (APP_GLenum type);
-    void (APP_GLCALLTYPE* glShaderSource) (APP_GLuint shader, APP_GLsizei count, APP_GLchar const* const* string, APP_GLint const* length);
-    void (APP_GLCALLTYPE* glCompileShader) (APP_GLuint shader);
-    void (APP_GLCALLTYPE* glGetShaderiv) (APP_GLuint shader, APP_GLenum pname, APP_GLint *params);
-    APP_GLuint (APP_GLCALLTYPE* glCreateProgram) (void);
-    void (APP_GLCALLTYPE* glAttachShader) (APP_GLuint program, APP_GLuint shader);
-    void (APP_GLCALLTYPE* glBindAttribLocation) (APP_GLuint program, APP_GLuint index, APP_GLchar const* name);
-    void (APP_GLCALLTYPE* glLinkProgram) (APP_GLuint program);
-    void (APP_GLCALLTYPE* glGetProgramiv) (APP_GLuint program, APP_GLenum pname, APP_GLint *params);
-    void (APP_GLCALLTYPE* glGenBuffers) (APP_GLsizei n, APP_GLuint *buffers);
-    void (APP_GLCALLTYPE* glBindBuffer) (APP_GLenum target, APP_GLuint buffer);
-    void (APP_GLCALLTYPE* glEnableVertexAttribArray) (APP_GLuint index);
-    void (APP_GLCALLTYPE* glVertexAttribPointer) (APP_GLuint index, APP_GLint size, APP_GLenum type, APP_GLboolean normalized, APP_GLsizei stride, void const* pointer);
-    void (APP_GLCALLTYPE* glGenTextures) (APP_GLsizei n, APP_GLuint* textures);
-    void (APP_GLCALLTYPE* glEnable) (APP_GLenum cap);
-    void (APP_GLCALLTYPE* glActiveTexture) (APP_GLenum texture);
-    void (APP_GLCALLTYPE* glBindTexture) (APP_GLenum target, APP_GLuint texture);
-    void (APP_GLCALLTYPE* glTexParameteri) (APP_GLenum target, APP_GLenum pname, APP_GLint param);
-    void (APP_GLCALLTYPE* glDeleteBuffers) (APP_GLsizei n, APP_GLuint const* buffers);
-    void (APP_GLCALLTYPE* glDeleteTextures) (APP_GLsizei n, APP_GLuint const* textures);
-    void (APP_GLCALLTYPE* glBufferData) (APP_GLenum target, APP_GLsizeiptr size, void const *data, APP_GLenum usage);
-    void (APP_GLCALLTYPE* glUseProgram) (APP_GLuint program);
-    void (APP_GLCALLTYPE* glUniform1i) (APP_GLint location, APP_GLint v0);
-    void (APP_GLCALLTYPE* glUniform3f) (APP_GLint location, APP_GLfloat v0, APP_GLfloat v1, APP_GLfloat v2);
-    APP_GLint (APP_GLCALLTYPE* glGetUniformLocation) (APP_GLuint program, APP_GLchar const* name);
-    void (APP_GLCALLTYPE* glTexImage2D) (APP_GLenum target, APP_GLint level, APP_GLint internalformat, APP_GLsizei width, APP_GLsizei height, APP_GLint border, APP_GLenum format, APP_GLenum type, void const* pixels);
-    void (APP_GLCALLTYPE* glClearColor) (APP_GLfloat red, APP_GLfloat green, APP_GLfloat blue, APP_GLfloat alpha);
-    void (APP_GLCALLTYPE* glClear) (APP_GLbitfield mask);
-    void (APP_GLCALLTYPE* glDrawArrays) (APP_GLenum mode, APP_GLint first, APP_GLsizei count);
-    void (APP_GLCALLTYPE* glViewport) (APP_GLint x, APP_GLint y, APP_GLsizei width, APP_GLsizei height);
-    void (APP_GLCALLTYPE* glDeleteShader) (APP_GLuint shader);
-    void (APP_GLCALLTYPE* glDeleteProgram) (APP_GLuint program);
-    #ifdef APP_REPORT_SHADER_ERRORS
-        void (APP_GLCALLTYPE* glGetShaderInfoLog) (APP_GLuint shader, APP_GLsizei bufSize, APP_GLsizei *length, APP_GLchar *infoLog);
-    #endif
+	{
+	APP_GLuint (APP_GLCALLTYPE* glCreateShader) (APP_GLenum type);
+	void (APP_GLCALLTYPE* glShaderSource) (APP_GLuint shader, APP_GLsizei count, APP_GLchar const* const* string, APP_GLint const* length);
+	void (APP_GLCALLTYPE* glCompileShader) (APP_GLuint shader);
+	void (APP_GLCALLTYPE* glGetShaderiv) (APP_GLuint shader, APP_GLenum pname, APP_GLint *params);
+	APP_GLuint (APP_GLCALLTYPE* glCreateProgram) (void);
+	void (APP_GLCALLTYPE* glAttachShader) (APP_GLuint program, APP_GLuint shader);
+	void (APP_GLCALLTYPE* glBindAttribLocation) (APP_GLuint program, APP_GLuint index, APP_GLchar const* name);
+	void (APP_GLCALLTYPE* glLinkProgram) (APP_GLuint program);
+	void (APP_GLCALLTYPE* glGetProgramiv) (APP_GLuint program, APP_GLenum pname, APP_GLint *params);
+	void (APP_GLCALLTYPE* glGenBuffers) (APP_GLsizei n, APP_GLuint *buffers);
+	void (APP_GLCALLTYPE* glBindBuffer) (APP_GLenum target, APP_GLuint buffer);
+	void (APP_GLCALLTYPE* glEnableVertexAttribArray) (APP_GLuint index);
+	void (APP_GLCALLTYPE* glVertexAttribPointer) (APP_GLuint index, APP_GLint size, APP_GLenum type, APP_GLboolean normalized, APP_GLsizei stride, void const* pointer);
+	void (APP_GLCALLTYPE* glGenTextures) (APP_GLsizei n, APP_GLuint* textures);
+	void (APP_GLCALLTYPE* glEnable) (APP_GLenum cap);
+	void (APP_GLCALLTYPE* glActiveTexture) (APP_GLenum texture);
+	void (APP_GLCALLTYPE* glBindTexture) (APP_GLenum target, APP_GLuint texture);
+	void (APP_GLCALLTYPE* glTexParameteri) (APP_GLenum target, APP_GLenum pname, APP_GLint param);
+	void (APP_GLCALLTYPE* glDeleteBuffers) (APP_GLsizei n, APP_GLuint const* buffers);
+	void (APP_GLCALLTYPE* glDeleteTextures) (APP_GLsizei n, APP_GLuint const* textures);
+	void (APP_GLCALLTYPE* glBufferData) (APP_GLenum target, APP_GLsizeiptr size, void const *data, APP_GLenum usage);
+	void (APP_GLCALLTYPE* glUseProgram) (APP_GLuint program);
+	void (APP_GLCALLTYPE* glUniform1i) (APP_GLint location, APP_GLint v0);
+	void (APP_GLCALLTYPE* glUniform3f) (APP_GLint location, APP_GLfloat v0, APP_GLfloat v1, APP_GLfloat v2);
+	APP_GLint (APP_GLCALLTYPE* glGetUniformLocation) (APP_GLuint program, APP_GLchar const* name);
+	void (APP_GLCALLTYPE* glTexImage2D) (APP_GLenum target, APP_GLint level, APP_GLint internalformat, APP_GLsizei width, APP_GLsizei height, APP_GLint border, APP_GLenum format, APP_GLenum type, void const* pixels);
+	void (APP_GLCALLTYPE* glClearColor) (APP_GLfloat red, APP_GLfloat green, APP_GLfloat blue, APP_GLfloat alpha);
+	void (APP_GLCALLTYPE* glClear) (APP_GLbitfield mask);
+	void (APP_GLCALLTYPE* glDrawArrays) (APP_GLenum mode, APP_GLint first, APP_GLsizei count);
+	void (APP_GLCALLTYPE* glViewport) (APP_GLint x, APP_GLint y, APP_GLsizei width, APP_GLsizei height);
+	void (APP_GLCALLTYPE* glDeleteShader) (APP_GLuint shader);
+	void (APP_GLCALLTYPE* glDeleteProgram) (APP_GLuint program);
+	#ifdef APP_REPORT_SHADER_ERRORS
+		void (APP_GLCALLTYPE* glGetShaderInfoLog) (APP_GLuint shader, APP_GLsizei bufSize, APP_GLsizei *length, APP_GLchar *infoLog);
+	#endif
 
-    app_interpolation_t interpolation;
-    int window_width;
-    int window_height;
+	app_interpolation_t interpolation;
+	int window_width;
+	int window_height;
 
-    APP_GLuint vertexbuffer;
-    APP_GLuint texture; 
+	APP_GLuint vertexbuffer;
+	APP_GLuint texture; 
 	APP_GLuint shader;	
-    };
+	};
 
 
 static int app_internal_opengl_init( app_t* app, struct app_internal_opengl_t* gl, app_interpolation_t interpolation,
-    int window_width, int window_height )
-    {
-    (void) app;
-    gl->interpolation = interpolation;
-    gl->window_width = window_width;
-    gl->window_height = window_height;
+	int window_width, int window_height )
+	{
+	(void) app;
+	gl->interpolation = interpolation;
+	gl->window_width = window_width;
+	gl->window_height = window_height;
 
 
-    #define STR( x ) #x
+	#define STR( x ) #x
 
 	char const* vs_source = 
-    STR(
+	STR(
 		attribute vec4 pos;
 		varying vec2 uv;	
 
 		void main( void )
 			{
 			gl_Position = vec4( pos.xy, 0.0, 1.0 );
-            uv = pos.zw;
+			uv = pos.zw;
 			}
 	);
 
@@ -844,19 +844,19 @@ static int app_internal_opengl_init( app_t* app, struct app_internal_opengl_t* g
 		uniform sampler2D texture;
 		uniform vec3 modulate;
 
-        void main(void)
+		void main(void)
 			{
 			gl_FragColor= texture2D( texture, uv ) * vec4( modulate, 1.0 );
 			}			
-    );
+	);
 
-    #undef STR
-    
+	#undef STR
+	
 	#ifdef APP_REPORT_SHADER_ERRORS
 		char error_message[ 1024 ]; 
 	#endif
 
-    APP_GLuint vs = gl->glCreateShader( APP_GL_VERTEX_SHADER );
+	APP_GLuint vs = gl->glCreateShader( APP_GL_VERTEX_SHADER );
 	gl->glShaderSource( vs, 1, (char const**) &vs_source, NULL );
 	gl->glCompileShader( vs );
 	APP_GLint vs_compiled;
@@ -918,37 +918,37 @@ static int app_internal_opengl_init( app_t* app, struct app_internal_opengl_t* g
 		}
 
 	gl->shader = prg;
-    gl->glDeleteShader( fs );
-    gl->glDeleteShader( vs );
+	gl->glDeleteShader( fs );
+	gl->glDeleteShader( vs );
 
 	gl->glGenBuffers( 1, &gl->vertexbuffer );
 	gl->glBindBuffer( APP_GL_ARRAY_BUFFER, gl->vertexbuffer );
 	gl->glEnableVertexAttribArray( 0 );
 	gl->glVertexAttribPointer( 0, 4, APP_GL_FLOAT, APP_GL_FALSE, 4 * sizeof( APP_GLfloat ), 0 );
 
-    gl->glGenTextures( 1, &gl->texture ); 
-    gl->glEnable( APP_GL_TEXTURE_2D ); 
-    gl->glActiveTexture( APP_GL_TEXTURE0 );
-    gl->glBindTexture( APP_GL_TEXTURE_2D, gl->texture );
-    gl->glTexParameteri( APP_GL_TEXTURE_2D, APP_GL_TEXTURE_MIN_FILTER, APP_GL_NEAREST );
-    gl->glTexParameteri( APP_GL_TEXTURE_2D, APP_GL_TEXTURE_MAG_FILTER, APP_GL_NEAREST );
+	gl->glGenTextures( 1, &gl->texture ); 
+	gl->glEnable( APP_GL_TEXTURE_2D ); 
+	gl->glActiveTexture( APP_GL_TEXTURE0 );
+	gl->glBindTexture( APP_GL_TEXTURE_2D, gl->texture );
+	gl->glTexParameteri( APP_GL_TEXTURE_2D, APP_GL_TEXTURE_MIN_FILTER, APP_GL_NEAREST );
+	gl->glTexParameteri( APP_GL_TEXTURE_2D, APP_GL_TEXTURE_MAG_FILTER, APP_GL_NEAREST );
 
-    return 1;
-    }
+	return 1;
+	}
 
 
 static int app_internal_opengl_term( struct app_internal_opengl_t* gl )
-    {
-    gl->glDeleteProgram( gl->shader );
-    gl->glDeleteBuffers( 1, &gl->vertexbuffer); 
-    gl->glDeleteTextures( 1, &gl->texture ); 
-    return 1;
-    }
+	{
+	gl->glDeleteProgram( gl->shader );
+	gl->glDeleteBuffers( 1, &gl->vertexbuffer); 
+	gl->glDeleteTextures( 1, &gl->texture ); 
+	return 1;
+	}
 
 
 static int app_internal_opengl_present( struct app_internal_opengl_t* gl, APP_U32 const* pixels_xbgr, int width, 
-    int height, APP_U32 mod_xbgr, APP_U32 border_xbgr )
-    {
+	int height, APP_U32 mod_xbgr, APP_U32 border_xbgr )
+	{
 	float x1 = 0.0f, y1 = 0.0f, x2 = (float) gl->window_width, y2 = (float) gl->window_height;
 
 	if( gl->interpolation == APP_INTERPOLATION_LINEAR )
@@ -969,7 +969,7 @@ static int app_internal_opengl_present( struct app_internal_opengl_t* gl, APP_U3
 		int hscale = gl->window_width / width;
 		int vscale = gl->window_height / height;
 		int pixel_scale = pixel_scale = hscale < vscale ? hscale : vscale;
-        pixel_scale = pixel_scale < 1 ? 1 : pixel_scale;
+		pixel_scale = pixel_scale < 1 ? 1 : pixel_scale;
 
 		int hborder = ( gl->window_width - pixel_scale * width ) / 2;
 		int vborder = ( gl->window_height - pixel_scale * height ) / 2;
@@ -979,33 +979,33 @@ static int app_internal_opengl_present( struct app_internal_opengl_t* gl, APP_U3
 		y2 = y1 + (float) ( pixel_scale * height );
 		}
 
-    x1 = ( x1 / gl->window_width ) * 2.0f - 1.0f;
-    x2 = ( x2 / gl->window_width ) * 2.0f - 1.0f;
-    y1 = ( y1 / gl->window_height ) * 2.0f - 1.0f;
-    y2 = ( y2 / gl->window_height ) * 2.0f - 1.0f;
+	x1 = ( x1 / gl->window_width ) * 2.0f - 1.0f;
+	x2 = ( x2 / gl->window_width ) * 2.0f - 1.0f;
+	y1 = ( y1 / gl->window_height ) * 2.0f - 1.0f;
+	y2 = ( y2 / gl->window_height ) * 2.0f - 1.0f;
 
 	APP_GLfloat vertices[ 16 ]; 
-    vertices[  0 ] = x1;
-    vertices[  1 ] = y1;
-    vertices[  2 ] = 0.0f;
-    vertices[  3 ] = 1.0f;
+	vertices[  0 ] = x1;
+	vertices[  1 ] = y1;
+	vertices[  2 ] = 0.0f;
+	vertices[  3 ] = 1.0f;
 
-    vertices[  4 ] = x2;
-    vertices[  5 ] = y1;
-    vertices[  6 ] = 1.0f;
-    vertices[  7 ] = 1.0f;
+	vertices[  4 ] = x2;
+	vertices[  5 ] = y1;
+	vertices[  6 ] = 1.0f;
+	vertices[  7 ] = 1.0f;
 
-    vertices[  8 ] = x2;
-    vertices[  9 ] = y2;
-    vertices[ 10 ] = 1.0f;
-    vertices[ 11 ] = 0.0f;
+	vertices[  8 ] = x2;
+	vertices[  9 ] = y2;
+	vertices[ 10 ] = 1.0f;
+	vertices[ 11 ] = 0.0f;
 
-    vertices[ 12 ] = x1;
-    vertices[ 13 ] = y2;
-    vertices[ 14 ] = 0.0f;
-    vertices[ 15 ] = 0.0f;
+	vertices[ 12 ] = x1;
+	vertices[ 13 ] = y2;
+	vertices[ 14 ] = 0.0f;
+	vertices[ 15 ] = 0.0f;
 
-    gl->glBindBuffer( APP_GL_ARRAY_BUFFER, gl->vertexbuffer );
+	gl->glBindBuffer( APP_GL_ARRAY_BUFFER, gl->vertexbuffer );
 	gl->glBufferData( APP_GL_ARRAY_BUFFER, 4 * 4 * sizeof( APP_GLfloat ), vertices, APP_GL_STATIC_DRAW );
 	gl->glVertexAttribPointer( 0, 4, APP_GL_FLOAT, APP_GL_FALSE, 4 * sizeof( APP_GLfloat ), 0 );
 
@@ -1018,19 +1018,19 @@ static int app_internal_opengl_present( struct app_internal_opengl_t* gl, APP_U3
 	gl->glUniform3f( gl->glGetUniformLocation( gl->shader, "modulate" ), mod_r, mod_g, mod_b );
 
 	gl->glActiveTexture( APP_GL_TEXTURE0 );
-    gl->glBindTexture( APP_GL_TEXTURE_2D, gl->texture );
-    gl->glTexImage2D( APP_GL_TEXTURE_2D, 0, APP_GL_RGBA, width, height, 0, APP_GL_RGBA, APP_GL_UNSIGNED_BYTE, pixels_xbgr ); 
-    
-    if( gl->interpolation == APP_INTERPOLATION_LINEAR )
-        {
-        gl->glTexParameteri( APP_GL_TEXTURE_2D, APP_GL_TEXTURE_MIN_FILTER, APP_GL_LINEAR );
-        gl->glTexParameteri( APP_GL_TEXTURE_2D, APP_GL_TEXTURE_MAG_FILTER, APP_GL_LINEAR );
-        }
-    else
-        {
-        gl->glTexParameteri( APP_GL_TEXTURE_2D, APP_GL_TEXTURE_MIN_FILTER, APP_GL_NEAREST );
-        gl->glTexParameteri( APP_GL_TEXTURE_2D, APP_GL_TEXTURE_MAG_FILTER, APP_GL_NEAREST );
-        }
+	gl->glBindTexture( APP_GL_TEXTURE_2D, gl->texture );
+	gl->glTexImage2D( APP_GL_TEXTURE_2D, 0, APP_GL_RGBA, width, height, 0, APP_GL_RGBA, APP_GL_UNSIGNED_BYTE, pixels_xbgr ); 
+	
+	if( gl->interpolation == APP_INTERPOLATION_LINEAR )
+		{
+		gl->glTexParameteri( APP_GL_TEXTURE_2D, APP_GL_TEXTURE_MIN_FILTER, APP_GL_LINEAR );
+		gl->glTexParameteri( APP_GL_TEXTURE_2D, APP_GL_TEXTURE_MAG_FILTER, APP_GL_LINEAR );
+		}
+	else
+		{
+		gl->glTexParameteri( APP_GL_TEXTURE_2D, APP_GL_TEXTURE_MIN_FILTER, APP_GL_NEAREST );
+		gl->glTexParameteri( APP_GL_TEXTURE_2D, APP_GL_TEXTURE_MAG_FILTER, APP_GL_NEAREST );
+		}
 
 	float r = ( ( border_xbgr >> 16 ) & 0xff ) / 255.0f;
 	float g = ( ( border_xbgr >> 8  ) & 0xff ) / 255.0f;
@@ -1039,22 +1039,22 @@ static int app_internal_opengl_present( struct app_internal_opengl_t* gl, APP_U3
 	gl->glClear( APP_GL_COLOR_BUFFER_BIT );
 	gl->glDrawArrays( APP_GL_TRIANGLE_FAN, 0, 4 );
 
-    return 1;
-    }
+	return 1;
+	}
 
 
 static void app_internal_opengl_resize( struct app_internal_opengl_t* gl, int width, int height )
-    {
-    gl->glViewport( 0, 0, width, height );    
-    gl->window_width = width;
-    gl->window_height = height;
-    }
+	{
+	gl->glViewport( 0, 0, width, height );    
+	gl->window_width = width;
+	gl->window_height = height;
+	}
 
 
 static void app_internal_opengl_interpolation( struct app_internal_opengl_t* gl, app_interpolation_t interpolation )
-    {
-    gl->interpolation = interpolation;
-    }
+	{
+	gl->interpolation = interpolation;
+	}
 
 
 #endif // #ifndef APP_NULL
@@ -1069,7 +1069,7 @@ static void app_internal_opengl_interpolation( struct app_internal_opengl_t* gl,
 
 struct app_t { };
 int app_run( int (*app_proc)( app_t*, void* ), void* user_data, void* memctx, void* logctx, void* fatalctx ) 
-    { app_t app; return app_proc( &app, user_data ); }
+	{ app_t app; return app_proc( &app, user_data ); }
 app_state_t app_yield( app_t* app ) { return APP_STATE_EXIT_REQUESTED; }
 void app_cancel_exit( app_t* app ) { }
 void app_title( app_t* app, char const* title ) { }
@@ -1162,22 +1162,22 @@ void app_coordinates_bitmap_to_window( app_t* app, int width, int height, int* x
 
 #ifndef APP_FATAL_ERROR
 	#if defined(__cplusplus)
-        #define APP_FATAL_ERROR( ctx, message ) { ::printf( "FATAL ERROR: %s\n", message ); \
-            ::MessageBoxA( 0, message, "Fatal Error!", MB_OK | MB_ICONSTOP ); ::_flushall(); ::_exit( 0xff ); }
+		#define APP_FATAL_ERROR( ctx, message ) { ::printf( "FATAL ERROR: %s\n", message ); \
+			::MessageBoxA( 0, message, "Fatal Error!", MB_OK | MB_ICONSTOP ); ::_flushall(); ::_exit( 0xff ); }
 	#else
-        #define APP_FATAL_ERROR( ctx, message ) { printf( "FATAL ERROR: %s\n", message ); \
-            MessageBoxA( 0, message, "Fatal Error!", MB_OK | MB_ICONSTOP ); _flushall(); _exit( 0xff ); }
+		#define APP_FATAL_ERROR( ctx, message ) { printf( "FATAL ERROR: %s\n", message ); \
+			MessageBoxA( 0, message, "Fatal Error!", MB_OK | MB_ICONSTOP ); _flushall(); _exit( 0xff ); }
 	#endif
 #endif
 
 typedef struct APP_LOGCONTEXTA 
-    {
-    char lcName[ 40 ]; UINT lcOptions; UINT lcStatus; UINT lcLocks; UINT lcMsgBase; UINT lcDevice; UINT lcPktRate;
-    DWORD lcPktData; DWORD lcPktMode; DWORD lcMoveMask; DWORD lcBtnDnMask; DWORD lcBtnUpMask; LONG lcInOrgX; 
-    LONG lcInOrgY; LONG lcInOrgZ; LONG lcInExtX; LONG lcInExtY; LONG lcInExtZ; LONG lcOutOrgX; LONG lcOutOrgY;
-    LONG lcOutOrgZ; LONG lcOutExtX; LONG lcOutExtY; LONG lcOutExtZ; DWORD lcSensX; DWORD lcSensY; DWORD lcSensZ;
-    BOOL lcSysMode; int lcSysOrgX; int lcSysOrgY; int lcSysExtX; int lcSysExtY; DWORD lcSysSensX; DWORD lcSysSensY;
-    } APP_LOGCONTEXTA;
+	{
+	char lcName[ 40 ]; UINT lcOptions; UINT lcStatus; UINT lcLocks; UINT lcMsgBase; UINT lcDevice; UINT lcPktRate;
+	DWORD lcPktData; DWORD lcPktMode; DWORD lcMoveMask; DWORD lcBtnDnMask; DWORD lcBtnUpMask; LONG lcInOrgX; 
+	LONG lcInOrgY; LONG lcInOrgZ; LONG lcInExtX; LONG lcInExtY; LONG lcInExtZ; LONG lcOutOrgX; LONG lcOutOrgY;
+	LONG lcOutOrgZ; LONG lcOutExtX; LONG lcOutExtY; LONG lcOutExtZ; DWORD lcSensX; DWORD lcSensY; DWORD lcSensZ;
+	BOOL lcSysMode; int lcSysOrgX; int lcSysOrgY; int lcSysExtX; int lcSysExtY; DWORD lcSysSensX; DWORD lcSysSensY;
+	} APP_LOGCONTEXTA;
 typedef struct APP_AXIS { LONG axMin; LONG axMax; UINT axUnits; DWORD axResolution; } APP_AXIS;
 typedef struct APP_PACKET { DWORD pkButtons; LONG pkX; LONG pkY; UINT pkNormalPressure; } APP_PACKET;
 DECLARE_HANDLE( APP_HMGR );
@@ -1195,49 +1195,49 @@ DECLARE_HANDLE( APP_HCTX );
 #define APP_WT_PACKET 0x7FF0
 
 struct app_t
-    {
+	{
 	void* memctx;
 	void* logctx;
-    void* fatalctx;
+	void* fatalctx;
 	app_interpolation_t interpolation;
 	app_screenmode_t screenmode;
 
-    BOOL initialized;
-    BOOL closed;
+	BOOL initialized;
+	BOOL closed;
 
-    char exe_path[ 260 ];
-    char userdata_path[ 260 ];
-    char appdata_path[ 260 ];
-    char const* cmdline;
+	char exe_path[ 260 ];
+	char userdata_path[ 260 ];
+	char appdata_path[ 260 ];
+	char const* cmdline;
 
 	HINSTANCE hinstance;
 	HWND hwnd;
-    HDC hdc;
+	HDC hdc;
 	HICON icon;
-    BOOL has_focus;
-    BOOL is_minimized;
+	BOOL has_focus;
+	BOOL is_minimized;
 
-    struct app_internal_opengl_t gl;
+	struct app_internal_opengl_t gl;
 	HMODULE gl_dll;
-    HGLRC gl_context; 
+	HGLRC gl_context; 
 	PROC (APP_GLCALLTYPE* wglGetProcAddress) (LPCSTR);
 	HGLRC (APP_GLCALLTYPE* wglCreateContext) (HDC);
 	BOOL (APP_GLCALLTYPE* wglDeleteContext) (HGLRC);
 	BOOL (APP_GLCALLTYPE* wglMakeCurrent) (HDC, HGLRC);
 	BOOL (APP_GLCALLTYPE* wglSwapIntervalEXT) (int);
 
-    HANDLE sound_notifications[ 2 ];
+	HANDLE sound_notifications[ 2 ];
 	HMODULE dsound_dll;
-    IDirectSound8* dsound;
-    IDirectSoundBuffer8* dsoundbuf;	
+	IDirectSound8* dsound;
+	IDirectSoundBuffer8* dsoundbuf;	
 	HANDLE sound_thread_handle;
 	volatile LONG exit_sound_thread;
-    int sample_pairs_count;
-    int sound_level;
+	int sample_pairs_count;
+	int sound_level;
 	void (*sound_callback)( APP_S16* sample_pairs, int sample_pairs_count, void* user_data );
 	void* sound_user_data;
 
-    HCURSOR current_pointer;
+	HCURSOR current_pointer;
 
 	BOOL clip_cursor;
 	RECT clip_rect;
@@ -1250,81 +1250,81 @@ struct app_t
 	int windowed_h;
 	int windowed_w;
 	int fullscreen_width;
-    int fullscreen_height;
+	int fullscreen_height;
 
 	int display_count;
 	app_display_t displays[ 16 ];
-    HMONITOR displays_hmonitor[ 16 ];
+	HMONITOR displays_hmonitor[ 16 ];
 
-    struct  
-        {
-    	HMODULE wintab_dll;
-        APP_HCTX context;
-        int max_pressure;
+	struct  
+		{
+		HMODULE wintab_dll;
+		APP_HCTX context;
+		int max_pressure;
 
-        UINT (WINAPI *WTInfo)( UINT, UINT, LPVOID );
-        APP_HCTX (WINAPI *WTOpen)( HWND, APP_LOGCONTEXTA*, BOOL );
-        BOOL (WINAPI *WTClose)( APP_HCTX );
-        BOOL (WINAPI *WTEnable)( APP_HCTX, BOOL );
-        BOOL (WINAPI *WTPacket)( APP_HCTX, UINT, LPVOID );
-        } tablet;
-    };
+		UINT (WINAPI *WTInfo)( UINT, UINT, LPVOID );
+		APP_HCTX (WINAPI *WTOpen)( HWND, APP_LOGCONTEXTA*, BOOL );
+		BOOL (WINAPI *WTClose)( APP_HCTX );
+		BOOL (WINAPI *WTEnable)( APP_HCTX, BOOL );
+		BOOL (WINAPI *WTPacket)( APP_HCTX, UINT, LPVOID );
+		} tablet;
+	};
 
 
 static app_key_t app_internal_vkcode_to_appkey( app_t* app, int vkcode )
 	{
 	int map[ 256 * 2 ] = { APP_KEY_INVALID, 0x00, APP_KEY_LBUTTON, 0x01, APP_KEY_RBUTTON, 0x02, APP_KEY_CANCEL, 0x03, APP_KEY_MBUTTON, 0x04, 
-        APP_KEY_XBUTTON1, 0x05, APP_KEY_XBUTTON2, 0x06, -1, 0x07, APP_KEY_BACK, 0x08, APP_KEY_TAB, 0x09, -1, 0x0A, -1, 0x0B, APP_KEY_CLEAR, 0x0C, 
-        APP_KEY_RETURN, 0x0D, -1, 0x0E, -1, 0x0F, APP_KEY_SHIFT, 0x10, APP_KEY_CONTROL, 0x11, APP_KEY_MENU, 0x12, APP_KEY_PAUSE, 0x13, 
-        APP_KEY_CAPITAL, 0x14, APP_KEY_KANA, 0x15, -1, 0x16, APP_KEY_JUNJA, 0x17, APP_KEY_FINAL, 0x18, APP_KEY_HANJA, 0x19, -1, 0x1A, 
-        APP_KEY_ESCAPE, 0x1B, APP_KEY_CONVERT, 0x1C, APP_KEY_NONCONVERT, 0x1D, APP_KEY_ACCEPT, 0x1E, APP_KEY_MODECHANGE, 0x1F, APP_KEY_SPACE, 0x20, 
-        APP_KEY_PRIOR, 0x21, APP_KEY_NEXT, 0x22, APP_KEY_END, 0x23, APP_KEY_HOME, 0x24, APP_KEY_LEFT, 0x25, APP_KEY_UP, 0x26, APP_KEY_RIGHT, 0x27, 
-        APP_KEY_DOWN, 0x28, APP_KEY_SELECT, 0x29, APP_KEY_PRINT, 0x2A, APP_KEY_EXEC, 0x2B, APP_KEY_SNAPSHOT, 0x2C, APP_KEY_INSERT, 0x2D, 
-        APP_KEY_DELETE, 0x2E, APP_KEY_HELP, 0x2F, APP_KEY_0, 0x30, APP_KEY_1, 0x31, APP_KEY_2, 0x32, APP_KEY_3, 0x33, APP_KEY_4, 0x34, 
-        APP_KEY_5, 0x35, APP_KEY_6, 0x36, APP_KEY_7, 0x37, APP_KEY_8, 0x38, APP_KEY_9, 0x39, -1, 0x3A, -1, 0x3B, -1, 0x3C, -1, 0x3D, -1, 0x3E, 
-        -1, 0x3F, -1, 0x40, APP_KEY_A, 0x41, APP_KEY_B, 0x42, APP_KEY_C, 0x43, APP_KEY_D, 0x44, APP_KEY_E, 0x45, APP_KEY_F, 0x46, APP_KEY_G, 0x47, 
-        APP_KEY_H, 0x48, APP_KEY_I, 0x49, APP_KEY_J, 0x4A, APP_KEY_K, 0x4B, APP_KEY_L, 0x4C, APP_KEY_M, 0x4D, APP_KEY_N, 0x4E, APP_KEY_O, 0x4F, 
-        APP_KEY_P, 0x50, APP_KEY_Q, 0x51, APP_KEY_R, 0x52, APP_KEY_S, 0x53, APP_KEY_T, 0x54, APP_KEY_U, 0x55, APP_KEY_V, 0x56, APP_KEY_W, 0x57, 
-        APP_KEY_X, 0x58, APP_KEY_Y, 0x59, APP_KEY_Z, 0x5A, APP_KEY_LWIN, 0x5B, APP_KEY_RWIN, 0x5C, APP_KEY_APPS, 0x5D, -1, 0x5E, APP_KEY_SLEEP, 0x5F, 
-        APP_KEY_NUMPAD0, 0x60, APP_KEY_NUMPAD1, 0x61, APP_KEY_NUMPAD2, 0x62, APP_KEY_NUMPAD3, 0x63, APP_KEY_NUMPAD4, 0x64, APP_KEY_NUMPAD5, 0x65, 
-        APP_KEY_NUMPAD6, 0x66, APP_KEY_NUMPAD7, 0x67, APP_KEY_NUMPAD8, 0x68, APP_KEY_NUMPAD9, 0x69, APP_KEY_MULTIPLY, 0x6A, APP_KEY_ADD, 0x6B, 
-        APP_KEY_SEPARATOR, 0x6C, APP_KEY_SUBTRACT, 0x6D, APP_KEY_DECIMAL, 0x6E, APP_KEY_DIVIDE, 0x6F, APP_KEY_F1, 0x70, APP_KEY_F2, 0x71, 
-        APP_KEY_F3, 0x72, APP_KEY_F4, 0x73, APP_KEY_F5, 0x74, APP_KEY_F6, 0x75, APP_KEY_F7, 0x76, APP_KEY_F8, 0x77, APP_KEY_F9, 0x78, 
-        APP_KEY_F10, 0x79, APP_KEY_F11, 0x7A, APP_KEY_F12, 0x7B, APP_KEY_F13, 0x7C, APP_KEY_F14, 0x7D, APP_KEY_F15, 0x7E, APP_KEY_F16, 0x7F, 
-        APP_KEY_F17, 0x80, APP_KEY_F18, 0x81, APP_KEY_F19, 0x82, APP_KEY_F20, 0x83, APP_KEY_F21, 0x84, APP_KEY_F22, 0x85, APP_KEY_F23, 0x86, 
-        APP_KEY_F24, 0x87, -1, 0x88, -1, 0x89, -1, 0x8A, -1, 0x8B, -1, 0x8C, -1, 0x8D, -1, 0x8E, -1, 0x8F, APP_KEY_NUMLOCK, 0x90, 
-        APP_KEY_SCROLL, 0x91, -1, 0x92, -1, 0x93, -1, 0x94, -1, 0x95, -1, 0x96, -1, 0x97, -1, 0x98, -1, 0x99, -1, 0x9A, -1, 0x9B, -1, 0x9C, -1, 0x9D,
-        -1, 0x9E, -1, 0x9F, APP_KEY_LSHIFT, 0xA0, APP_KEY_RSHIFT, 0xA1, APP_KEY_LCONTROL, 0xA2, APP_KEY_RCONTROL, 0xA3, APP_KEY_LMENU, 0xA4,
-        APP_KEY_RMENU, 0xA5, APP_KEY_BROWSER_BACK, 0xA6, APP_KEY_BROWSER_FORWARD, 0xA7, APP_KEY_BROWSER_REFRESH, 0xA8, APP_KEY_BROWSER_STOP, 0xA9, 
-        APP_KEY_BROWSER_SEARCH, 0xAA, APP_KEY_BROWSER_FAVORITES, 0xAB, APP_KEY_BROWSER_HOME, 0xAC, APP_KEY_VOLUME_MUTE, 0xAD, 
-        APP_KEY_VOLUME_DOWN, 0xAE, APP_KEY_VOLUME_UP, 0xAF, APP_KEY_MEDIA_NEXT_TRACK, 0xB0, APP_KEY_MEDIA_PREV_TRACK, 0xB1, APP_KEY_MEDIA_STOP, 0xB2,
-        APP_KEY_MEDIA_PLAY_PAUSE, 0xB3, APP_KEY_LAUNCH_MAIL, 0xB4, APP_KEY_LAUNCH_MEDIA_SELECT, 0xB5, APP_KEY_LAUNCH_APP1, 0xB6, 
-        APP_KEY_LAUNCH_APP2, 0xB7, -1, 0xB8, -1, 0xB9, APP_KEY_OEM_1, 0xBA, APP_KEY_OEM_PLUS, 0xBB, APP_KEY_OEM_COMMA, 0xBC, APP_KEY_OEM_MINUS, 0xBD, 
-        APP_KEY_OEM_PERIOD, 0xBE, APP_KEY_OEM_2, 0xBF, APP_KEY_OEM_3, 0xC0, -1, 0xC1, -1, 0xC2, -1, 0xC3, -1, 0xC4, -1, 0xC5, -1, 0xC6, -1, 0xC7,
-        -1, 0xC8, -1, 0xC9, -1, 0xCA, -1, 0xCB, -1, 0xCC, -1, 0xCD, -1, 0xCE, -1, 0xCF, -1, 0xD0, -1, 0xD1, -1, 0xD2, -1, 0xD3, -1, 0xD4, -1, 0xD5,
-        -1, 0xD6, -1, 0xD7, -1, 0xD8, -1, 0xD9, -1, 0xDA, APP_KEY_OEM_4, 0xDB, APP_KEY_OEM_5, 0xDC, APP_KEY_OEM_6, 0xDD, APP_KEY_OEM_7, 0xDE,
-        APP_KEY_OEM_8, 0xDF, -1, 0xE0, -1, 0xE1, APP_KEY_OEM_102, 0xE2, -1, 0xE3, -1, 0xE4, APP_KEY_PROCESSKEY, 0xE5, -1, 0xE6, -1, 0xE7, -1, 0xE8, 
-        -1, 0xE9, -1, 0xEA, -1, 0xEB, -1, 0xEC, -1, 0xED, -1, 0xEE, -1, 0xEF, -1, 0xF0, -1, 0xF1, -1, 0xF2, -1, 0xF3, -1, 0xF4, -1, 0xF5,
-        APP_KEY_ATTN, 0xF6, APP_KEY_CRSEL, 0xF7, APP_KEY_EXSEL, 0xF8, APP_KEY_EREOF, 0xF9, APP_KEY_PLAY, 0xFA, APP_KEY_ZOOM, 0xFB, 
-        APP_KEY_NONAME, 0xFC, APP_KEY_PA1, 0xFD, APP_KEY_OEM_CLEAR, 0xFE, -1, 0xFF, };
+		APP_KEY_XBUTTON1, 0x05, APP_KEY_XBUTTON2, 0x06, -1, 0x07, APP_KEY_BACK, 0x08, APP_KEY_TAB, 0x09, -1, 0x0A, -1, 0x0B, APP_KEY_CLEAR, 0x0C, 
+		APP_KEY_RETURN, 0x0D, -1, 0x0E, -1, 0x0F, APP_KEY_SHIFT, 0x10, APP_KEY_CONTROL, 0x11, APP_KEY_MENU, 0x12, APP_KEY_PAUSE, 0x13, 
+		APP_KEY_CAPITAL, 0x14, APP_KEY_KANA, 0x15, -1, 0x16, APP_KEY_JUNJA, 0x17, APP_KEY_FINAL, 0x18, APP_KEY_HANJA, 0x19, -1, 0x1A, 
+		APP_KEY_ESCAPE, 0x1B, APP_KEY_CONVERT, 0x1C, APP_KEY_NONCONVERT, 0x1D, APP_KEY_ACCEPT, 0x1E, APP_KEY_MODECHANGE, 0x1F, APP_KEY_SPACE, 0x20, 
+		APP_KEY_PRIOR, 0x21, APP_KEY_NEXT, 0x22, APP_KEY_END, 0x23, APP_KEY_HOME, 0x24, APP_KEY_LEFT, 0x25, APP_KEY_UP, 0x26, APP_KEY_RIGHT, 0x27, 
+		APP_KEY_DOWN, 0x28, APP_KEY_SELECT, 0x29, APP_KEY_PRINT, 0x2A, APP_KEY_EXEC, 0x2B, APP_KEY_SNAPSHOT, 0x2C, APP_KEY_INSERT, 0x2D, 
+		APP_KEY_DELETE, 0x2E, APP_KEY_HELP, 0x2F, APP_KEY_0, 0x30, APP_KEY_1, 0x31, APP_KEY_2, 0x32, APP_KEY_3, 0x33, APP_KEY_4, 0x34, 
+		APP_KEY_5, 0x35, APP_KEY_6, 0x36, APP_KEY_7, 0x37, APP_KEY_8, 0x38, APP_KEY_9, 0x39, -1, 0x3A, -1, 0x3B, -1, 0x3C, -1, 0x3D, -1, 0x3E, 
+		-1, 0x3F, -1, 0x40, APP_KEY_A, 0x41, APP_KEY_B, 0x42, APP_KEY_C, 0x43, APP_KEY_D, 0x44, APP_KEY_E, 0x45, APP_KEY_F, 0x46, APP_KEY_G, 0x47, 
+		APP_KEY_H, 0x48, APP_KEY_I, 0x49, APP_KEY_J, 0x4A, APP_KEY_K, 0x4B, APP_KEY_L, 0x4C, APP_KEY_M, 0x4D, APP_KEY_N, 0x4E, APP_KEY_O, 0x4F, 
+		APP_KEY_P, 0x50, APP_KEY_Q, 0x51, APP_KEY_R, 0x52, APP_KEY_S, 0x53, APP_KEY_T, 0x54, APP_KEY_U, 0x55, APP_KEY_V, 0x56, APP_KEY_W, 0x57, 
+		APP_KEY_X, 0x58, APP_KEY_Y, 0x59, APP_KEY_Z, 0x5A, APP_KEY_LWIN, 0x5B, APP_KEY_RWIN, 0x5C, APP_KEY_APPS, 0x5D, -1, 0x5E, APP_KEY_SLEEP, 0x5F, 
+		APP_KEY_NUMPAD0, 0x60, APP_KEY_NUMPAD1, 0x61, APP_KEY_NUMPAD2, 0x62, APP_KEY_NUMPAD3, 0x63, APP_KEY_NUMPAD4, 0x64, APP_KEY_NUMPAD5, 0x65, 
+		APP_KEY_NUMPAD6, 0x66, APP_KEY_NUMPAD7, 0x67, APP_KEY_NUMPAD8, 0x68, APP_KEY_NUMPAD9, 0x69, APP_KEY_MULTIPLY, 0x6A, APP_KEY_ADD, 0x6B, 
+		APP_KEY_SEPARATOR, 0x6C, APP_KEY_SUBTRACT, 0x6D, APP_KEY_DECIMAL, 0x6E, APP_KEY_DIVIDE, 0x6F, APP_KEY_F1, 0x70, APP_KEY_F2, 0x71, 
+		APP_KEY_F3, 0x72, APP_KEY_F4, 0x73, APP_KEY_F5, 0x74, APP_KEY_F6, 0x75, APP_KEY_F7, 0x76, APP_KEY_F8, 0x77, APP_KEY_F9, 0x78, 
+		APP_KEY_F10, 0x79, APP_KEY_F11, 0x7A, APP_KEY_F12, 0x7B, APP_KEY_F13, 0x7C, APP_KEY_F14, 0x7D, APP_KEY_F15, 0x7E, APP_KEY_F16, 0x7F, 
+		APP_KEY_F17, 0x80, APP_KEY_F18, 0x81, APP_KEY_F19, 0x82, APP_KEY_F20, 0x83, APP_KEY_F21, 0x84, APP_KEY_F22, 0x85, APP_KEY_F23, 0x86, 
+		APP_KEY_F24, 0x87, -1, 0x88, -1, 0x89, -1, 0x8A, -1, 0x8B, -1, 0x8C, -1, 0x8D, -1, 0x8E, -1, 0x8F, APP_KEY_NUMLOCK, 0x90, 
+		APP_KEY_SCROLL, 0x91, -1, 0x92, -1, 0x93, -1, 0x94, -1, 0x95, -1, 0x96, -1, 0x97, -1, 0x98, -1, 0x99, -1, 0x9A, -1, 0x9B, -1, 0x9C, -1, 0x9D,
+		-1, 0x9E, -1, 0x9F, APP_KEY_LSHIFT, 0xA0, APP_KEY_RSHIFT, 0xA1, APP_KEY_LCONTROL, 0xA2, APP_KEY_RCONTROL, 0xA3, APP_KEY_LMENU, 0xA4,
+		APP_KEY_RMENU, 0xA5, APP_KEY_BROWSER_BACK, 0xA6, APP_KEY_BROWSER_FORWARD, 0xA7, APP_KEY_BROWSER_REFRESH, 0xA8, APP_KEY_BROWSER_STOP, 0xA9, 
+		APP_KEY_BROWSER_SEARCH, 0xAA, APP_KEY_BROWSER_FAVORITES, 0xAB, APP_KEY_BROWSER_HOME, 0xAC, APP_KEY_VOLUME_MUTE, 0xAD, 
+		APP_KEY_VOLUME_DOWN, 0xAE, APP_KEY_VOLUME_UP, 0xAF, APP_KEY_MEDIA_NEXT_TRACK, 0xB0, APP_KEY_MEDIA_PREV_TRACK, 0xB1, APP_KEY_MEDIA_STOP, 0xB2,
+		APP_KEY_MEDIA_PLAY_PAUSE, 0xB3, APP_KEY_LAUNCH_MAIL, 0xB4, APP_KEY_LAUNCH_MEDIA_SELECT, 0xB5, APP_KEY_LAUNCH_APP1, 0xB6, 
+		APP_KEY_LAUNCH_APP2, 0xB7, -1, 0xB8, -1, 0xB9, APP_KEY_OEM_1, 0xBA, APP_KEY_OEM_PLUS, 0xBB, APP_KEY_OEM_COMMA, 0xBC, APP_KEY_OEM_MINUS, 0xBD, 
+		APP_KEY_OEM_PERIOD, 0xBE, APP_KEY_OEM_2, 0xBF, APP_KEY_OEM_3, 0xC0, -1, 0xC1, -1, 0xC2, -1, 0xC3, -1, 0xC4, -1, 0xC5, -1, 0xC6, -1, 0xC7,
+		-1, 0xC8, -1, 0xC9, -1, 0xCA, -1, 0xCB, -1, 0xCC, -1, 0xCD, -1, 0xCE, -1, 0xCF, -1, 0xD0, -1, 0xD1, -1, 0xD2, -1, 0xD3, -1, 0xD4, -1, 0xD5,
+		-1, 0xD6, -1, 0xD7, -1, 0xD8, -1, 0xD9, -1, 0xDA, APP_KEY_OEM_4, 0xDB, APP_KEY_OEM_5, 0xDC, APP_KEY_OEM_6, 0xDD, APP_KEY_OEM_7, 0xDE,
+		APP_KEY_OEM_8, 0xDF, -1, 0xE0, -1, 0xE1, APP_KEY_OEM_102, 0xE2, -1, 0xE3, -1, 0xE4, APP_KEY_PROCESSKEY, 0xE5, -1, 0xE6, -1, 0xE7, -1, 0xE8, 
+		-1, 0xE9, -1, 0xEA, -1, 0xEB, -1, 0xEC, -1, 0xED, -1, 0xEE, -1, 0xEF, -1, 0xF0, -1, 0xF1, -1, 0xF2, -1, 0xF3, -1, 0xF4, -1, 0xF5,
+		APP_KEY_ATTN, 0xF6, APP_KEY_CRSEL, 0xF7, APP_KEY_EXSEL, 0xF8, APP_KEY_EREOF, 0xF9, APP_KEY_PLAY, 0xFA, APP_KEY_ZOOM, 0xFB, 
+		APP_KEY_NONAME, 0xFC, APP_KEY_PA1, 0xFD, APP_KEY_OEM_CLEAR, 0xFE, -1, 0xFF, };
 	if( vkcode < 0 || vkcode >= sizeof( map ) / ( 2 * sizeof( *map ) ) ) return APP_KEY_INVALID;
-    if( map[ vkcode * 2 + 1 ] != vkcode )
-        {
-        app_log( app, APP_LOG_LEVEL_ERROR, "Keymap definition error" );
-        return APP_KEY_INVALID;
-        }
+	if( map[ vkcode * 2 + 1 ] != vkcode )
+		{
+		app_log( app, APP_LOG_LEVEL_ERROR, "Keymap definition error" );
+		return APP_KEY_INVALID;
+		}
 	return (app_key_t) map[ vkcode * 2 ];
 	}
 
 
 static void app_internal_add_input_event( app_t* app, app_input_event_t* event )
-    {
+	{
 	if( app->has_focus )
-        {
+		{
 	    if( app->input_count < sizeof( app->input_events ) / sizeof( *app->input_events ) )
-            app->input_events[ app->input_count++ ] = *event;
-        }
-    }
+			app->input_events[ app->input_count++ ] = *event;
+		}
+	}
 
 
 static RECT app_internal_rect( int left, int top, int right, int bottom )
@@ -1334,54 +1334,54 @@ static RECT app_internal_rect( int left, int top, int right, int bottom )
 
 
 static BOOL app_internal_tablet_init( app_t* app )
-    {
-    app->tablet.wintab_dll = LoadLibraryA( "Wintab32.dll" );
-    if( !app->tablet.wintab_dll ) return FALSE;
+	{
+	app->tablet.wintab_dll = LoadLibraryA( "Wintab32.dll" );
+	if( !app->tablet.wintab_dll ) return FALSE;
 
-    app->tablet.WTInfo = ( UINT (WINAPI*)( UINT, UINT, LPVOID ) ) 
-        (uintptr_t ) GetProcAddress( app->tablet.wintab_dll, "WTInfoA" );
-    app->tablet.WTOpen = ( APP_HCTX (WINAPI*)( HWND, APP_LOGCONTEXTA*, BOOL ) )
-        (uintptr_t ) GetProcAddress( app->tablet.wintab_dll, "WTOpenA" );
-    app->tablet.WTClose = ( BOOL (WINAPI*)( APP_HCTX ) )
-        (uintptr_t ) GetProcAddress( app->tablet.wintab_dll, "WTClose" );
-    app->tablet.WTEnable = ( BOOL (WINAPI*)( APP_HCTX, BOOL ) )
-        (uintptr_t ) GetProcAddress( app->tablet.wintab_dll, "WTEnable" );
-    app->tablet.WTPacket = ( BOOL (WINAPI*)( APP_HCTX, UINT, LPVOID ) )
-        (uintptr_t ) GetProcAddress( app->tablet.wintab_dll, "WTPacket" );
+	app->tablet.WTInfo = ( UINT (WINAPI*)( UINT, UINT, LPVOID ) ) 
+		(uintptr_t ) GetProcAddress( app->tablet.wintab_dll, "WTInfoA" );
+	app->tablet.WTOpen = ( APP_HCTX (WINAPI*)( HWND, APP_LOGCONTEXTA*, BOOL ) )
+		(uintptr_t ) GetProcAddress( app->tablet.wintab_dll, "WTOpenA" );
+	app->tablet.WTClose = ( BOOL (WINAPI*)( APP_HCTX ) )
+		(uintptr_t ) GetProcAddress( app->tablet.wintab_dll, "WTClose" );
+	app->tablet.WTEnable = ( BOOL (WINAPI*)( APP_HCTX, BOOL ) )
+		(uintptr_t ) GetProcAddress( app->tablet.wintab_dll, "WTEnable" );
+	app->tablet.WTPacket = ( BOOL (WINAPI*)( APP_HCTX, UINT, LPVOID ) )
+		(uintptr_t ) GetProcAddress( app->tablet.wintab_dll, "WTPacket" );
 
-    if( !app->tablet.WTInfo( 0 ,0, NULL ) ) return FALSE; // checks if tablet is present
-                                                      
-    APP_LOGCONTEXTA log_context; 
-    memset( &log_context, 0, sizeof( log_context ) );
-    app->tablet.WTInfo( APP_WTI_DDCTXS, 0, &log_context );
+	if( !app->tablet.WTInfo( 0 ,0, NULL ) ) return FALSE; // checks if tablet is present
+													  
+	APP_LOGCONTEXTA log_context; 
+	memset( &log_context, 0, sizeof( log_context ) );
+	app->tablet.WTInfo( APP_WTI_DDCTXS, 0, &log_context );
 
-    APP_AXIS pressure; 
-    memset( &pressure, 0, sizeof( pressure ) );
-    app->tablet.WTInfo( APP_WTI_DEVICES, APP_DVC_NPRESSURE, &pressure );
-    app->tablet.max_pressure = pressure.axMax;
+	APP_AXIS pressure; 
+	memset( &pressure, 0, sizeof( pressure ) );
+	app->tablet.WTInfo( APP_WTI_DEVICES, APP_DVC_NPRESSURE, &pressure );
+	app->tablet.max_pressure = pressure.axMax;
 
-    log_context.lcPktData = APP_PACKETDATA;
-    log_context.lcOptions |= APP_CXO_MESSAGES;
-    log_context.lcPktMode = APP_PACKETMODE;
-    log_context.lcMoveMask = APP_PACKETDATA;
-    log_context.lcBtnUpMask = log_context.lcBtnDnMask;
-    log_context.lcOutOrgX = 0;
-    log_context.lcOutOrgY = 0;
-    log_context.lcOutExtX = GetSystemMetrics( SM_CXSCREEN) ;
-    log_context.lcOutExtY = -GetSystemMetrics( SM_CYSCREEN );
+	log_context.lcPktData = APP_PACKETDATA;
+	log_context.lcOptions |= APP_CXO_MESSAGES;
+	log_context.lcPktMode = APP_PACKETMODE;
+	log_context.lcMoveMask = APP_PACKETDATA;
+	log_context.lcBtnUpMask = log_context.lcBtnDnMask;
+	log_context.lcOutOrgX = 0;
+	log_context.lcOutOrgY = 0;
+	log_context.lcOutExtX = GetSystemMetrics( SM_CXSCREEN) ;
+	log_context.lcOutExtY = -GetSystemMetrics( SM_CYSCREEN );
 
-    app->tablet.context = app->tablet.WTOpen( app->hwnd, &log_context, FALSE );
-    if( !app->tablet.context ) return FALSE;
-    return TRUE;
+	app->tablet.context = app->tablet.WTOpen( app->hwnd, &log_context, FALSE );
+	if( !app->tablet.context ) return FALSE;
+	return TRUE;
 }
 
 
 static BOOL app_internal_tablet_term( app_t* app )
-    {
-    if( app->tablet.context ) app->tablet.WTClose( app->tablet.context );
-    if( app->tablet.wintab_dll ) FreeLibrary( app->tablet.wintab_dll );
-    return TRUE;
-    }
+	{
+	if( app->tablet.context ) app->tablet.WTClose( app->tablet.context );
+	if( app->tablet.wintab_dll ) FreeLibrary( app->tablet.wintab_dll );
+	return TRUE;
+	}
 
 
 
@@ -1390,66 +1390,66 @@ static LRESULT CALLBACK app_internal_wndproc( HWND hwnd, UINT message, WPARAM wp
 	app_t* app = (app_t*)(uintptr_t) GetWindowLongPtr( hwnd, GWLP_USERDATA );
 	if( !app ) return DefWindowProc( hwnd, message, wparam, lparam);
 
-    app_input_event_t input_event;
+	app_input_event_t input_event;
 
-    switch( message )
+	switch( message )
 		{
 		case WM_CHAR: 
-            input_event.type = APP_INPUT_CHAR; input_event.data.char_code = (char) wparam; 
-            app_internal_add_input_event( app, &input_event ); 
-            break;
+			input_event.type = APP_INPUT_CHAR; input_event.data.char_code = (char) wparam; 
+			app_internal_add_input_event( app, &input_event ); 
+			break;
 		case WM_LBUTTONDOWN: 
-            input_event.type = APP_INPUT_KEY_DOWN; input_event.data.key = APP_KEY_LBUTTON; 
-            app_internal_add_input_event( app, &input_event ); 
-            break;
+			input_event.type = APP_INPUT_KEY_DOWN; input_event.data.key = APP_KEY_LBUTTON; 
+			app_internal_add_input_event( app, &input_event ); 
+			break;
 		case WM_LBUTTONUP: 
-            input_event.type = APP_INPUT_KEY_UP; input_event.data.key = APP_KEY_LBUTTON; 
-            app_internal_add_input_event( app, &input_event ); 
-            break;
+			input_event.type = APP_INPUT_KEY_UP; input_event.data.key = APP_KEY_LBUTTON; 
+			app_internal_add_input_event( app, &input_event ); 
+			break;
 		case WM_LBUTTONDBLCLK: 
-            input_event.type = APP_INPUT_DOUBLE_CLICK; input_event.data.key = APP_KEY_LBUTTON; 
-            app_internal_add_input_event( app, &input_event ); 
-            break;
+			input_event.type = APP_INPUT_DOUBLE_CLICK; input_event.data.key = APP_KEY_LBUTTON; 
+			app_internal_add_input_event( app, &input_event ); 
+			break;
 		case WM_RBUTTONDOWN: 
-            input_event.type = APP_INPUT_KEY_DOWN; input_event.data.key = APP_KEY_RBUTTON; 
-            app_internal_add_input_event( app, &input_event ); 
-            break;
+			input_event.type = APP_INPUT_KEY_DOWN; input_event.data.key = APP_KEY_RBUTTON; 
+			app_internal_add_input_event( app, &input_event ); 
+			break;
 		case WM_RBUTTONUP: 
-            input_event.type = APP_INPUT_KEY_UP; input_event.data.key = APP_KEY_RBUTTON; 
-            app_internal_add_input_event( app, &input_event ); 
-            break;
+			input_event.type = APP_INPUT_KEY_UP; input_event.data.key = APP_KEY_RBUTTON; 
+			app_internal_add_input_event( app, &input_event ); 
+			break;
 		case WM_RBUTTONDBLCLK: 
-            input_event.type = APP_INPUT_DOUBLE_CLICK; input_event.data.key = APP_KEY_RBUTTON; 
-            app_internal_add_input_event( app, &input_event ); 
-            break;
+			input_event.type = APP_INPUT_DOUBLE_CLICK; input_event.data.key = APP_KEY_RBUTTON; 
+			app_internal_add_input_event( app, &input_event ); 
+			break;
 		case WM_MBUTTONDOWN: 
-            input_event.type = APP_INPUT_KEY_DOWN; input_event.data.key = APP_KEY_MBUTTON; 
-            app_internal_add_input_event( app, &input_event ); 
-            break;
+			input_event.type = APP_INPUT_KEY_DOWN; input_event.data.key = APP_KEY_MBUTTON; 
+			app_internal_add_input_event( app, &input_event ); 
+			break;
 		case WM_MBUTTONUP: 
-            input_event.type = APP_INPUT_KEY_UP; input_event.data.key = APP_KEY_MBUTTON; 
-            app_internal_add_input_event( app, &input_event ); 
-            break;
+			input_event.type = APP_INPUT_KEY_UP; input_event.data.key = APP_KEY_MBUTTON; 
+			app_internal_add_input_event( app, &input_event ); 
+			break;
 		case WM_MBUTTONDBLCLK: 
-            input_event.type = APP_INPUT_DOUBLE_CLICK; input_event.data.key = APP_KEY_MBUTTON; 
-            app_internal_add_input_event( app, &input_event ); 
-            break;
-        case WM_XBUTTONDOWN: 
-            input_event.type = APP_INPUT_KEY_DOWN; input_event.data.key = HIWORD( wparam ) == 1 ? APP_KEY_XBUTTON1 :APP_KEY_XBUTTON2; 
-            app_internal_add_input_event( app, &input_event ); 
-            break;
+			input_event.type = APP_INPUT_DOUBLE_CLICK; input_event.data.key = APP_KEY_MBUTTON; 
+			app_internal_add_input_event( app, &input_event ); 
+			break;
+		case WM_XBUTTONDOWN: 
+			input_event.type = APP_INPUT_KEY_DOWN; input_event.data.key = HIWORD( wparam ) == 1 ? APP_KEY_XBUTTON1 :APP_KEY_XBUTTON2; 
+			app_internal_add_input_event( app, &input_event ); 
+			break;
 		case WM_XBUTTONUP: 
-            input_event.type = APP_INPUT_KEY_UP; input_event.data.key = HIWORD( wparam ) == 1 ? APP_KEY_XBUTTON1 :APP_KEY_XBUTTON2; 
-            app_internal_add_input_event( app, &input_event ); 
-            break;
+			input_event.type = APP_INPUT_KEY_UP; input_event.data.key = HIWORD( wparam ) == 1 ? APP_KEY_XBUTTON1 :APP_KEY_XBUTTON2; 
+			app_internal_add_input_event( app, &input_event ); 
+			break;
 		case WM_XBUTTONDBLCLK: 
-            input_event.type = APP_INPUT_DOUBLE_CLICK; input_event.data.key = HIWORD( wparam ) == 1 ? APP_KEY_XBUTTON1 :APP_KEY_XBUTTON2; 
-            app_internal_add_input_event( app, &input_event ); 
-            break;
+			input_event.type = APP_INPUT_DOUBLE_CLICK; input_event.data.key = HIWORD( wparam ) == 1 ? APP_KEY_XBUTTON1 :APP_KEY_XBUTTON2; 
+			app_internal_add_input_event( app, &input_event ); 
+			break;
 		case WM_SYSKEYDOWN: 
 		case WM_KEYDOWN: 
 			{
-            input_event.type = APP_INPUT_KEY_DOWN; 
+			input_event.type = APP_INPUT_KEY_DOWN; 
 			WPARAM vkcode = wparam;
 			UINT scancode = (UINT)( ( lparam & 0x00ff0000 ) >> 16 );
 			int extended  = ( lparam & 0x01000000 ) != 0;
@@ -1486,7 +1486,7 @@ static LRESULT CALLBACK app_internal_wndproc( HWND hwnd, UINT message, WPARAM wp
 		case WM_SYSKEYUP: 
 		case WM_KEYUP: 
 			{
-            input_event.type = APP_INPUT_KEY_UP; 
+			input_event.type = APP_INPUT_KEY_UP; 
 			WPARAM vkcode = wparam;
 			UINT scancode = (UINT)( ( lparam & 0x00ff0000 ) >> 16 );
 			int extended  = ( lparam & 0x01000000 ) != 0;
@@ -1530,12 +1530,12 @@ static LRESULT CALLBACK app_internal_wndproc( HWND hwnd, UINT message, WPARAM wp
 					{
 					app_input_event_t* event = &app->input_events[ app->input_count - 1 ];
 					event->data.wheel_delta += wheel_delta;					
-                    }
+					}
 				else
 					{
 					input_event.type = APP_INPUT_SCROLL_WHEEL;
 					input_event.data.wheel_delta = wheel_delta;
-    				app_internal_add_input_event( app, &input_event ); 
+					app_internal_add_input_event( app, &input_event ); 
 					}
 				}
 			break;
@@ -1545,14 +1545,14 @@ static LRESULT CALLBACK app_internal_wndproc( HWND hwnd, UINT message, WPARAM wp
 				{
 				POINT p;
 				GetCursorPos( &p ); 
-                ScreenToClient( app->hwnd, &p );
+				ScreenToClient( app->hwnd, &p );
 				int mouse_x = p.x;
 				int mouse_y = p.y;
 
-                input_event.type = APP_INPUT_MOUSE_MOVE; 
+				input_event.type = APP_INPUT_MOUSE_MOVE; 
 				input_event.data.mouse_pos.x = mouse_x; 
 				input_event.data.mouse_pos.y = mouse_y; 
-                app_internal_add_input_event( app, &input_event ); 
+				app_internal_add_input_event( app, &input_event ); 
 				}
 			break;
 
@@ -1575,29 +1575,29 @@ static LRESULT CALLBACK app_internal_wndproc( HWND hwnd, UINT message, WPARAM wp
 					app_input_event_t* event = &app->input_events[ app->input_count - 1 ];
 					event->data.mouse_delta.x += dx;					
 					event->data.mouse_delta.y += dy;					
-                    }
+					}
 				else
 					{
 					input_event.type = APP_INPUT_MOUSE_DELTA;
 					input_event.data.mouse_delta.x = dx;					
 					input_event.data.mouse_delta.y = dy;					
-    				app_internal_add_input_event( app, &input_event ); 
+					app_internal_add_input_event( app, &input_event ); 
 					}
 				} 
 			break;
 			}
 
-        case APP_WT_PACKET:
-            {
-            APP_PACKET packet;
-            memset( &packet, 0, sizeof( packet ) );
-            if( (APP_HCTX) lparam == app->tablet.context && 
-                app->tablet.WTPacket( app->tablet.context, (UINT) wparam, &packet ) )
-                {
-                POINT p;
-                p.x = packet.pkX;
-                p.y = packet.pkY;
-                ScreenToClient( app->hwnd, &p );
+		case APP_WT_PACKET:
+			{
+			APP_PACKET packet;
+			memset( &packet, 0, sizeof( packet ) );
+			if( (APP_HCTX) lparam == app->tablet.context && 
+				app->tablet.WTPacket( app->tablet.context, (UINT) wparam, &packet ) )
+				{
+				POINT p;
+				p.x = packet.pkX;
+				p.y = packet.pkY;
+				ScreenToClient( app->hwnd, &p );
 				int pen_x = p.x;
 				int pen_y = p.y;
 
@@ -1608,58 +1608,58 @@ static LRESULT CALLBACK app_internal_wndproc( HWND hwnd, UINT message, WPARAM wp
 				input_event.data.tablet.tip = ( packet.pkButtons & 1 ) ? APP_PRESSED : APP_NOT_PRESSED;
 				input_event.data.tablet.lower = ( packet.pkButtons & 2 ) ? APP_PRESSED : APP_NOT_PRESSED;
 				input_event.data.tablet.upper = ( packet.pkButtons & 4 ) ? APP_PRESSED : APP_NOT_PRESSED;
-                app_internal_add_input_event( app, &input_event ); 
-                }
-            } break;
+				app_internal_add_input_event( app, &input_event ); 
+				}
+			} break;
 
 		case WM_SETCURSOR:
 			if( LOWORD( lparam ) == HTCLIENT )
 				{
-                SetCursor( app->current_pointer );
-                return 0;
-                }
+				SetCursor( app->current_pointer );
+				return 0;
+				}
 			break;
 
 
-        case WM_WINDOWPOSCHANGED:
-            {
-            if( app->screenmode == APP_SCREENMODE_FULLSCREEN )
-                {
-                RECT wr, cr;
-                GetWindowRect( app->hwnd, &wr );
-                GetClientRect( app->hwnd, &cr );
-                if( wr.right - wr.left == cr.right - cr.left && wr.bottom - wr.top == cr.bottom - cr.top )
-                    {
-                    if( cr.right - cr.left != app->fullscreen_width || cr.bottom - cr.top != app->fullscreen_height )
-                        app_screenmode( app, APP_SCREENMODE_WINDOW );
-                    }
-                }
-
-            if( app->clip_cursor ) 
-                {
-                RECT r = app->clip_rect;
-                ClientToScreen( app->hwnd, (POINT*)&r );
-                ClientToScreen( app->hwnd, ( (POINT*)&r ) + 1 );
-                ClipCursor( &r );
-                }
-
-            } break;
-
-        case WM_SIZE:
+		case WM_WINDOWPOSCHANGED:
 			{
-            if( wparam == SIZE_MAXIMIZED )
-                {
+			if( app->screenmode == APP_SCREENMODE_FULLSCREEN )
+				{
+				RECT wr, cr;
+				GetWindowRect( app->hwnd, &wr );
+				GetClientRect( app->hwnd, &cr );
+				if( wr.right - wr.left == cr.right - cr.left && wr.bottom - wr.top == cr.bottom - cr.top )
+					{
+					if( cr.right - cr.left != app->fullscreen_width || cr.bottom - cr.top != app->fullscreen_height )
+						app_screenmode( app, APP_SCREENMODE_WINDOW );
+					}
+				}
+
+			if( app->clip_cursor ) 
+				{
+				RECT r = app->clip_rect;
+				ClientToScreen( app->hwnd, (POINT*)&r );
+				ClientToScreen( app->hwnd, ( (POINT*)&r ) + 1 );
+				ClipCursor( &r );
+				}
+
+			} break;
+
+		case WM_SIZE:
+			{
+			if( wparam == SIZE_MAXIMIZED )
+				{
 		        WINDOWPLACEMENT placement;
-                placement.length = sizeof( placement );
+				placement.length = sizeof( placement );
 		        GetWindowPlacement( app->hwnd, &placement );
 		        app->windowed_x = placement.rcNormalPosition.left;
 		        app->windowed_y = placement.rcNormalPosition.top;
 		        app->windowed_w = placement.rcNormalPosition.right - placement.rcNormalPosition.left;
 		        app->windowed_h = placement.rcNormalPosition.bottom - placement.rcNormalPosition.top;
-                }
+				}
 
 			RECT r;
-        	GetClientRect( app->hwnd, &r );		
+			GetClientRect( app->hwnd, &r );		
 			app_internal_opengl_resize( &app->gl, r.right - r.left, r.bottom - r.top );
 			} break;
 
@@ -1670,12 +1670,12 @@ static LRESULT CALLBACK app_internal_wndproc( HWND hwnd, UINT message, WPARAM wp
 				{
 				app->is_minimized = FALSE;
 				if( app->clip_cursor ) 
-                    {
-                    RECT r = app->clip_rect;
-                    ClientToScreen( app->hwnd, (POINT*)&r );
-                    ClientToScreen( app->hwnd, ( (POINT*)&r ) + 1 );
-                    ClipCursor( &r );
-                    }
+					{
+					RECT r = app->clip_rect;
+					ClientToScreen( app->hwnd, (POINT*)&r );
+					ClientToScreen( app->hwnd, ( (POINT*)&r ) + 1 );
+					ClipCursor( &r );
+					}
 				}
 			else
 				{
@@ -1690,75 +1690,75 @@ static LRESULT CALLBACK app_internal_wndproc( HWND hwnd, UINT message, WPARAM wp
 
 		case WM_CLOSE:
 			app->closed = TRUE;
-            return 0;
+			return 0;
 			break;
 		}
 
 	return DefWindowProc( hwnd, message, wparam, lparam);
 	}
 
-    
+	
 static BOOL CALLBACK app_internal_monitorenumproc( HMONITOR hmonitor, HDC dc, LPRECT rect, LPARAM data )
-    {
-    (void) dc;
-    app_t* app = (app_t*) data;
+	{
+	(void) dc;
+	app_t* app = (app_t*) data;
 
-    if( app->display_count >= sizeof( app->displays ) / sizeof( *app->displays ) ) return FALSE;
-    app->displays_hmonitor[ app->display_count ] = hmonitor;
-    app_display_t* display = &app->displays[ app->display_count++ ];
-    
-    display->x = rect->left;
-    display->y = rect->top;
-    display->width = rect->right - rect->left;
-    display->height = rect->bottom - rect->top;
+	if( app->display_count >= sizeof( app->displays ) / sizeof( *app->displays ) ) return FALSE;
+	app->displays_hmonitor[ app->display_count ] = hmonitor;
+	app_display_t* display = &app->displays[ app->display_count++ ];
+	
+	display->x = rect->left;
+	display->y = rect->top;
+	display->width = rect->right - rect->left;
+	display->height = rect->bottom - rect->top;
 
-    #ifdef __cplusplus
-        MONITORINFOEXA mi;
-        mi.cbSize = sizeof( mi );
-        BOOL res = GetMonitorInfoA( hmonitor, &mi );
-        if( res && strlen( mi.szDevice ) >= sizeof( display->id ) ) res = FALSE;
-        strcpy( display->id, res ? mi.szDevice : "" ) ;
-    #else
-        MONITORINFOEXA mi;
-        mi.cbSize = sizeof( mi );
-        BOOL res = GetMonitorInfoA( hmonitor, (LPMONITORINFO)&mi );
-        if( res && strlen( mi.szDevice ) >= sizeof( display->id ) ) res = FALSE;
-        strcpy( display->id, res ? mi.szDevice : "" ) ;
-    #endif
+	#ifdef __cplusplus
+		MONITORINFOEXA mi;
+		mi.cbSize = sizeof( mi );
+		BOOL res = GetMonitorInfoA( hmonitor, &mi );
+		if( res && strlen( mi.szDevice ) >= sizeof( display->id ) ) res = FALSE;
+		strcpy( display->id, res ? mi.szDevice : "" ) ;
+	#else
+		MONITORINFOEXA mi;
+		mi.cbSize = sizeof( mi );
+		BOOL res = GetMonitorInfoA( hmonitor, (LPMONITORINFO)&mi );
+		if( res && strlen( mi.szDevice ) >= sizeof( display->id ) ) res = FALSE;
+		strcpy( display->id, res ? mi.szDevice : "" ) ;
+	#endif
 
-    return TRUE;
-    }
+	return TRUE;
+	}
 
 
 static void app_internal_app_default_cursor( app_t* app )
-    {
-    APP_U32 pointer_pixels[ 256 * 256 ];
-    int pointer_width, pointer_height, pointer_hotspot_x, pointer_hotspot_y; 
-    app_pointer_default( app, &pointer_width, &pointer_height, pointer_pixels, &pointer_hotspot_x, &pointer_hotspot_y );
-    app_pointer( app, pointer_width, pointer_height, pointer_pixels, pointer_hotspot_x, pointer_hotspot_y );
-    }
+	{
+	APP_U32 pointer_pixels[ 256 * 256 ];
+	int pointer_width, pointer_height, pointer_hotspot_x, pointer_hotspot_y; 
+	app_pointer_default( app, &pointer_width, &pointer_height, pointer_pixels, &pointer_hotspot_x, &pointer_hotspot_y );
+	app_pointer( app, pointer_width, pointer_height, pointer_pixels, pointer_hotspot_x, pointer_hotspot_y );
+	}
 
 
 #pragma warning( push )
 #pragma warning( disable: 4533 ) // initialization of 'wc' is skipped by 'goto init_failed'
 
 int app_run( int (*app_proc)( app_t*, void* ), void* user_data, void* memctx, void* logctx, void* fatalctx )
-    {
-    int result = 0xff;
+	{
+	int result = 0xff;
 
-    // Init app instance
-    app_t* app = (app_t*) APP_MALLOC( memctx, sizeof( app_t ) );
-    memset( app, 0, sizeof( *app ) );
-    app->memctx = memctx;
-    app->logctx = logctx;
-    app->fatalctx = fatalctx;
+	// Init app instance
+	app_t* app = (app_t*) APP_MALLOC( memctx, sizeof( app_t ) );
+	memset( app, 0, sizeof( *app ) );
+	app->memctx = memctx;
+	app->logctx = logctx;
+	app->fatalctx = fatalctx;
 	app->interpolation = APP_INTERPOLATION_LINEAR;
 	app->screenmode = APP_SCREENMODE_FULLSCREEN;
 
-    // Log start message
+	// Log start message
 	char msg[ 64 ];
-    time_t t = time( NULL );
-    struct tm* start = localtime( &t );
+	time_t t = time( NULL );
+	struct tm* start = localtime( &t );
 	sprintf( msg, "Application started %02d:%02d:%02d %04d-%02d-%02d.", 
 		start->tm_hour, start->tm_min, start->tm_sec, start->tm_year + 1900, start->tm_mon + 1, start->tm_mday );
 	app_log( app, APP_LOG_LEVEL_INFO, msg );
@@ -1771,27 +1771,27 @@ int app_run( int (*app_proc)( app_t*, void* ), void* user_data, void* memctx, vo
 	// Get instance handle
 	app->hinstance = GetModuleHandle( NULL );
 
-    // Retrieve the path of our executable
-    GetModuleFileNameA( 0, app->exe_path, sizeof( app->exe_path ) );
+	// Retrieve the path of our executable
+	GetModuleFileNameA( 0, app->exe_path, sizeof( app->exe_path ) );
 
-    // Retrieve user data path
-    SHGetFolderPathA( NULL, CSIDL_PERSONAL | CSIDL_FLAG_CREATE, NULL, 0, app->userdata_path ); 
+	// Retrieve user data path
+	SHGetFolderPathA( NULL, CSIDL_PERSONAL | CSIDL_FLAG_CREATE, NULL, 0, app->userdata_path ); 
 
-    // Retrieve app data path
-    SHGetFolderPathA( NULL, CSIDL_COMMON_APPDATA | CSIDL_FLAG_CREATE, NULL, 0, app->appdata_path ); 
+	// Retrieve app data path
+	SHGetFolderPathA( NULL, CSIDL_COMMON_APPDATA | CSIDL_FLAG_CREATE, NULL, 0, app->appdata_path ); 
 
-    // Get command line string
+	// Get command line string
 	app->cmdline = GetCommandLineA();
 
 	// Load a default Arrow cursor     
-    app_internal_app_default_cursor( app );
+	app_internal_app_default_cursor( app );
 
 	// Load first icon in the exe and use as app icon
 	app->icon = LoadIconA( app->hinstance , MAKEINTRESOURCEA( 1 ) );
 
-    // List all displays
+	// List all displays
 	app->display_count = 0;
-    EnumDisplayMonitors( NULL, NULL, app_internal_monitorenumproc, (LPARAM) app );
+	EnumDisplayMonitors( NULL, NULL, app_internal_monitorenumproc, (LPARAM) app );
 	if( app->display_count <= 0 ) { app_log( app, APP_LOG_LEVEL_ERROR, "Failed to get display info" ); goto init_failed;  }
 
 	// Setup the main application window
@@ -1800,25 +1800,25 @@ int app_run( int (*app_proc)( app_t*, void* ), void* user_data, void* memctx, vo
 	app->windowed_x = ( app->displays[ 0 ].width - app->windowed_w ) /  2;
 	app->windowed_y = ( app->displays[ 0 ].height - app->windowed_h ) / 2;
 
-    app->fullscreen_width = app->displays[ 0 ].width;
-    app->fullscreen_height = app->displays[ 0 ].height;
+	app->fullscreen_width = app->displays[ 0 ].width;
+	app->fullscreen_height = app->displays[ 0 ].height;
 
 	RECT winrect = app_internal_rect( app->windowed_x, app->windowed_y, 
-        app->windowed_x + app->windowed_w, app->windowed_y + app->windowed_h );
+		app->windowed_x + app->windowed_w, app->windowed_y + app->windowed_h );
 	AdjustWindowRect( &winrect, WS_OVERLAPPEDWINDOW | WS_VISIBLE, FALSE );
 
 	WNDCLASSEX wc = { sizeof( WNDCLASSEX ), CS_DBLCLKS | CS_OWNDC | CS_HREDRAW | CS_VREDRAW,  
-        (WNDPROC) app_internal_wndproc, 0, 0, 0, 0, 0, 0, 0, TEXT( "app_wc" ), 0 };
+		(WNDPROC) app_internal_wndproc, 0, 0, 0, 0, 0, 0, 0, TEXT( "app_wc" ), 0 };
 	wc.hInstance = app->hinstance; wc.hIcon = app->icon; wc.hCursor = app->current_pointer; 
 	wc.hbrBackground = (HBRUSH) GetStockObject( BLACK_BRUSH ); wc.hIconSm = app->icon;
 	RegisterClassEx( &wc );
 	app->hwnd = CreateWindowEx( 0, wc.lpszClassName, 0, WS_OVERLAPPEDWINDOW, app->windowed_x, app->windowed_y, 
-        winrect.right - winrect.left, winrect.bottom - winrect.top, (HWND) 0, (HMENU) 0, app->hinstance, 0 );
+		winrect.right - winrect.left, winrect.bottom - winrect.top, (HWND) 0, (HMENU) 0, app->hinstance, 0 );
 	if( !app->hwnd ) { app_log( app, APP_LOG_LEVEL_ERROR, "Failed to create window." ); goto init_failed; }
-    ShowWindow( app->hwnd, SW_HIDE );
-    app->hdc = GetDC( app->hwnd );
-    app->has_focus = TRUE;
-    app->is_minimized = FALSE;
+	ShowWindow( app->hwnd, SW_HIDE );
+	app->hdc = GetDC( app->hwnd );
+	app->has_focus = TRUE;
+	app->is_minimized = FALSE;
 
 	// Store app pointer with window
 	#pragma warning( push )
@@ -1826,18 +1826,18 @@ int app_run( int (*app_proc)( app_t*, void* ), void* user_data, void* memctx, vo
 	SetWindowLongPtr( app->hwnd, GWLP_USERDATA, (LONG_PTR) app );
 	#pragma warning( pop )
 
-    // Windows specific OpenGL initialization
+	// Windows specific OpenGL initialization
 	app->gl_dll = LoadLibraryA( "opengl32.dll" );
-    if( !app->gl_dll ) { app_log( app, APP_LOG_LEVEL_ERROR, "Failed to load opengl32.dll" ); goto init_failed; }
+	if( !app->gl_dll ) { app_log( app, APP_LOG_LEVEL_ERROR, "Failed to load opengl32.dll" ); goto init_failed; }
 	app->wglGetProcAddress = (PROC(APP_GLCALLTYPE*)(LPCSTR)) (uintptr_t) GetProcAddress( app->gl_dll, "wglGetProcAddress" );
-    if( !app->gl_dll ) { app_log( app, APP_LOG_LEVEL_ERROR, "Failed to find wglGetProcAddress" ); goto init_failed; }
+	if( !app->gl_dll ) { app_log( app, APP_LOG_LEVEL_ERROR, "Failed to find wglGetProcAddress" ); goto init_failed; }
 	app->wglCreateContext = (HGLRC(APP_GLCALLTYPE*)(HDC)) (uintptr_t) GetProcAddress( app->gl_dll, "wglCreateContext" );
-    if( !app->gl_dll ) { app_log( app, APP_LOG_LEVEL_ERROR, "Failed to find wglCreateContext" ); goto init_failed; }
+	if( !app->gl_dll ) { app_log( app, APP_LOG_LEVEL_ERROR, "Failed to find wglCreateContext" ); goto init_failed; }
 	app->wglDeleteContext = (BOOL(APP_GLCALLTYPE*)(HGLRC)) (uintptr_t) GetProcAddress( app->gl_dll, "wglDeleteContext" );
-    if( !app->gl_dll ) { app_log( app, APP_LOG_LEVEL_ERROR, "Failed to find wglDeleteContext" ); goto init_failed; }
+	if( !app->gl_dll ) { app_log( app, APP_LOG_LEVEL_ERROR, "Failed to find wglDeleteContext" ); goto init_failed; }
 	app->wglMakeCurrent = (BOOL(APP_GLCALLTYPE*)(HDC, HGLRC)) (uintptr_t) GetProcAddress( app->gl_dll, "wglMakeCurrent" );
-    if( !app->gl_dll ) { app_log( app, APP_LOG_LEVEL_ERROR, "Failed to find wglMakeCurrent" ); goto init_failed; }
-    
+	if( !app->gl_dll ) { app_log( app, APP_LOG_LEVEL_ERROR, "Failed to find wglMakeCurrent" ); goto init_failed; }
+	
 	PIXELFORMATDESCRIPTOR pfd;
 	memset( &pfd, 0, sizeof( pfd ) );
 	pfd.nSize = sizeof( PIXELFORMATDESCRIPTOR );
@@ -1849,142 +1849,142 @@ int app_run( int (*app_proc)( app_t*, void* ), void* user_data, void* memctx, vo
 	pfd.cStencilBits = 8;
 	pfd.iLayerType = PFD_MAIN_PLANE;
 	BOOL res = SetPixelFormat( app->hdc, ChoosePixelFormat( app->hdc, &pfd ), &pfd );
-    if( !res ) { app_log( app, APP_LOG_LEVEL_ERROR, "Failed to set pixel format" ); goto init_failed; }
+	if( !res ) { app_log( app, APP_LOG_LEVEL_ERROR, "Failed to set pixel format" ); goto init_failed; }
 
 	app->gl_context = app->wglCreateContext( app->hdc ); 
-    if( !app->gl_context ) { app_log( app, APP_LOG_LEVEL_ERROR, "Failed to create OpenGL context" ); goto init_failed; }
+	if( !app->gl_context ) { app_log( app, APP_LOG_LEVEL_ERROR, "Failed to create OpenGL context" ); goto init_failed; }
 	res = app->wglMakeCurrent( app->hdc, app->gl_context );
-    if( !res ) { app_log( app, APP_LOG_LEVEL_ERROR, "Failed to activate OpenGl Context" ); goto init_failed; }
+	if( !res ) { app_log( app, APP_LOG_LEVEL_ERROR, "Failed to activate OpenGl Context" ); goto init_failed; }
 
 	app->wglSwapIntervalEXT = (BOOL (APP_GLCALLTYPE*)(int)) (uintptr_t) app->wglGetProcAddress( "wglSwapIntervalEXT" );
 	if( app->wglSwapIntervalEXT ) app->wglSwapIntervalEXT( 1 );
 
-    // Attempt to bind opengl functions using GetProcAddress
-    app->gl.glCreateShader = ( APP_GLuint (APP_GLCALLTYPE*) (APP_GLenum) ) (uintptr_t) GetProcAddress( app->gl_dll, "glCreateShader" );
-    app->gl.glShaderSource = ( void (APP_GLCALLTYPE*) (APP_GLuint, APP_GLsizei, APP_GLchar const* const*, APP_GLint const*) ) (uintptr_t) GetProcAddress( app->gl_dll, "glShaderSource" );
-    app->gl.glCompileShader = ( void (APP_GLCALLTYPE*) (APP_GLuint) ) (uintptr_t) GetProcAddress( app->gl_dll, "glCompileShader" );
-    app->gl.glGetShaderiv = ( void (APP_GLCALLTYPE*) (APP_GLuint, APP_GLenum, APP_GLint*) ) (uintptr_t) GetProcAddress( app->gl_dll, "glGetShaderiv" );
-    app->gl.glCreateProgram = ( APP_GLuint (APP_GLCALLTYPE*) (void) ) (uintptr_t) GetProcAddress( app->gl_dll, "glCreateProgram" );
-    app->gl.glAttachShader = ( void (APP_GLCALLTYPE*) (APP_GLuint, APP_GLuint) ) (uintptr_t) GetProcAddress( app->gl_dll, "glAttachShader" );
-    app->gl.glBindAttribLocation = ( void (APP_GLCALLTYPE*) (APP_GLuint, APP_GLuint, APP_GLchar const*) ) (uintptr_t) GetProcAddress( app->gl_dll, "glBindAttribLocation" );
-    app->gl.glLinkProgram = ( void (APP_GLCALLTYPE*) (APP_GLuint) ) (uintptr_t) GetProcAddress( app->gl_dll, "glLinkProgram" );
-    app->gl.glGetProgramiv = ( void (APP_GLCALLTYPE*) (APP_GLuint, APP_GLenum, APP_GLint*) ) (uintptr_t) GetProcAddress( app->gl_dll, "glGetProgramiv" );
-    app->gl.glGenBuffers = ( void (APP_GLCALLTYPE*) (APP_GLsizei, APP_GLuint*) ) (uintptr_t) GetProcAddress( app->gl_dll, "glGenBuffers" );
-    app->gl.glBindBuffer = ( void (APP_GLCALLTYPE*) (APP_GLenum, APP_GLuint) ) (uintptr_t) GetProcAddress( app->gl_dll, "glBindBuffer" );
-    app->gl.glEnableVertexAttribArray = ( void (APP_GLCALLTYPE*) (APP_GLuint) ) (uintptr_t) GetProcAddress( app->gl_dll, "glEnableVertexAttribArray" );
-    app->gl.glVertexAttribPointer = ( void (APP_GLCALLTYPE*) (APP_GLuint, APP_GLint, APP_GLenum, APP_GLboolean, APP_GLsizei, void const*) ) (uintptr_t) GetProcAddress( app->gl_dll, "glVertexAttribPointer" );
-    app->gl.glGenTextures = ( void (APP_GLCALLTYPE*) (APP_GLsizei, APP_GLuint*) ) (uintptr_t) GetProcAddress( app->gl_dll, "glGenTextures" );
-    app->gl.glEnable = ( void (APP_GLCALLTYPE*) (APP_GLenum) ) (uintptr_t) GetProcAddress( app->gl_dll, "glEnable" );
-    app->gl.glActiveTexture = ( void (APP_GLCALLTYPE*) (APP_GLenum) ) (uintptr_t) GetProcAddress( app->gl_dll, "glActiveTexture" );
-    app->gl.glBindTexture = ( void (APP_GLCALLTYPE*) (APP_GLenum, APP_GLuint) ) (uintptr_t) GetProcAddress( app->gl_dll, "glBindTexture" );
-    app->gl.glTexParameteri = ( void (APP_GLCALLTYPE*) (APP_GLenum, APP_GLenum, APP_GLint) ) (uintptr_t) GetProcAddress( app->gl_dll, "glTexParameteri" );
-    app->gl.glDeleteBuffers = ( void (APP_GLCALLTYPE*) (APP_GLsizei, APP_GLuint const*) ) (uintptr_t) GetProcAddress( app->gl_dll, "glDeleteBuffers" );
-    app->gl.glDeleteTextures = ( void (APP_GLCALLTYPE*) (APP_GLsizei, APP_GLuint const*) ) (uintptr_t) GetProcAddress( app->gl_dll, "glDeleteTextures" );
-    app->gl.glBufferData = ( void (APP_GLCALLTYPE*) (APP_GLenum, APP_GLsizeiptr, void const *, APP_GLenum) ) (uintptr_t) GetProcAddress( app->gl_dll, "glBufferData" );
-    app->gl.glUseProgram = ( void (APP_GLCALLTYPE*) (APP_GLuint) ) (uintptr_t) GetProcAddress( app->gl_dll, "glUseProgram" );
-    app->gl.glUniform1i = ( void (APP_GLCALLTYPE*) (APP_GLint, APP_GLint) ) (uintptr_t) GetProcAddress( app->gl_dll, "glUniform1i" );
-    app->gl.glUniform3f = ( void (APP_GLCALLTYPE*) (APP_GLint, APP_GLfloat, APP_GLfloat, APP_GLfloat) ) (uintptr_t) GetProcAddress( app->gl_dll, "glUniform3f" );
-    app->gl.glGetUniformLocation = ( APP_GLint (APP_GLCALLTYPE*) (APP_GLuint, APP_GLchar const*) ) (uintptr_t) GetProcAddress( app->gl_dll, "glGetUniformLocation" );
-    app->gl.glTexImage2D = ( void (APP_GLCALLTYPE*) (APP_GLenum, APP_GLint, APP_GLint, APP_GLsizei, APP_GLsizei, APP_GLint, APP_GLenum, APP_GLenum, void const*) ) (uintptr_t) GetProcAddress( app->gl_dll, "glTexImage2D" );
-    app->gl.glClearColor = ( void (APP_GLCALLTYPE*) (APP_GLfloat, APP_GLfloat, APP_GLfloat, APP_GLfloat) ) (uintptr_t) GetProcAddress( app->gl_dll, "glClearColor" );
-    app->gl.glClear = ( void (APP_GLCALLTYPE*) (APP_GLbitfield) ) (uintptr_t) GetProcAddress( app->gl_dll, "glClear" );
-    app->gl.glDrawArrays = ( void (APP_GLCALLTYPE*) (APP_GLenum, APP_GLint, APP_GLsizei) ) (uintptr_t) GetProcAddress( app->gl_dll, "glDrawArrays" );
-    app->gl.glViewport = ( void (APP_GLCALLTYPE*) (APP_GLint, APP_GLint, APP_GLsizei, APP_GLsizei) ) (uintptr_t) GetProcAddress( app->gl_dll, "glViewport" );
-    app->gl.glDeleteShader = ( void (APP_GLCALLTYPE*) (APP_GLuint) ) (uintptr_t) GetProcAddress( app->gl_dll, "glDeleteShader" );
-    app->gl.glDeleteProgram = ( void (APP_GLCALLTYPE*) (APP_GLuint) ) (uintptr_t) GetProcAddress( app->gl_dll, "glDeleteProgram" );
-    #ifdef APP_REPORT_SHADER_ERRORS
-        app->gl.glGetShaderInfoLog = ( void (APP_GLCALLTYPE*) (APP_GLuint, APP_GLsizei, APP_GLsizei*, APP_GLchar*) ) (uintptr_t) GetProcAddress( app->gl_dll, "glGetShaderInfoLog" );
-    #endif
+	// Attempt to bind opengl functions using GetProcAddress
+	app->gl.glCreateShader = ( APP_GLuint (APP_GLCALLTYPE*) (APP_GLenum) ) (uintptr_t) GetProcAddress( app->gl_dll, "glCreateShader" );
+	app->gl.glShaderSource = ( void (APP_GLCALLTYPE*) (APP_GLuint, APP_GLsizei, APP_GLchar const* const*, APP_GLint const*) ) (uintptr_t) GetProcAddress( app->gl_dll, "glShaderSource" );
+	app->gl.glCompileShader = ( void (APP_GLCALLTYPE*) (APP_GLuint) ) (uintptr_t) GetProcAddress( app->gl_dll, "glCompileShader" );
+	app->gl.glGetShaderiv = ( void (APP_GLCALLTYPE*) (APP_GLuint, APP_GLenum, APP_GLint*) ) (uintptr_t) GetProcAddress( app->gl_dll, "glGetShaderiv" );
+	app->gl.glCreateProgram = ( APP_GLuint (APP_GLCALLTYPE*) (void) ) (uintptr_t) GetProcAddress( app->gl_dll, "glCreateProgram" );
+	app->gl.glAttachShader = ( void (APP_GLCALLTYPE*) (APP_GLuint, APP_GLuint) ) (uintptr_t) GetProcAddress( app->gl_dll, "glAttachShader" );
+	app->gl.glBindAttribLocation = ( void (APP_GLCALLTYPE*) (APP_GLuint, APP_GLuint, APP_GLchar const*) ) (uintptr_t) GetProcAddress( app->gl_dll, "glBindAttribLocation" );
+	app->gl.glLinkProgram = ( void (APP_GLCALLTYPE*) (APP_GLuint) ) (uintptr_t) GetProcAddress( app->gl_dll, "glLinkProgram" );
+	app->gl.glGetProgramiv = ( void (APP_GLCALLTYPE*) (APP_GLuint, APP_GLenum, APP_GLint*) ) (uintptr_t) GetProcAddress( app->gl_dll, "glGetProgramiv" );
+	app->gl.glGenBuffers = ( void (APP_GLCALLTYPE*) (APP_GLsizei, APP_GLuint*) ) (uintptr_t) GetProcAddress( app->gl_dll, "glGenBuffers" );
+	app->gl.glBindBuffer = ( void (APP_GLCALLTYPE*) (APP_GLenum, APP_GLuint) ) (uintptr_t) GetProcAddress( app->gl_dll, "glBindBuffer" );
+	app->gl.glEnableVertexAttribArray = ( void (APP_GLCALLTYPE*) (APP_GLuint) ) (uintptr_t) GetProcAddress( app->gl_dll, "glEnableVertexAttribArray" );
+	app->gl.glVertexAttribPointer = ( void (APP_GLCALLTYPE*) (APP_GLuint, APP_GLint, APP_GLenum, APP_GLboolean, APP_GLsizei, void const*) ) (uintptr_t) GetProcAddress( app->gl_dll, "glVertexAttribPointer" );
+	app->gl.glGenTextures = ( void (APP_GLCALLTYPE*) (APP_GLsizei, APP_GLuint*) ) (uintptr_t) GetProcAddress( app->gl_dll, "glGenTextures" );
+	app->gl.glEnable = ( void (APP_GLCALLTYPE*) (APP_GLenum) ) (uintptr_t) GetProcAddress( app->gl_dll, "glEnable" );
+	app->gl.glActiveTexture = ( void (APP_GLCALLTYPE*) (APP_GLenum) ) (uintptr_t) GetProcAddress( app->gl_dll, "glActiveTexture" );
+	app->gl.glBindTexture = ( void (APP_GLCALLTYPE*) (APP_GLenum, APP_GLuint) ) (uintptr_t) GetProcAddress( app->gl_dll, "glBindTexture" );
+	app->gl.glTexParameteri = ( void (APP_GLCALLTYPE*) (APP_GLenum, APP_GLenum, APP_GLint) ) (uintptr_t) GetProcAddress( app->gl_dll, "glTexParameteri" );
+	app->gl.glDeleteBuffers = ( void (APP_GLCALLTYPE*) (APP_GLsizei, APP_GLuint const*) ) (uintptr_t) GetProcAddress( app->gl_dll, "glDeleteBuffers" );
+	app->gl.glDeleteTextures = ( void (APP_GLCALLTYPE*) (APP_GLsizei, APP_GLuint const*) ) (uintptr_t) GetProcAddress( app->gl_dll, "glDeleteTextures" );
+	app->gl.glBufferData = ( void (APP_GLCALLTYPE*) (APP_GLenum, APP_GLsizeiptr, void const *, APP_GLenum) ) (uintptr_t) GetProcAddress( app->gl_dll, "glBufferData" );
+	app->gl.glUseProgram = ( void (APP_GLCALLTYPE*) (APP_GLuint) ) (uintptr_t) GetProcAddress( app->gl_dll, "glUseProgram" );
+	app->gl.glUniform1i = ( void (APP_GLCALLTYPE*) (APP_GLint, APP_GLint) ) (uintptr_t) GetProcAddress( app->gl_dll, "glUniform1i" );
+	app->gl.glUniform3f = ( void (APP_GLCALLTYPE*) (APP_GLint, APP_GLfloat, APP_GLfloat, APP_GLfloat) ) (uintptr_t) GetProcAddress( app->gl_dll, "glUniform3f" );
+	app->gl.glGetUniformLocation = ( APP_GLint (APP_GLCALLTYPE*) (APP_GLuint, APP_GLchar const*) ) (uintptr_t) GetProcAddress( app->gl_dll, "glGetUniformLocation" );
+	app->gl.glTexImage2D = ( void (APP_GLCALLTYPE*) (APP_GLenum, APP_GLint, APP_GLint, APP_GLsizei, APP_GLsizei, APP_GLint, APP_GLenum, APP_GLenum, void const*) ) (uintptr_t) GetProcAddress( app->gl_dll, "glTexImage2D" );
+	app->gl.glClearColor = ( void (APP_GLCALLTYPE*) (APP_GLfloat, APP_GLfloat, APP_GLfloat, APP_GLfloat) ) (uintptr_t) GetProcAddress( app->gl_dll, "glClearColor" );
+	app->gl.glClear = ( void (APP_GLCALLTYPE*) (APP_GLbitfield) ) (uintptr_t) GetProcAddress( app->gl_dll, "glClear" );
+	app->gl.glDrawArrays = ( void (APP_GLCALLTYPE*) (APP_GLenum, APP_GLint, APP_GLsizei) ) (uintptr_t) GetProcAddress( app->gl_dll, "glDrawArrays" );
+	app->gl.glViewport = ( void (APP_GLCALLTYPE*) (APP_GLint, APP_GLint, APP_GLsizei, APP_GLsizei) ) (uintptr_t) GetProcAddress( app->gl_dll, "glViewport" );
+	app->gl.glDeleteShader = ( void (APP_GLCALLTYPE*) (APP_GLuint) ) (uintptr_t) GetProcAddress( app->gl_dll, "glDeleteShader" );
+	app->gl.glDeleteProgram = ( void (APP_GLCALLTYPE*) (APP_GLuint) ) (uintptr_t) GetProcAddress( app->gl_dll, "glDeleteProgram" );
+	#ifdef APP_REPORT_SHADER_ERRORS
+		app->gl.glGetShaderInfoLog = ( void (APP_GLCALLTYPE*) (APP_GLuint, APP_GLsizei, APP_GLsizei*, APP_GLchar*) ) (uintptr_t) GetProcAddress( app->gl_dll, "glGetShaderInfoLog" );
+	#endif
 
-    // Any opengl functions which didn't bind, try binding them using wglGetProcAddrss
-    if( !app->gl.glCreateShader ) app->gl.glCreateShader = ( APP_GLuint (APP_GLCALLTYPE*) (APP_GLenum) ) (uintptr_t) app->wglGetProcAddress( "glCreateShader" );
-    if( !app->gl.glShaderSource ) app->gl.glShaderSource = ( void (APP_GLCALLTYPE*) (APP_GLuint, APP_GLsizei, APP_GLchar const* const*, APP_GLint const*) ) (uintptr_t) app->wglGetProcAddress( "glShaderSource" );
-    if( !app->gl.glCompileShader ) app->gl.glCompileShader = ( void (APP_GLCALLTYPE*) (APP_GLuint) ) (uintptr_t) app->wglGetProcAddress( "glCompileShader" );
-    if( !app->gl.glGetShaderiv ) app->gl.glGetShaderiv = ( void (APP_GLCALLTYPE*) (APP_GLuint, APP_GLenum, APP_GLint*) ) (uintptr_t) app->wglGetProcAddress( "glGetShaderiv" );
-    if( !app->gl.glCreateProgram ) app->gl.glCreateProgram = ( APP_GLuint (APP_GLCALLTYPE*) (void) ) (uintptr_t) app->wglGetProcAddress( "glCreateProgram" );
-    if( !app->gl.glAttachShader ) app->gl.glAttachShader = ( void (APP_GLCALLTYPE*) (APP_GLuint, APP_GLuint) ) (uintptr_t) app->wglGetProcAddress( "glAttachShader" );
-    if( !app->gl.glBindAttribLocation ) app->gl.glBindAttribLocation = ( void (APP_GLCALLTYPE*) (APP_GLuint, APP_GLuint, APP_GLchar const*) ) (uintptr_t) app->wglGetProcAddress( "glBindAttribLocation" );
-    if( !app->gl.glLinkProgram ) app->gl.glLinkProgram = ( void (APP_GLCALLTYPE*) (APP_GLuint) ) (uintptr_t) app->wglGetProcAddress( "glLinkProgram" );
-    if( !app->gl.glGetProgramiv ) app->gl.glGetProgramiv = ( void (APP_GLCALLTYPE*) (APP_GLuint, APP_GLenum, APP_GLint*) ) (uintptr_t) app->wglGetProcAddress( "glGetProgramiv" );
-    if( !app->gl.glGenBuffers ) app->gl.glGenBuffers = ( void (APP_GLCALLTYPE*) (APP_GLsizei, APP_GLuint*) ) (uintptr_t) app->wglGetProcAddress( "glGenBuffers" );
-    if( !app->gl.glBindBuffer ) app->gl.glBindBuffer = ( void (APP_GLCALLTYPE*) (APP_GLenum, APP_GLuint) ) (uintptr_t) app->wglGetProcAddress( "glBindBuffer" );
-    if( !app->gl.glEnableVertexAttribArray ) app->gl.glEnableVertexAttribArray = ( void (APP_GLCALLTYPE*) (APP_GLuint) ) (uintptr_t) app->wglGetProcAddress( "glEnableVertexAttribArray" );
-    if( !app->gl.glVertexAttribPointer ) app->gl.glVertexAttribPointer = ( void (APP_GLCALLTYPE*) (APP_GLuint, APP_GLint, APP_GLenum, APP_GLboolean, APP_GLsizei, void const*) ) (uintptr_t) app->wglGetProcAddress( "glVertexAttribPointer" );
-    if( !app->gl.glGenTextures ) app->gl.glGenTextures = ( void (APP_GLCALLTYPE*) (APP_GLsizei, APP_GLuint*) ) (uintptr_t) app->wglGetProcAddress( "glGenTextures" );
-    if( !app->gl.glEnable ) app->gl.glEnable = ( void (APP_GLCALLTYPE*) (APP_GLenum) ) (uintptr_t) app->wglGetProcAddress( "glEnable" );
-    if( !app->gl.glActiveTexture ) app->gl.glActiveTexture = ( void (APP_GLCALLTYPE*) (APP_GLenum) ) (uintptr_t) app->wglGetProcAddress( "glActiveTexture" );
-    if( !app->gl.glBindTexture ) app->gl.glBindTexture = ( void (APP_GLCALLTYPE*) (APP_GLenum, APP_GLuint) ) (uintptr_t) app->wglGetProcAddress( "glBindTexture" );
-    if( !app->gl.glTexParameteri ) app->gl.glTexParameteri = ( void (APP_GLCALLTYPE*) (APP_GLenum, APP_GLenum, APP_GLint) ) (uintptr_t) app->wglGetProcAddress( "glTexParameteri" );
-    if( !app->gl.glDeleteBuffers ) app->gl.glDeleteBuffers = ( void (APP_GLCALLTYPE*) (APP_GLsizei, APP_GLuint const*) ) (uintptr_t) app->wglGetProcAddress( "glDeleteBuffers" );
-    if( !app->gl.glDeleteTextures ) app->gl.glDeleteTextures = ( void (APP_GLCALLTYPE*) (APP_GLsizei, APP_GLuint const*) ) (uintptr_t) app->wglGetProcAddress( "glDeleteTextures" );
-    if( !app->gl.glBufferData ) app->gl.glBufferData = ( void (APP_GLCALLTYPE*) (APP_GLenum, APP_GLsizeiptr, void const *, APP_GLenum) ) (uintptr_t) app->wglGetProcAddress( "glBufferData" );
-    if( !app->gl.glUseProgram ) app->gl.glUseProgram = ( void (APP_GLCALLTYPE*) (APP_GLuint) ) (uintptr_t) app->wglGetProcAddress( "glUseProgram" );
-    if( !app->gl.glUniform1i ) app->gl.glUniform1i = ( void (APP_GLCALLTYPE*) (APP_GLint, APP_GLint) ) (uintptr_t) app->wglGetProcAddress( "glUniform1i" );
-    if( !app->gl.glUniform3f ) app->gl.glUniform3f = ( void (APP_GLCALLTYPE*) (APP_GLint, APP_GLfloat, APP_GLfloat, APP_GLfloat) ) (uintptr_t) app->wglGetProcAddress( "glUniform3f" );
-    if( !app->gl.glGetUniformLocation ) app->gl.glGetUniformLocation = ( APP_GLint (APP_GLCALLTYPE*) (APP_GLuint, APP_GLchar const*) ) (uintptr_t) app->wglGetProcAddress( "glGetUniformLocation" );
-    if( !app->gl.glTexImage2D ) app->gl.glTexImage2D = ( void (APP_GLCALLTYPE*) (APP_GLenum, APP_GLint, APP_GLint, APP_GLsizei, APP_GLsizei, APP_GLint, APP_GLenum, APP_GLenum, void const*) ) (uintptr_t) app->wglGetProcAddress( "glTexImage2D" );
-    if( !app->gl.glClearColor ) app->gl.glClearColor = ( void (APP_GLCALLTYPE*) (APP_GLfloat, APP_GLfloat, APP_GLfloat, APP_GLfloat) ) (uintptr_t) app->wglGetProcAddress( "glClearColor" );
-    if( !app->gl.glClear ) app->gl.glClear = ( void (APP_GLCALLTYPE*) (APP_GLbitfield) ) (uintptr_t) app->wglGetProcAddress( "glClear" );
-    if( !app->gl.glDrawArrays ) app->gl.glDrawArrays = ( void (APP_GLCALLTYPE*) (APP_GLenum, APP_GLint, APP_GLsizei) ) (uintptr_t) app->wglGetProcAddress( "glDrawArrays" );
-    if( !app->gl.glViewport ) app->gl.glViewport = ( void (APP_GLCALLTYPE*) (APP_GLint, APP_GLint, APP_GLsizei, APP_GLsizei) ) (uintptr_t) app->wglGetProcAddress( "glViewport" );
-    if( !app->gl.glDeleteShader ) app->gl.glDeleteShader = ( void (APP_GLCALLTYPE*) (APP_GLuint) ) (uintptr_t) app->wglGetProcAddress( "glDeleteShader" );
-    if( !app->gl.glDeleteProgram ) app->gl.glDeleteProgram = ( void (APP_GLCALLTYPE*) (APP_GLuint) ) (uintptr_t) app->wglGetProcAddress( "glDeleteProgram" );
-    #ifdef APP_REPORT_SHADER_ERRORS
-        if( !app->gl.glGetShaderInfoLog ) app->gl.glGetShaderInfoLog = ( void (APP_GLCALLTYPE*) (APP_GLuint, APP_GLsizei, APP_GLsizei*, APP_GLchar*) ) (uintptr_t) app->wglGetProcAddress( "glGetShaderInfoLog" );
-    #endif
+	// Any opengl functions which didn't bind, try binding them using wglGetProcAddrss
+	if( !app->gl.glCreateShader ) app->gl.glCreateShader = ( APP_GLuint (APP_GLCALLTYPE*) (APP_GLenum) ) (uintptr_t) app->wglGetProcAddress( "glCreateShader" );
+	if( !app->gl.glShaderSource ) app->gl.glShaderSource = ( void (APP_GLCALLTYPE*) (APP_GLuint, APP_GLsizei, APP_GLchar const* const*, APP_GLint const*) ) (uintptr_t) app->wglGetProcAddress( "glShaderSource" );
+	if( !app->gl.glCompileShader ) app->gl.glCompileShader = ( void (APP_GLCALLTYPE*) (APP_GLuint) ) (uintptr_t) app->wglGetProcAddress( "glCompileShader" );
+	if( !app->gl.glGetShaderiv ) app->gl.glGetShaderiv = ( void (APP_GLCALLTYPE*) (APP_GLuint, APP_GLenum, APP_GLint*) ) (uintptr_t) app->wglGetProcAddress( "glGetShaderiv" );
+	if( !app->gl.glCreateProgram ) app->gl.glCreateProgram = ( APP_GLuint (APP_GLCALLTYPE*) (void) ) (uintptr_t) app->wglGetProcAddress( "glCreateProgram" );
+	if( !app->gl.glAttachShader ) app->gl.glAttachShader = ( void (APP_GLCALLTYPE*) (APP_GLuint, APP_GLuint) ) (uintptr_t) app->wglGetProcAddress( "glAttachShader" );
+	if( !app->gl.glBindAttribLocation ) app->gl.glBindAttribLocation = ( void (APP_GLCALLTYPE*) (APP_GLuint, APP_GLuint, APP_GLchar const*) ) (uintptr_t) app->wglGetProcAddress( "glBindAttribLocation" );
+	if( !app->gl.glLinkProgram ) app->gl.glLinkProgram = ( void (APP_GLCALLTYPE*) (APP_GLuint) ) (uintptr_t) app->wglGetProcAddress( "glLinkProgram" );
+	if( !app->gl.glGetProgramiv ) app->gl.glGetProgramiv = ( void (APP_GLCALLTYPE*) (APP_GLuint, APP_GLenum, APP_GLint*) ) (uintptr_t) app->wglGetProcAddress( "glGetProgramiv" );
+	if( !app->gl.glGenBuffers ) app->gl.glGenBuffers = ( void (APP_GLCALLTYPE*) (APP_GLsizei, APP_GLuint*) ) (uintptr_t) app->wglGetProcAddress( "glGenBuffers" );
+	if( !app->gl.glBindBuffer ) app->gl.glBindBuffer = ( void (APP_GLCALLTYPE*) (APP_GLenum, APP_GLuint) ) (uintptr_t) app->wglGetProcAddress( "glBindBuffer" );
+	if( !app->gl.glEnableVertexAttribArray ) app->gl.glEnableVertexAttribArray = ( void (APP_GLCALLTYPE*) (APP_GLuint) ) (uintptr_t) app->wglGetProcAddress( "glEnableVertexAttribArray" );
+	if( !app->gl.glVertexAttribPointer ) app->gl.glVertexAttribPointer = ( void (APP_GLCALLTYPE*) (APP_GLuint, APP_GLint, APP_GLenum, APP_GLboolean, APP_GLsizei, void const*) ) (uintptr_t) app->wglGetProcAddress( "glVertexAttribPointer" );
+	if( !app->gl.glGenTextures ) app->gl.glGenTextures = ( void (APP_GLCALLTYPE*) (APP_GLsizei, APP_GLuint*) ) (uintptr_t) app->wglGetProcAddress( "glGenTextures" );
+	if( !app->gl.glEnable ) app->gl.glEnable = ( void (APP_GLCALLTYPE*) (APP_GLenum) ) (uintptr_t) app->wglGetProcAddress( "glEnable" );
+	if( !app->gl.glActiveTexture ) app->gl.glActiveTexture = ( void (APP_GLCALLTYPE*) (APP_GLenum) ) (uintptr_t) app->wglGetProcAddress( "glActiveTexture" );
+	if( !app->gl.glBindTexture ) app->gl.glBindTexture = ( void (APP_GLCALLTYPE*) (APP_GLenum, APP_GLuint) ) (uintptr_t) app->wglGetProcAddress( "glBindTexture" );
+	if( !app->gl.glTexParameteri ) app->gl.glTexParameteri = ( void (APP_GLCALLTYPE*) (APP_GLenum, APP_GLenum, APP_GLint) ) (uintptr_t) app->wglGetProcAddress( "glTexParameteri" );
+	if( !app->gl.glDeleteBuffers ) app->gl.glDeleteBuffers = ( void (APP_GLCALLTYPE*) (APP_GLsizei, APP_GLuint const*) ) (uintptr_t) app->wglGetProcAddress( "glDeleteBuffers" );
+	if( !app->gl.glDeleteTextures ) app->gl.glDeleteTextures = ( void (APP_GLCALLTYPE*) (APP_GLsizei, APP_GLuint const*) ) (uintptr_t) app->wglGetProcAddress( "glDeleteTextures" );
+	if( !app->gl.glBufferData ) app->gl.glBufferData = ( void (APP_GLCALLTYPE*) (APP_GLenum, APP_GLsizeiptr, void const *, APP_GLenum) ) (uintptr_t) app->wglGetProcAddress( "glBufferData" );
+	if( !app->gl.glUseProgram ) app->gl.glUseProgram = ( void (APP_GLCALLTYPE*) (APP_GLuint) ) (uintptr_t) app->wglGetProcAddress( "glUseProgram" );
+	if( !app->gl.glUniform1i ) app->gl.glUniform1i = ( void (APP_GLCALLTYPE*) (APP_GLint, APP_GLint) ) (uintptr_t) app->wglGetProcAddress( "glUniform1i" );
+	if( !app->gl.glUniform3f ) app->gl.glUniform3f = ( void (APP_GLCALLTYPE*) (APP_GLint, APP_GLfloat, APP_GLfloat, APP_GLfloat) ) (uintptr_t) app->wglGetProcAddress( "glUniform3f" );
+	if( !app->gl.glGetUniformLocation ) app->gl.glGetUniformLocation = ( APP_GLint (APP_GLCALLTYPE*) (APP_GLuint, APP_GLchar const*) ) (uintptr_t) app->wglGetProcAddress( "glGetUniformLocation" );
+	if( !app->gl.glTexImage2D ) app->gl.glTexImage2D = ( void (APP_GLCALLTYPE*) (APP_GLenum, APP_GLint, APP_GLint, APP_GLsizei, APP_GLsizei, APP_GLint, APP_GLenum, APP_GLenum, void const*) ) (uintptr_t) app->wglGetProcAddress( "glTexImage2D" );
+	if( !app->gl.glClearColor ) app->gl.glClearColor = ( void (APP_GLCALLTYPE*) (APP_GLfloat, APP_GLfloat, APP_GLfloat, APP_GLfloat) ) (uintptr_t) app->wglGetProcAddress( "glClearColor" );
+	if( !app->gl.glClear ) app->gl.glClear = ( void (APP_GLCALLTYPE*) (APP_GLbitfield) ) (uintptr_t) app->wglGetProcAddress( "glClear" );
+	if( !app->gl.glDrawArrays ) app->gl.glDrawArrays = ( void (APP_GLCALLTYPE*) (APP_GLenum, APP_GLint, APP_GLsizei) ) (uintptr_t) app->wglGetProcAddress( "glDrawArrays" );
+	if( !app->gl.glViewport ) app->gl.glViewport = ( void (APP_GLCALLTYPE*) (APP_GLint, APP_GLint, APP_GLsizei, APP_GLsizei) ) (uintptr_t) app->wglGetProcAddress( "glViewport" );
+	if( !app->gl.glDeleteShader ) app->gl.glDeleteShader = ( void (APP_GLCALLTYPE*) (APP_GLuint) ) (uintptr_t) app->wglGetProcAddress( "glDeleteShader" );
+	if( !app->gl.glDeleteProgram ) app->gl.glDeleteProgram = ( void (APP_GLCALLTYPE*) (APP_GLuint) ) (uintptr_t) app->wglGetProcAddress( "glDeleteProgram" );
+	#ifdef APP_REPORT_SHADER_ERRORS
+		if( !app->gl.glGetShaderInfoLog ) app->gl.glGetShaderInfoLog = ( void (APP_GLCALLTYPE*) (APP_GLuint, APP_GLsizei, APP_GLsizei*, APP_GLchar*) ) (uintptr_t) app->wglGetProcAddress( "glGetShaderInfoLog" );
+	#endif
 
-    // Report error if any gl function was not found.
-    if( !app->gl.glCreateShader ) { app_fatal_error( app, "Could not find function glCreateShader." ); goto init_failed; }
-    if( !app->gl.glShaderSource ) { app_fatal_error( app, "Could not find function glShaderSource." ); goto init_failed; }
-    if( !app->gl.glCompileShader ) { app_fatal_error( app, "Could not find function glCompileShader." ); goto init_failed; }
-    if( !app->gl.glGetShaderiv ) { app_fatal_error( app, "Could not find function glGetShaderiv." ); goto init_failed; }
-    if( !app->gl.glCreateProgram ) { app_fatal_error( app, "Could not find function glCreateProgram." ); goto init_failed; }
-    if( !app->gl.glAttachShader ) { app_fatal_error( app, "Could not find function glAttachShader." ); goto init_failed; }
-    if( !app->gl.glBindAttribLocation ) { app_fatal_error( app, "Could not find function glBindAttribLocation." ); goto init_failed; }
-    if( !app->gl.glLinkProgram ) { app_fatal_error( app, "Could not find function glLinkProgram." ); goto init_failed; }
-    if( !app->gl.glGetProgramiv ) { app_fatal_error( app, "Could not find function glGetProgramiv." ); goto init_failed; }
-    if( !app->gl.glGenBuffers ) { app_fatal_error( app, "Could not find function glGenBuffers." ); goto init_failed; }
-    if( !app->gl.glBindBuffer ) { app_fatal_error( app, "Could not find function glBindBuffer." ); goto init_failed; }
-    if( !app->gl.glEnableVertexAttribArray ) { app_fatal_error( app, "Could not find function glEnableVertexAttribArray." ); goto init_failed; }
-    if( !app->gl.glVertexAttribPointer ) { app_fatal_error( app, "Could not find function glVertexAttribPointer." ); goto init_failed; }
-    if( !app->gl.glGenTextures ) { app_fatal_error( app, "Could not find function glGenTextures." ); goto init_failed; }
-    if( !app->gl.glEnable ) { app_fatal_error( app, "Could not find function glEnable." ); goto init_failed; }
-    if( !app->gl.glActiveTexture ) { app_fatal_error( app, "Could not find function glActiveTexture." ); goto init_failed; }
-    if( !app->gl.glBindTexture ) { app_fatal_error( app, "Could not find function glBindTexture." ); goto init_failed; }
-    if( !app->gl.glTexParameteri ) { app_fatal_error( app, "Could not find function glTexParameteri." ); goto init_failed; }
-    if( !app->gl.glDeleteBuffers ) { app_fatal_error( app, "Could not find function glDeleteBuffers." ); goto init_failed; }
-    if( !app->gl.glDeleteTextures ) { app_fatal_error( app, "Could not find function glDeleteTextures." ); goto init_failed; }
-    if( !app->gl.glBufferData ) { app_fatal_error( app, "Could not find function glBufferData." ); goto init_failed; }
-    if( !app->gl.glUseProgram ) { app_fatal_error( app, "Could not find function glUseProgram." ); goto init_failed; }
-    if( !app->gl.glUniform1i ) { app_fatal_error( app, "Could not find function glUniform1i." ); goto init_failed; }
-    if( !app->gl.glUniform3f ) { app_fatal_error( app, "Could not find function glUniform3f." ); goto init_failed; }
-    if( !app->gl.glGetUniformLocation ) { app_fatal_error( app, "Could not find function glGetUniformLocation." ); goto init_failed; }
-    if( !app->gl.glTexImage2D ) { app_fatal_error( app, "Could not find function glTexImage2D." ); goto init_failed; }
-    if( !app->gl.glClearColor ) { app_fatal_error( app, "Could not find function glClearColor." ); goto init_failed; }
-    if( !app->gl.glClear ) { app_fatal_error( app, "Could not find function glClear." ); goto init_failed; }
-    if( !app->gl.glDrawArrays ) { app_fatal_error( app, "Could not find function glDrawArrays." ); goto init_failed; }
-    if( !app->gl.glViewport ) { app_fatal_error( app, "Could not find function glViewport." ); goto init_failed; }
-    if( !app->gl.glDeleteShader ) { app_fatal_error( app, "Could not find function glDeleteShader." ); goto init_failed; }
-    if( !app->gl.glDeleteProgram ) { app_fatal_error( app, "Could not find function glDeleteProgram." ); goto init_failed; }
-    #ifdef APP_REPORT_SHADER_ERRORS
-        if( !app->gl.glGetShaderInfoLog ) { app_fatal_error( app, "Could not find function glGetShaderInfoLog." ); goto init_failed; }
-    #endif
+	// Report error if any gl function was not found.
+	if( !app->gl.glCreateShader ) { app_fatal_error( app, "Could not find function glCreateShader." ); goto init_failed; }
+	if( !app->gl.glShaderSource ) { app_fatal_error( app, "Could not find function glShaderSource." ); goto init_failed; }
+	if( !app->gl.glCompileShader ) { app_fatal_error( app, "Could not find function glCompileShader." ); goto init_failed; }
+	if( !app->gl.glGetShaderiv ) { app_fatal_error( app, "Could not find function glGetShaderiv." ); goto init_failed; }
+	if( !app->gl.glCreateProgram ) { app_fatal_error( app, "Could not find function glCreateProgram." ); goto init_failed; }
+	if( !app->gl.glAttachShader ) { app_fatal_error( app, "Could not find function glAttachShader." ); goto init_failed; }
+	if( !app->gl.glBindAttribLocation ) { app_fatal_error( app, "Could not find function glBindAttribLocation." ); goto init_failed; }
+	if( !app->gl.glLinkProgram ) { app_fatal_error( app, "Could not find function glLinkProgram." ); goto init_failed; }
+	if( !app->gl.glGetProgramiv ) { app_fatal_error( app, "Could not find function glGetProgramiv." ); goto init_failed; }
+	if( !app->gl.glGenBuffers ) { app_fatal_error( app, "Could not find function glGenBuffers." ); goto init_failed; }
+	if( !app->gl.glBindBuffer ) { app_fatal_error( app, "Could not find function glBindBuffer." ); goto init_failed; }
+	if( !app->gl.glEnableVertexAttribArray ) { app_fatal_error( app, "Could not find function glEnableVertexAttribArray." ); goto init_failed; }
+	if( !app->gl.glVertexAttribPointer ) { app_fatal_error( app, "Could not find function glVertexAttribPointer." ); goto init_failed; }
+	if( !app->gl.glGenTextures ) { app_fatal_error( app, "Could not find function glGenTextures." ); goto init_failed; }
+	if( !app->gl.glEnable ) { app_fatal_error( app, "Could not find function glEnable." ); goto init_failed; }
+	if( !app->gl.glActiveTexture ) { app_fatal_error( app, "Could not find function glActiveTexture." ); goto init_failed; }
+	if( !app->gl.glBindTexture ) { app_fatal_error( app, "Could not find function glBindTexture." ); goto init_failed; }
+	if( !app->gl.glTexParameteri ) { app_fatal_error( app, "Could not find function glTexParameteri." ); goto init_failed; }
+	if( !app->gl.glDeleteBuffers ) { app_fatal_error( app, "Could not find function glDeleteBuffers." ); goto init_failed; }
+	if( !app->gl.glDeleteTextures ) { app_fatal_error( app, "Could not find function glDeleteTextures." ); goto init_failed; }
+	if( !app->gl.glBufferData ) { app_fatal_error( app, "Could not find function glBufferData." ); goto init_failed; }
+	if( !app->gl.glUseProgram ) { app_fatal_error( app, "Could not find function glUseProgram." ); goto init_failed; }
+	if( !app->gl.glUniform1i ) { app_fatal_error( app, "Could not find function glUniform1i." ); goto init_failed; }
+	if( !app->gl.glUniform3f ) { app_fatal_error( app, "Could not find function glUniform3f." ); goto init_failed; }
+	if( !app->gl.glGetUniformLocation ) { app_fatal_error( app, "Could not find function glGetUniformLocation." ); goto init_failed; }
+	if( !app->gl.glTexImage2D ) { app_fatal_error( app, "Could not find function glTexImage2D." ); goto init_failed; }
+	if( !app->gl.glClearColor ) { app_fatal_error( app, "Could not find function glClearColor." ); goto init_failed; }
+	if( !app->gl.glClear ) { app_fatal_error( app, "Could not find function glClear." ); goto init_failed; }
+	if( !app->gl.glDrawArrays ) { app_fatal_error( app, "Could not find function glDrawArrays." ); goto init_failed; }
+	if( !app->gl.glViewport ) { app_fatal_error( app, "Could not find function glViewport." ); goto init_failed; }
+	if( !app->gl.glDeleteShader ) { app_fatal_error( app, "Could not find function glDeleteShader." ); goto init_failed; }
+	if( !app->gl.glDeleteProgram ) { app_fatal_error( app, "Could not find function glDeleteProgram." ); goto init_failed; }
+	#ifdef APP_REPORT_SHADER_ERRORS
+		if( !app->gl.glGetShaderInfoLog ) { app_fatal_error( app, "Could not find function glGetShaderInfoLog." ); goto init_failed; }
+	#endif
 
-    // Platform independent OpenGL initialization
-    int width = app->screenmode == APP_SCREENMODE_FULLSCREEN ? app->fullscreen_width : app->windowed_w;
-    int height = app->screenmode == APP_SCREENMODE_FULLSCREEN ? app->fullscreen_height: app->windowed_h;
-    if( !app_internal_opengl_init( app, &app->gl, app->interpolation, width, height ) )
-        { 
-        app_log( app, APP_LOG_LEVEL_ERROR, "Failed to initialize OpenGL" ); 
-        goto init_failed; 
-        }
+	// Platform independent OpenGL initialization
+	int width = app->screenmode == APP_SCREENMODE_FULLSCREEN ? app->fullscreen_width : app->windowed_w;
+	int height = app->screenmode == APP_SCREENMODE_FULLSCREEN ? app->fullscreen_height: app->windowed_h;
+	if( !app_internal_opengl_init( app, &app->gl, app->interpolation, width, height ) )
+		{ 
+		app_log( app, APP_LOG_LEVEL_ERROR, "Failed to initialize OpenGL" ); 
+		goto init_failed; 
+		}
 
-    app->sound_notifications[ 0 ] = CreateEventA( NULL, FALSE, FALSE, NULL );
-    app->sound_notifications[ 1 ] = CreateEventA( NULL, FALSE, FALSE, NULL );
+	app->sound_notifications[ 0 ] = CreateEventA( NULL, FALSE, FALSE, NULL );
+	app->sound_notifications[ 1 ] = CreateEventA( NULL, FALSE, FALSE, NULL );
 
 
-    app->dsound_dll = LoadLibraryA( "dsound.dll" );
-    if( !app->dsound_dll ) app_log( app, APP_LOG_LEVEL_WARNING, "Couldn't load dsound.dll. Sound disabled." );
+	app->dsound_dll = LoadLibraryA( "dsound.dll" );
+	if( !app->dsound_dll ) app_log( app, APP_LOG_LEVEL_WARNING, "Couldn't load dsound.dll. Sound disabled." );
 
 	if( app->dsound_dll )
 		{
@@ -2023,73 +2023,73 @@ int app_run( int (*app_proc)( app_t*, void* ), void* user_data, void* memctx, vo
 		}
 	app->sound_thread_handle = INVALID_HANDLE_VALUE;
 
-    USHORT const USAGE_PAGE_GENERIC = ((USHORT) 0x01);
-    USHORT const USAGE_GENERIC_MOUSE = ((USHORT) 0x02);
+	USHORT const USAGE_PAGE_GENERIC = ((USHORT) 0x01);
+	USHORT const USAGE_GENERIC_MOUSE = ((USHORT) 0x02);
 
-    RAWINPUTDEVICE rid[ 1 ];
-    rid[ 0 ].usUsagePage = USAGE_PAGE_GENERIC; 
-    rid[ 0 ].usUsage = USAGE_GENERIC_MOUSE; 
-    rid[ 0 ].dwFlags = RIDEV_INPUTSINK;   
-    rid[ 0 ].hwndTarget = app->hwnd;
-    RegisterRawInputDevices( rid, 1, sizeof( *rid ) );
+	RAWINPUTDEVICE rid[ 1 ];
+	rid[ 0 ].usUsagePage = USAGE_PAGE_GENERIC; 
+	rid[ 0 ].usUsage = USAGE_GENERIC_MOUSE; 
+	rid[ 0 ].dwFlags = RIDEV_INPUTSINK;   
+	rid[ 0 ].hwndTarget = app->hwnd;
+	RegisterRawInputDevices( rid, 1, sizeof( *rid ) );
 
-    if( !app_internal_tablet_init( app ) ) app_log( app, APP_LOG_LEVEL_WARNING, "WinTab initialization failed - tablet not available" );
+	if( !app_internal_tablet_init( app ) ) app_log( app, APP_LOG_LEVEL_WARNING, "WinTab initialization failed - tablet not available" );
 
-    result = app_proc( app, user_data );
+	result = app_proc( app, user_data );
 
 init_failed:
-    if( !app_internal_tablet_term( app ) ) app_log( app, APP_LOG_LEVEL_WARNING, "WinTab termination failed" );
+	if( !app_internal_tablet_term( app ) ) app_log( app, APP_LOG_LEVEL_WARNING, "WinTab termination failed" );
 	if( app->sound_thread_handle != INVALID_HANDLE_VALUE )
 		{
 		InterlockedExchange( &app->exit_sound_thread, 1 );
 		WaitForSingleObject( app->sound_thread_handle, INFINITE );
 		CloseHandle( app->sound_thread_handle );
 		}
-    if( app->dsoundbuf ) IDirectSoundBuffer8_Release( app->dsoundbuf );
+	if( app->dsoundbuf ) IDirectSoundBuffer8_Release( app->dsoundbuf );
 	if( app->dsound ) IDirectSound8_Release( app->dsound );
 	if( app->dsound_dll ) FreeLibrary( app->dsound_dll );
-    if( app->sound_notifications[ 0 ] ) CloseHandle( app->sound_notifications[ 0 ] );
-    if( app->sound_notifications[ 1 ] ) CloseHandle( app->sound_notifications[ 1 ] );
-    if( !app_internal_opengl_term( &app->gl ) ) app_log( app, APP_LOG_LEVEL_WARNING, "Failed to terminate OpenGL" ); 
+	if( app->sound_notifications[ 0 ] ) CloseHandle( app->sound_notifications[ 0 ] );
+	if( app->sound_notifications[ 1 ] ) CloseHandle( app->sound_notifications[ 1 ] );
+	if( !app_internal_opengl_term( &app->gl ) ) app_log( app, APP_LOG_LEVEL_WARNING, "Failed to terminate OpenGL" ); 
 	if( app->gl_context ) app->wglMakeCurrent( 0, 0 );
-    if( app->gl_context ) app->wglDeleteContext( app->gl_context ); 	
+	if( app->gl_context ) app->wglDeleteContext( app->gl_context ); 	
 	if( app->gl_dll ) FreeLibrary( app->gl_dll );
-    if( app->icon ) DestroyIcon( app->icon );
-    if( app->current_pointer ) DestroyIcon( app->current_pointer );
-    if( app->hdc ) ReleaseDC( app->hwnd, app->hdc );
-    if( app->hwnd ) DestroyWindow( app->hwnd );
-    UnregisterClass( TEXT( "app_wc" ), app->hinstance );
+	if( app->icon ) DestroyIcon( app->icon );
+	if( app->current_pointer ) DestroyIcon( app->current_pointer );
+	if( app->hdc ) ReleaseDC( app->hwnd, app->hdc );
+	if( app->hwnd ) DestroyWindow( app->hwnd );
+	UnregisterClass( TEXT( "app_wc" ), app->hinstance );
 
 	if( timeGetDevCaps( &tc, sizeof( TIMECAPS ) ) == TIMERR_NOERROR ) 
 		timeEndPeriod( tc.wPeriodMin );
 
-    t = time( NULL );
-    struct tm* end = localtime( &t );
+	t = time( NULL );
+	struct tm* end = localtime( &t );
 	sprintf( msg, "Application terminated %02d:%02d:%02d %04d-%02d-%02d.", 
 		end->tm_hour, end->tm_min, end->tm_sec, end->tm_year + 1900, end->tm_mon + 1, end->tm_mday );
 	app_log( app, APP_LOG_LEVEL_INFO, msg );
 
-    APP_FREE( memctx, app );
-    return result;
-    }
+	APP_FREE( memctx, app );
+	return result;
+	}
 
 #pragma warning( pop )
 
 
 app_state_t app_yield( app_t* app )
-    {
+	{
 	if( !app->initialized )
 		{
 		if( app->screenmode == APP_SCREENMODE_WINDOW ) 
-        {
+		{
 			app->screenmode = APP_SCREENMODE_FULLSCREEN;
-            app_screenmode( app, APP_SCREENMODE_WINDOW );
-        }
+			app_screenmode( app, APP_SCREENMODE_WINDOW );
+		}
 		else
-        {
+		{
 			app->screenmode = APP_SCREENMODE_WINDOW;
-            app_screenmode( app, APP_SCREENMODE_FULLSCREEN );
-        }
+			app_screenmode( app, APP_SCREENMODE_FULLSCREEN );
+		}
 		ShowWindow( app->hwnd, SW_SHOWNORMAL );			
 		SetActiveWindow( app->hwnd );
 		BringWindowToTop( app->hwnd );
@@ -2111,17 +2111,17 @@ app_state_t app_yield( app_t* app )
 	//	Sleep( 4 ); // Pause for a bit... we're not in a rush here
 	
 	return app->closed == TRUE ? APP_STATE_EXIT_REQUESTED : APP_STATE_NORMAL;
-    }
+	}
 
 
 void app_cancel_exit( app_t* app )
-    {
-    app->closed = FALSE;
-    }
+	{
+	app->closed = FALSE;
+	}
 
 
 void app_title( app_t* app, char const* title )
-    {
+	{
 	#ifdef UNICODE
 		int len = (int) strlen (title );
 		if( len < 256 )
@@ -2133,67 +2133,67 @@ void app_title( app_t* app, char const* title )
 	#else
 		SetWindowText( app->hwnd, title );
 	#endif
-    }
+	}
 
 
 char const* app_cmdline( app_t* app )
-    {
-    return app->cmdline;
-    }
+	{
+	return app->cmdline;
+	}
 
 
 char const* app_filename( app_t* app )
-    {
-    return app->exe_path;
-    }
+	{
+	return app->exe_path;
+	}
 
 
 char const* app_userdata( app_t* app )
-    {
-    return app->userdata_path;
-    }
+	{
+	return app->userdata_path;
+	}
 
 
 char const* app_appdata( app_t* app )
-    {
-    return app->appdata_path;
-    }
+	{
+	return app->appdata_path;
+	}
 
 
 APP_U64 app_time_count( app_t* app )
-    {
+	{
 	(void) app;
 	LARGE_INTEGER c;
 	QueryPerformanceCounter( &c );
 	return (APP_U64) c.QuadPart;
-    }
+	}
 
 
 APP_U64 app_time_freq( app_t* app )
-    {
+	{
 	(void) app;
 	LARGE_INTEGER f;
 	QueryPerformanceFrequency( &f );
 	return (APP_U64) f.QuadPart;
-    }
+	}
 
 
 void app_log( app_t* app, app_log_level_t level, char const* message )
-    {
-    (void) app, level, message;
-    APP_LOG( app->logctx, level, message );
-    }
+	{
+	(void) app, level, message;
+	APP_LOG( app->logctx, level, message );
+	}
 
 
 void app_fatal_error( app_t* app, char const* message )
-    {
-    (void) app, message;
+	{
+	(void) app, message;
 	APP_FATAL_ERROR( app->fatalctx, message );
-    }
+	}
 
 
 static HCURSOR app_internal_create_cursor( HWND hwnd, int width, int height, APP_U32* pixels_abgr, int hotspot_x, int hotspot_y )
-    {
+	{
 	int size = width > height ? width : height;
 	BITMAPV5HEADER header;
 	memset( &header, 0, sizeof( BITMAPV5HEADER ) );
@@ -2240,172 +2240,172 @@ static HCURSOR app_internal_create_cursor( HWND hwnd, int width, int height, APP
 	DeleteObject( empty_mask ); 
 
 	return cursor;    
-    }
+	}
 
 
 void app_pointer( app_t* app, int width, int height, APP_U32* pixels_abgr, int hotspot_x, int hotspot_y )
-    {
-    if( app->current_pointer ) DestroyIcon( app->current_pointer );
-    app->current_pointer = 0;
-    
-    if( pixels_abgr )
-        app->current_pointer = app_internal_create_cursor( app->hwnd, width, height, 
+	{
+	if( app->current_pointer ) DestroyIcon( app->current_pointer );
+	app->current_pointer = 0;
+	
+	if( pixels_abgr )
+		app->current_pointer = app_internal_create_cursor( app->hwnd, width, height, 
 	    	pixels_abgr, hotspot_x, hotspot_y );
 	ShowCursor( FALSE );
 	SetCursor( app->current_pointer );
 	ShowCursor( TRUE );
-    }
+	}
 
 
 static BOOL app_internal_extract_default_windows_cursor( int* width, int* height, APP_U32* pixels_abgr, 
-    int* hotspot_x, int* hotspot_y )
-    {
-    HCURSOR cursor = LoadCursor( NULL, IDC_ARROW );
-    if( !cursor ) return FALSE;
-    
-    ICONINFO info;
-    if( !GetIconInfo( cursor, &info ) ) { DestroyCursor( cursor ); return FALSE; }
-    BOOL bw_cursor = ( info.hbmColor == NULL );
+	int* hotspot_x, int* hotspot_y )
+	{
+	HCURSOR cursor = LoadCursor( NULL, IDC_ARROW );
+	if( !cursor ) return FALSE;
+	
+	ICONINFO info;
+	if( !GetIconInfo( cursor, &info ) ) { DestroyCursor( cursor ); return FALSE; }
+	BOOL bw_cursor = ( info.hbmColor == NULL );
 
-    BITMAP bmpinfo;
-    memset( &bmpinfo, 0, sizeof( bmpinfo ) );
-    if( bw_cursor && GetObject( info.hbmMask, sizeof( BITMAP ), &bmpinfo ) == 0 ) 
-        { 
-        DestroyCursor( cursor ); 
-        DeleteObject( info.hbmColor );
-        DeleteObject( info.hbmMask );
-        return FALSE; 
-        }
-    if( !bw_cursor && GetObject( info.hbmColor, sizeof( BITMAP ), &bmpinfo ) == 0 )
-        { 
-        DestroyCursor( cursor ); 
-        DeleteObject( info.hbmColor );
-        DeleteObject( info.hbmMask );
-        return FALSE; 
-        }
+	BITMAP bmpinfo;
+	memset( &bmpinfo, 0, sizeof( bmpinfo ) );
+	if( bw_cursor && GetObject( info.hbmMask, sizeof( BITMAP ), &bmpinfo ) == 0 ) 
+		{ 
+		DestroyCursor( cursor ); 
+		DeleteObject( info.hbmColor );
+		DeleteObject( info.hbmMask );
+		return FALSE; 
+		}
+	if( !bw_cursor && GetObject( info.hbmColor, sizeof( BITMAP ), &bmpinfo ) == 0 )
+		{ 
+		DestroyCursor( cursor ); 
+		DeleteObject( info.hbmColor );
+		DeleteObject( info.hbmMask );
+		return FALSE; 
+		}
 
-    if( bmpinfo.bmWidth > 256 || bmpinfo.bmHeight > 256 )
-        {
-        DestroyCursor( cursor ); 
-        DeleteObject( info.hbmColor );
-        DeleteObject( info.hbmMask );
-        return FALSE; 
-        }
-    int pointer_width = bmpinfo.bmWidth;
-    int pointer_height = ( bmpinfo.bmHeight >= 0 ? bmpinfo.bmHeight : -bmpinfo.bmHeight ) / ( bw_cursor ? 2 : 1 );
+	if( bmpinfo.bmWidth > 256 || bmpinfo.bmHeight > 256 )
+		{
+		DestroyCursor( cursor ); 
+		DeleteObject( info.hbmColor );
+		DeleteObject( info.hbmMask );
+		return FALSE; 
+		}
+	int pointer_width = bmpinfo.bmWidth;
+	int pointer_height = ( bmpinfo.bmHeight >= 0 ? bmpinfo.bmHeight : -bmpinfo.bmHeight ) / ( bw_cursor ? 2 : 1 );
 
-    if( width ) *width = pointer_width;
-    if( height ) *height = pointer_height;
-    if( hotspot_x ) *hotspot_x = (int) info.xHotspot;
-    if( hotspot_y ) *hotspot_y = (int) info.yHotspot;
-    if( !pixels_abgr )
-        {
-        DestroyCursor( cursor ); 
-        DeleteObject( info.hbmColor );
-        DeleteObject( info.hbmMask );
-        return TRUE;
-        }
-    
-    BITMAPINFOHEADER bmi;
-    bmi.biSize = sizeof( BITMAPINFOHEADER );
-    bmi.biPlanes = 1;
-    bmi.biBitCount = 32;
-    bmi.biWidth = bmpinfo.bmWidth;
-    bmi.biHeight = -bmpinfo.bmHeight;
-    bmi.biCompression = BI_RGB;
-    bmi.biSizeImage = 0;
-    HDC hdc = GetDC( NULL );
-    if( GetDIBits( hdc, bw_cursor ? info.hbmMask : info.hbmColor, 0, (UINT) bmpinfo.bmHeight, pixels_abgr, 
-        (BITMAPINFO*) &bmi, DIB_RGB_COLORS ) != bmpinfo.bmHeight )
-        {
-        DestroyCursor( cursor ); 
-        DeleteObject( info.hbmColor );
-        DeleteObject( info.hbmMask );
-        ReleaseDC( NULL, hdc );
-        return FALSE;
-        }
-    ReleaseDC( NULL, hdc );
+	if( width ) *width = pointer_width;
+	if( height ) *height = pointer_height;
+	if( hotspot_x ) *hotspot_x = (int) info.xHotspot;
+	if( hotspot_y ) *hotspot_y = (int) info.yHotspot;
+	if( !pixels_abgr )
+		{
+		DestroyCursor( cursor ); 
+		DeleteObject( info.hbmColor );
+		DeleteObject( info.hbmMask );
+		return TRUE;
+		}
+	
+	BITMAPINFOHEADER bmi;
+	bmi.biSize = sizeof( BITMAPINFOHEADER );
+	bmi.biPlanes = 1;
+	bmi.biBitCount = 32;
+	bmi.biWidth = bmpinfo.bmWidth;
+	bmi.biHeight = -bmpinfo.bmHeight;
+	bmi.biCompression = BI_RGB;
+	bmi.biSizeImage = 0;
+	HDC hdc = GetDC( NULL );
+	if( GetDIBits( hdc, bw_cursor ? info.hbmMask : info.hbmColor, 0, (UINT) bmpinfo.bmHeight, pixels_abgr, 
+		(BITMAPINFO*) &bmi, DIB_RGB_COLORS ) != bmpinfo.bmHeight )
+		{
+		DestroyCursor( cursor ); 
+		DeleteObject( info.hbmColor );
+		DeleteObject( info.hbmMask );
+		ReleaseDC( NULL, hdc );
+		return FALSE;
+		}
+	ReleaseDC( NULL, hdc );
 
-    if( bw_cursor )
-        {
-        for( int y = 0; y < pointer_height; ++y )
-            {
-            for( int x = 0; x < pointer_width; ++x )
-                {
-                APP_U32 c = pixels_abgr[ x + pointer_width * y ];
-                APP_U32 m = pixels_abgr[ x + pointer_width * ( pointer_height + y ) ];
-                APP_U32 a = 255 - ( c & 0xff );
-                APP_U32 g = m & 0xff;
-                pixels_abgr[ x + pointer_width * y ] = ( a << 24 ) | ( g << 16 ) | ( g << 8 ) | g;
-                }
-            }
-        }
-    else
-        {
-        for( int y = 0; y < pointer_height; ++y )
-            {
-            for( int x = 0; x < pointer_width; ++x )
-                {
-                APP_U32 c = pixels_abgr[ x + pointer_width * y ];
-                APP_U32 a = ( c >> 24 ) & 0xff;
-                APP_U32 r = ( c >> 16 ) & 0xff;
-                APP_U32 g = ( c >>  8 ) & 0xff;
-                APP_U32 b = ( c       ) & 0xff;
-                pixels_abgr[ x + pointer_width * y ] = ( a << 24 ) | ( b << 16 ) | ( g << 8 ) | r;
-                }
-            }
-        }
+	if( bw_cursor )
+		{
+		for( int y = 0; y < pointer_height; ++y )
+			{
+			for( int x = 0; x < pointer_width; ++x )
+				{
+				APP_U32 c = pixels_abgr[ x + pointer_width * y ];
+				APP_U32 m = pixels_abgr[ x + pointer_width * ( pointer_height + y ) ];
+				APP_U32 a = 255 - ( c & 0xff );
+				APP_U32 g = m & 0xff;
+				pixels_abgr[ x + pointer_width * y ] = ( a << 24 ) | ( g << 16 ) | ( g << 8 ) | g;
+				}
+			}
+		}
+	else
+		{
+		for( int y = 0; y < pointer_height; ++y )
+			{
+			for( int x = 0; x < pointer_width; ++x )
+				{
+				APP_U32 c = pixels_abgr[ x + pointer_width * y ];
+				APP_U32 a = ( c >> 24 ) & 0xff;
+				APP_U32 r = ( c >> 16 ) & 0xff;
+				APP_U32 g = ( c >>  8 ) & 0xff;
+				APP_U32 b = ( c       ) & 0xff;
+				pixels_abgr[ x + pointer_width * y ] = ( a << 24 ) | ( b << 16 ) | ( g << 8 ) | r;
+				}
+			}
+		}
 
-    DeleteObject( info.hbmColor );
-    DeleteObject( info.hbmMask );
-    DestroyCursor( cursor );
-    return TRUE;
-    }
+	DeleteObject( info.hbmColor );
+	DeleteObject( info.hbmMask );
+	DestroyCursor( cursor );
+	return TRUE;
+	}
 
 
 void app_pointer_default( app_t* app, int* width, int* height, APP_U32* pixels_abgr, int* hotspot_x, int* hotspot_y )
-    {
-    (void) app;
+	{
+	(void) app;
 
-    APP_U32 default_pointer_data[ 11 * 16 ] = 
-        {
-        0xFF000000,0xFF000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,
-        0xFF000000,0xFFFFFFFF,0xFF000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,
-        0xFF000000,0xFFFFFFFF,0xFFFFFFFF,0xFF000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,
-        0xFF000000,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFF000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,
-        0xFF000000,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFF000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,
-        0xFF000000,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFF000000,0x00000000,0x00000000,0x00000000,0x00000000,
-        0xFF000000,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFF000000,0x00000000,0x00000000,0x00000000,
-        0xFF000000,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFF000000,0x00000000,0x00000000,
-        0xFF000000,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFF000000,0x00000000,
-        0xFF000000,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFF000000,0xFF000000,0xFF000000,0xFF000000,0xFF000000,
-        0xFF000000,0xFFFFFFFF,0xFFFFFFFF,0xFF000000,0xFFFFFFFF,0xFFFFFFFF,0xFF000000,0x00000000,0x00000000,0x00000000,0x00000000,
-        0xFF000000,0xFFFFFFFF,0xFF000000,0x00000000,0xFF000000,0xFFFFFFFF,0xFFFFFFFF,0xFF000000,0x00000000,0x00000000,0x00000000,
-        0xFF000000,0xFF000000,0x00000000,0x00000000,0xFF000000,0xFFFFFFFF,0xFFFFFFFF,0xFF000000,0x00000000,0x00000000,0x00000000,
-        0xFF000000,0x00000000,0x00000000,0x00000000,0x00000000,0xFF000000,0xFFFFFFFF,0xFFFFFFFF,0xFF000000,0x00000000,0x00000000,
-        0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0xFF000000,0xFFFFFFFF,0xFFFFFFFF,0xFF000000,0x00000000,0x00000000,
-        0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0xFF000000,0xFF000000,0xFF000000,0x00000000,0x00000000,
-        };
+	APP_U32 default_pointer_data[ 11 * 16 ] = 
+		{
+		0xFF000000,0xFF000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,
+		0xFF000000,0xFFFFFFFF,0xFF000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,
+		0xFF000000,0xFFFFFFFF,0xFFFFFFFF,0xFF000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,
+		0xFF000000,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFF000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,
+		0xFF000000,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFF000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,
+		0xFF000000,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFF000000,0x00000000,0x00000000,0x00000000,0x00000000,
+		0xFF000000,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFF000000,0x00000000,0x00000000,0x00000000,
+		0xFF000000,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFF000000,0x00000000,0x00000000,
+		0xFF000000,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFF000000,0x00000000,
+		0xFF000000,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFF000000,0xFF000000,0xFF000000,0xFF000000,0xFF000000,
+		0xFF000000,0xFFFFFFFF,0xFFFFFFFF,0xFF000000,0xFFFFFFFF,0xFFFFFFFF,0xFF000000,0x00000000,0x00000000,0x00000000,0x00000000,
+		0xFF000000,0xFFFFFFFF,0xFF000000,0x00000000,0xFF000000,0xFFFFFFFF,0xFFFFFFFF,0xFF000000,0x00000000,0x00000000,0x00000000,
+		0xFF000000,0xFF000000,0x00000000,0x00000000,0xFF000000,0xFFFFFFFF,0xFFFFFFFF,0xFF000000,0x00000000,0x00000000,0x00000000,
+		0xFF000000,0x00000000,0x00000000,0x00000000,0x00000000,0xFF000000,0xFFFFFFFF,0xFFFFFFFF,0xFF000000,0x00000000,0x00000000,
+		0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0xFF000000,0xFFFFFFFF,0xFFFFFFFF,0xFF000000,0x00000000,0x00000000,
+		0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0xFF000000,0xFF000000,0xFF000000,0x00000000,0x00000000,
+		};
 
-    if( !app_internal_extract_default_windows_cursor( width, height, pixels_abgr, hotspot_x, hotspot_y ) )
-        {
-        if( width ) *width = 11;
-        if( height ) *height = 16;
-        if( hotspot_x ) *hotspot_x = 0;
-        if( hotspot_y ) *hotspot_y = 0;
-        if( pixels_abgr ) memcpy( pixels_abgr, default_pointer_data, sizeof( APP_U32 ) * 11 * 16 );
-        }
-    }
+	if( !app_internal_extract_default_windows_cursor( width, height, pixels_abgr, hotspot_x, hotspot_y ) )
+		{
+		if( width ) *width = 11;
+		if( height ) *height = 16;
+		if( hotspot_x ) *hotspot_x = 0;
+		if( hotspot_y ) *hotspot_y = 0;
+		if( pixels_abgr ) memcpy( pixels_abgr, default_pointer_data, sizeof( APP_U32 ) * 11 * 16 );
+		}
+	}
 
 
 
 void app_pointer_pos( app_t* app, int x, int y )
 	{
-    POINT p;
-    p.x = x;
-    p.y = y;
-    ClientToScreen( app->hwnd, &p );
-    SetCursorPos( p.x, p.y );     
+	POINT p;
+	p.x = x;
+	p.y = y;
+	ClientToScreen( app->hwnd, &p );
+	SetCursorPos( p.x, p.y );     
 	}
 
 
@@ -2413,7 +2413,7 @@ int app_pointer_x( app_t* app )
 	{
 	POINT p;
 	GetCursorPos( &p ); 
-    ScreenToClient( app->hwnd, &p );
+	ScreenToClient( app->hwnd, &p );
 	return (int) p.x;
 	}
 
@@ -2422,96 +2422,96 @@ int app_pointer_y( app_t* app )
 	{
 	POINT p;
 	GetCursorPos( &p ); 
-    ScreenToClient( app->hwnd, &p );
+	ScreenToClient( app->hwnd, &p );
 	return (int) p.y;
 	}
 
 
 void app_pointer_limit( app_t* app, int x, int y, int width, int height )
 	{ 
-    app->clip_cursor = TRUE;
-    app->clip_rect.left= x;
-    app->clip_rect.top = y;
-    app->clip_rect.right = x + width;
-    app->clip_rect.bottom = y + height;
-    
-    RECT r = app->clip_rect;
-    ClientToScreen( app->hwnd, (POINT*)&r );
-    ClientToScreen( app->hwnd, ( (POINT*)&r ) + 1 );
-    ClipCursor( &r );
+	app->clip_cursor = TRUE;
+	app->clip_rect.left= x;
+	app->clip_rect.top = y;
+	app->clip_rect.right = x + width;
+	app->clip_rect.bottom = y + height;
+	
+	RECT r = app->clip_rect;
+	ClientToScreen( app->hwnd, (POINT*)&r );
+	ClientToScreen( app->hwnd, ( (POINT*)&r ) + 1 );
+	ClipCursor( &r );
 	}
 
 
 void app_pointer_limit_off( app_t* app )
 	{
-    app->clip_cursor = FALSE;
-    ClipCursor( 0 );
-    }
+	app->clip_cursor = FALSE;
+	ClipCursor( 0 );
+	}
 
 
 void app_interpolation( app_t* app, app_interpolation_t interpolation )
-    {
-    if( interpolation == app->interpolation ) return;
-    app->interpolation = interpolation;
+	{
+	if( interpolation == app->interpolation ) return;
+	app->interpolation = interpolation;
 
 	POINT p;
 	GetCursorPos( &p ); 
-    ScreenToClient( app->hwnd, &p );
+	ScreenToClient( app->hwnd, &p );
 	int mouse_x = p.x;
 	int mouse_y = p.y;
 
-    app_input_event_t input_event;
-    input_event.type = APP_INPUT_MOUSE_MOVE; 
+	app_input_event_t input_event;
+	input_event.type = APP_INPUT_MOUSE_MOVE; 
 	input_event.data.mouse_pos.x = mouse_x; 
 	input_event.data.mouse_pos.y = mouse_y; 
-    app_internal_add_input_event( app, &input_event );
+	app_internal_add_input_event( app, &input_event );
 
-    app_internal_opengl_interpolation( &app->gl, interpolation );
-    }
+	app_internal_opengl_interpolation( &app->gl, interpolation );
+	}
 
 
 void app_screenmode( app_t* app, app_screenmode_t screenmode )
-    {
-    if( screenmode == app->screenmode ) return;
-    app->screenmode = screenmode;
-    BOOL visible = IsWindowVisible( app->hwnd );
-    if( screenmode == APP_SCREENMODE_WINDOW ) 
-        {
- 		SetWindowLong( app->hwnd, GWL_STYLE, WS_OVERLAPPEDWINDOW | ( visible ? WS_VISIBLE : 0 ) );
+	{
+	if( screenmode == app->screenmode ) return;
+	app->screenmode = screenmode;
+	BOOL visible = IsWindowVisible( app->hwnd );
+	if( screenmode == APP_SCREENMODE_WINDOW ) 
+		{
+		SetWindowLong( app->hwnd, GWL_STYLE, WS_OVERLAPPEDWINDOW | ( visible ? WS_VISIBLE : 0 ) );
 
 		WINDOWPLACEMENT placement;
-        placement.length = sizeof( placement );        
-        GetWindowPlacement( app->hwnd, &placement );
-        placement.showCmd = (UINT)( visible ? SW_SHOW : SW_HIDE );
-        
-        placement.rcNormalPosition.left = app->windowed_x;
+		placement.length = sizeof( placement );        
+		GetWindowPlacement( app->hwnd, &placement );
+		placement.showCmd = (UINT)( visible ? SW_SHOW : SW_HIDE );
+		
+		placement.rcNormalPosition.left = app->windowed_x;
 		placement.rcNormalPosition.top = app->windowed_y;
-        placement.rcNormalPosition.right = app->windowed_x + app->windowed_w;
+		placement.rcNormalPosition.right = app->windowed_x + app->windowed_w;
 		placement.rcNormalPosition.bottom = app->windowed_y + app->windowed_h;
 		SetWindowPlacement( app->hwnd, &placement );
 		}
-    else
-        {
+	else
+		{
 		WINDOWPLACEMENT placement;
-        placement.length = sizeof( placement );
+		placement.length = sizeof( placement );
 		GetWindowPlacement( app->hwnd, &placement );
 
-        if( visible )
-            {
-            if( placement.showCmd != SW_SHOWMAXIMIZED )
-                {
+		if( visible )
+			{
+			if( placement.showCmd != SW_SHOWMAXIMIZED )
+				{
 		        app->windowed_x = placement.rcNormalPosition.left;
 		        app->windowed_y = placement.rcNormalPosition.top;
 		        app->windowed_w = placement.rcNormalPosition.right - placement.rcNormalPosition.left;
 		        app->windowed_h = placement.rcNormalPosition.bottom - placement.rcNormalPosition.top;
-                }
-            else
-                {
-                ShowWindow( app->hwnd, SW_RESTORE );
-                }
-            }
+				}
+			else
+				{
+				ShowWindow( app->hwnd, SW_RESTORE );
+				}
+			}
 
-        HMONITOR hmonitor = MonitorFromWindow( app->hwnd, MONITOR_DEFAULTTOPRIMARY );
+		HMONITOR hmonitor = MonitorFromWindow( app->hwnd, MONITOR_DEFAULTTOPRIMARY );
 		int display_index = 0;
 		for( int i = 0; i < app->display_count; ++i )
 			{
@@ -2526,35 +2526,35 @@ void app_screenmode( app_t* app, app_screenmode_t screenmode )
 		RECT r = app_internal_rect( app->displays[ display_index ].x, app->displays[ display_index ].y, 
 			app->displays[ display_index ].x + app->displays[ display_index ].width, 
 			app->displays[ display_index ].y + app->displays[ display_index ].height );
-        app->fullscreen_width = r.right - r.left;
-        app->fullscreen_height = r.bottom - r.top;
+		app->fullscreen_width = r.right - r.left;
+		app->fullscreen_height = r.bottom - r.top;
 	    SetWindowPos( app->hwnd, 0, r.left, r.top, app->fullscreen_width, app->fullscreen_height, 
-            SWP_NOOWNERZORDER | SWP_FRAMECHANGED );	    
+			SWP_NOOWNERZORDER | SWP_FRAMECHANGED );	    
 
 		SetWindowLong( app->hwnd, GWL_STYLE, ( visible ? WS_VISIBLE : 0 ) );		
 	    SetWindowPos( app->hwnd, 0, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOOWNERZORDER | SWP_FRAMECHANGED );	    
 		}
-    }
+	}
 
 
 void app_window_size( app_t* app, int width, int height )
-    {
-    RECT r;
+	{
+	RECT r;
 	r = app_internal_rect( 0, 0, width, height );
 	AdjustWindowRect( &r, WS_OVERLAPPEDWINDOW | WS_VISIBLE, FALSE );
-    
-    width = r.right - r.left;
-    height = r.bottom - r.top;
+	
+	width = r.right - r.left;
+	height = r.bottom - r.top;
 	app->windowed_w = width;
 	app->windowed_h = height;
 
 	if( app->screenmode == APP_SCREENMODE_WINDOW ) 
 	    SetWindowPos( app->hwnd, 0, 0, 0, width, height, SWP_NOMOVE | SWP_NOOWNERZORDER | SWP_FRAMECHANGED );
-    }
+	}
 
 
 int app_window_width( app_t* app )
-    {
+	{
 	int width = app->windowed_w;
 	if( app->screenmode == APP_SCREENMODE_WINDOW )
 		{
@@ -2570,11 +2570,11 @@ int app_window_width( app_t* app )
 	//GetWindowRect( app->hwnd, &r );
 	//AdjustWindowRect( &r, WS_OVERLAPPEDWINDOW | WS_VISIBLE, FALSE );
 	//return r.right - r.left;
-    }
+	}
 
 
 int app_window_height( app_t* app )
-    {
+	{
 	int height = app->windowed_h;
 	if( app->screenmode == APP_SCREENMODE_WINDOW )
 		{
@@ -2590,143 +2590,143 @@ int app_window_height( app_t* app )
 	//GetWindowRect( app->hwnd, &r );
 	//AdjustWindowRect( &r, WS_OVERLAPPEDWINDOW | WS_VISIBLE, FALSE );
 	//return ( r.bottom - r.top );
-    }
+	}
 
 
 void app_window_pos( app_t* app, int x, int y )
-    {
-    if( app->screenmode == APP_SCREENMODE_WINDOW ) 
-        {
+	{
+	if( app->screenmode == APP_SCREENMODE_WINDOW ) 
+		{
 		WINDOWPLACEMENT placement;
-        placement.length = sizeof( placement );
+		placement.length = sizeof( placement );
 		GetWindowPlacement( app->hwnd, &placement );
 		placement.rcNormalPosition.right = x + ( placement.rcNormalPosition.right - placement.rcNormalPosition.left );
 		placement.rcNormalPosition.bottom = y + ( placement.rcNormalPosition.bottom - placement.rcNormalPosition.top );
 		placement.rcNormalPosition.left = x;
 		placement.rcNormalPosition.top = y;
 		SetWindowPlacement( app->hwnd, &placement );
-        }
+		}
 
 	app->windowed_x = x;
-    app->windowed_y = y;
-    }
+	app->windowed_y = y;
+	}
 
 
 int app_window_x( app_t* app )
-    {
-    if( app->screenmode == APP_SCREENMODE_WINDOW ) 
-        {
+	{
+	if( app->screenmode == APP_SCREENMODE_WINDOW ) 
+		{
 	    WINDOWPLACEMENT placement;
-        placement.length = sizeof( placement );
+		placement.length = sizeof( placement );
 	    GetWindowPlacement( app->hwnd, &placement );
-        return placement.rcNormalPosition.left;
-        }
-    else
-        {
-        return app->windowed_x;
-        }
-    }
+		return placement.rcNormalPosition.left;
+		}
+	else
+		{
+		return app->windowed_x;
+		}
+	}
 
 
 int app_window_y( app_t* app )
-    {
-    if( app->screenmode == APP_SCREENMODE_WINDOW ) 
-        {
+	{
+	if( app->screenmode == APP_SCREENMODE_WINDOW ) 
+		{
 	    WINDOWPLACEMENT placement;
-        placement.length = sizeof( placement );
+		placement.length = sizeof( placement );
 	    GetWindowPlacement( app->hwnd, &placement );
-        return placement.rcNormalPosition.top;
-        }
-    else
-        {
-        return app->windowed_y;
-        }
-    }
+		return placement.rcNormalPosition.top;
+		}
+	else
+		{
+		return app->windowed_y;
+		}
+	}
 
 
 app_displays_t app_displays( app_t* app ) 
-    { 
-    app_displays_t displays; 
-    displays.count = app->display_count;
-    displays.displays = app->displays;
-    return displays; 
-    }
+	{ 
+	app_displays_t displays; 
+	displays.count = app->display_count;
+	displays.displays = app->displays;
+	return displays; 
+	}
 
 
 void app_present( app_t* app, APP_U32 const* pixels_xbgr, int width, int height, APP_U32 mod_xbgr, APP_U32 border_xbgr )
-    {
-    if( app->is_minimized ) return;
-    if( pixels_xbgr ) app_internal_opengl_present( &app->gl, pixels_xbgr, width, height, mod_xbgr, border_xbgr );  
-    SwapBuffers( app->hdc );
-    }
+	{
+	if( app->is_minimized ) return;
+	if( pixels_xbgr ) app_internal_opengl_present( &app->gl, pixels_xbgr, width, height, mod_xbgr, border_xbgr );  
+	SwapBuffers( app->hdc );
+	}
 
 
 static void app_sound_write( app_t* app, int sample_pairs_offset, int sample_pairs_count ) 
-    { 
-    int offset = sample_pairs_offset * 2 * ( 16 / 8 );
-    int length = sample_pairs_count * 2 * ( 16 / 8 );
+	{ 
+	int offset = sample_pairs_offset * 2 * ( 16 / 8 );
+	int length = sample_pairs_count * 2 * ( 16 / 8 );
 
 	// Obtain memory address of write block. This will be in two parts if the block wraps around.
-    LPVOID lpvPtr1; 
-    DWORD dwBytes1; 
-    LPVOID lpvPtr2; 
-    DWORD dwBytes2; 
-    HRESULT hr = IDirectSoundBuffer8_Lock( app->dsoundbuf, (DWORD) offset, (DWORD) length, &lpvPtr1, &dwBytes1, 
-        &lpvPtr2, &dwBytes2, 0 ); 
+	LPVOID lpvPtr1; 
+	DWORD dwBytes1; 
+	LPVOID lpvPtr2; 
+	DWORD dwBytes2; 
+	HRESULT hr = IDirectSoundBuffer8_Lock( app->dsoundbuf, (DWORD) offset, (DWORD) length, &lpvPtr1, &dwBytes1, 
+		&lpvPtr2, &dwBytes2, 0 ); 
  
-    // If DSERR_BUFFERLOST is returned, restore and retry lock. 
-    if( hr == DSERR_BUFFERLOST ) 
+	// If DSERR_BUFFERLOST is returned, restore and retry lock. 
+	if( hr == DSERR_BUFFERLOST ) 
 		{ 
-        IDirectSoundBuffer8_Restore( app->dsoundbuf ); 
+		IDirectSoundBuffer8_Restore( app->dsoundbuf ); 
 	    hr = IDirectSoundBuffer8_Lock( app->dsoundbuf, (DWORD) offset, (DWORD) length, &lpvPtr1, &dwBytes1, 
-            &lpvPtr2, &dwBytes2, 0 ); 
+			&lpvPtr2, &dwBytes2, 0 ); 
 		} 
-    if( FAILED( hr) ) 
-        { 
-        app_log( app, APP_LOG_LEVEL_WARNING, "Couldn't lock sound buffer" );
+	if( FAILED( hr) ) 
+		{ 
+		app_log( app, APP_LOG_LEVEL_WARNING, "Couldn't lock sound buffer" );
 		IDirectSound8_Release( app->dsound );
 		app->dsound = 0;
-        return;
-        }
+		return;
+		}
 
 	// Write to pointers.      
 	app->sound_callback( (APP_S16*) lpvPtr1, (int) dwBytes1 / ( 2 * ( 16 / 8 ) ), app->sound_user_data );
 	if( lpvPtr2 ) app->sound_callback( (APP_S16*) lpvPtr2, (int) dwBytes2 / ( 2 * ( 16 / 8 ) ), app->sound_user_data );
 
 	// Release the data back to DirectSound. 
-    hr = IDirectSoundBuffer8_Unlock( app->dsoundbuf, lpvPtr1, dwBytes1, lpvPtr2, dwBytes2 ); 
-    if( FAILED( hr) ) 
-        { 
-        app_log( app, APP_LOG_LEVEL_WARNING, "Couldn't unlock sound buffer" );
+	hr = IDirectSoundBuffer8_Unlock( app->dsoundbuf, lpvPtr1, dwBytes1, lpvPtr2, dwBytes2 ); 
+	if( FAILED( hr) ) 
+		{ 
+		app_log( app, APP_LOG_LEVEL_WARNING, "Couldn't unlock sound buffer" );
 		IDirectSound8_Release( app->dsound );
 		app->dsound = 0;
-        return;
-        }
-    }
+		return;
+		}
+	}
 
 
 static DWORD WINAPI app_sound_thread_proc( LPVOID lpThreadParameter )
 	{
-    app_t* app = (app_t*) lpThreadParameter;
-    int mid_point = app->sample_pairs_count / 2;
-    int half_size = mid_point;
-    int prev_pos = 0;
-    while( InterlockedCompareExchange( &app->exit_sound_thread, 0, 0 ) == 0 )
-        {
-        WaitForMultipleObjectsEx( 2, app->sound_notifications, FALSE, 100, FALSE );
-        DWORD position = 0;
+	app_t* app = (app_t*) lpThreadParameter;
+	int mid_point = app->sample_pairs_count / 2;
+	int half_size = mid_point;
+	int prev_pos = 0;
+	while( InterlockedCompareExchange( &app->exit_sound_thread, 0, 0 ) == 0 )
+		{
+		WaitForMultipleObjectsEx( 2, app->sound_notifications, FALSE, 100, FALSE );
+		DWORD position = 0;
 		IDirectSoundBuffer8_GetCurrentPosition( app->dsoundbuf, &position, 0 );
 		int pos = ( (int) position )/( 2 * ( 16 / 8 ) );
 
 	    if( prev_pos >= mid_point && pos < mid_point )
-            app_sound_write( app, mid_point, half_size );
+			app_sound_write( app, mid_point, half_size );
 		else if( prev_pos < mid_point && pos >= mid_point )
-            app_sound_write( app, 0, half_size );
+			app_sound_write( app, 0, half_size );
 
 		prev_pos = pos;	
-        }
+		}
 
-    return 0;
+	return 0;
 	}
 
 
@@ -2790,7 +2790,7 @@ void app_sound( app_t* app, int sample_pairs_count, void (*sound_callback)( APP_
 			dsbdesc.dwBufferBytes = (DWORD) size; 
 			dsbdesc.lpwfxFormat = &format; 
 	    
-            IDirectSoundBuffer* soundbuf = NULL;	
+			IDirectSoundBuffer* soundbuf = NULL;	
 			HRESULT hr = IDirectSound8_CreateSoundBuffer( app->dsound, &dsbdesc, &soundbuf, NULL ); 
 			if( FAILED( hr ) || !soundbuf ) 
 				{
@@ -2803,12 +2803,12 @@ void app_sound( app_t* app, int sample_pairs_count, void (*sound_callback)( APP_
 				return;
 				}
 
-            GUID const GUID_IDirectSoundBuffer8 = { 0x6825a449, 0x7524, 0x4d82, { 0x92, 0x0f, 0x50, 0xe3, 0x6a, 0xb3, 0xab, 0x1e } };
-            hr = IDirectSoundBuffer8_QueryInterface( soundbuf, GUID_IDirectSoundBuffer8, (void**) &app->dsoundbuf );
+			GUID const GUID_IDirectSoundBuffer8 = { 0x6825a449, 0x7524, 0x4d82, { 0x92, 0x0f, 0x50, 0xe3, 0x6a, 0xb3, 0xab, 0x1e } };
+			hr = IDirectSoundBuffer8_QueryInterface( soundbuf, GUID_IDirectSoundBuffer8, (void**) &app->dsoundbuf );
 			IDirectSoundBuffer_Release( soundbuf );
 
-            if( FAILED( hr ) || !app->dsoundbuf )
-                { 
+			if( FAILED( hr ) || !app->dsoundbuf )
+				{ 
 				app_log( app, APP_LOG_LEVEL_WARNING, "Failed to create sound buffer" );	
 				IDirectSound8_Release( app->dsound );
 				app->dsound = 0;
@@ -2816,32 +2816,32 @@ void app_sound( app_t* app, int sample_pairs_count, void (*sound_callback)( APP_
 				app->sound_callback = NULL;
 				app->sound_user_data = NULL;
 				return;
-                }                    
+				}                    
 
-            IDirectSoundNotify8* notify = NULL; 
-            GUID const GUID_IDirectSoundNotify8 = { 0xb0210783, 0x89cd, 0x11d0, { 0xaf, 0x8, 0x0, 0xa0, 0xc9, 0x25, 0xcd, 0x16 } };
-            hr = app->dsoundbuf->QueryInterface( GUID_IDirectSoundNotify8, (void**) &notify );
-            if( FAILED( hr ) || !notify )
-                { 
+			IDirectSoundNotify8* notify = NULL; 
+			GUID const GUID_IDirectSoundNotify8 = { 0xb0210783, 0x89cd, 0x11d0, { 0xaf, 0x8, 0x0, 0xa0, 0xc9, 0x25, 0xcd, 0x16 } };
+			hr = app->dsoundbuf->QueryInterface( GUID_IDirectSoundNotify8, (void**) &notify );
+			if( FAILED( hr ) || !notify )
+				{ 
 				app_log( app, APP_LOG_LEVEL_WARNING, "Failed to create sound buffer" );	
 			    IDirectSoundBuffer_Release( app->dsoundbuf );
 				IDirectSound8_Release( app->dsound );
 				app->dsound = 0;
-                app->dsoundbuf = 0;
+				app->dsoundbuf = 0;
 				app->sample_pairs_count = 0;
 				app->sound_callback = NULL;
 				app->sound_user_data = NULL;
 				return;
-                }                    
+				}                    
 
-            DSBPOSITIONNOTIFY notify_positions[ 2 ];
-            notify_positions[ 0 ].dwOffset = 0;
-            notify_positions[ 0 ].hEventNotify = app->sound_notifications[ 0 ];
-            notify_positions[ 1 ].dwOffset = (DWORD)( size / 2 );
-            notify_positions[ 1 ].hEventNotify = app->sound_notifications[ 1 ];
+			DSBPOSITIONNOTIFY notify_positions[ 2 ];
+			notify_positions[ 0 ].dwOffset = 0;
+			notify_positions[ 0 ].hEventNotify = app->sound_notifications[ 0 ];
+			notify_positions[ 1 ].dwOffset = (DWORD)( size / 2 );
+			notify_positions[ 1 ].hEventNotify = app->sound_notifications[ 1 ];
 
-            IDirectSoundNotify_SetNotificationPositions( notify, 2, notify_positions );
-            IDirectSoundNotify_Release( notify );
+			IDirectSoundNotify_SetNotificationPositions( notify, 2, notify_positions );
+			IDirectSoundNotify_Release( notify );
 
 			app->sound_thread_handle = CreateThread( NULL, 0U, app_sound_thread_proc, app, 0, NULL );
 			SetThreadPriority( app->sound_thread_handle, THREAD_PRIORITY_HIGHEST );
@@ -2856,30 +2856,30 @@ void app_sound( app_t* app, int sample_pairs_count, void (*sound_callback)( APP_
 
 
 void app_sound_volume( app_t* app, float volume )
-    {
+	{
 	if( !app->dsound ) return;
-    if( !app->dsoundbuf ) return;
+	if( !app->dsoundbuf ) return;
 
-    int level = volume < 0.000015f ? DSBVOLUME_MIN : (int) ( 2000.0f * log10f( volume ) );
-    if( app->sound_level == level ) return;	
-    app->sound_level = level;
+	int level = volume < 0.000015f ? DSBVOLUME_MIN : (int) ( 2000.0f * log10f( volume ) );
+	if( app->sound_level == level ) return;	
+	app->sound_level = level;
 
 	IDirectSoundBuffer8_SetVolume( app->dsoundbuf, level );
-    }
+	}
 
 
 app_input_t app_input( app_t* app )
-    {
+	{
 	app_input_t input; 
 	input.events = app->input_events; 
 	input.count = app->input_count;
 	app->input_count = 0;
 	return input;
-    }
+	}
 
 
 void app_coordinates_window_to_bitmap( app_t* app, int width, int height, int* x, int* y )
-    {
+	{
 	if( width == 0 || height == 0 ) return;
 	RECT r;
 	GetClientRect( app->hwnd, &r );
@@ -2900,7 +2900,7 @@ void app_coordinates_window_to_bitmap( app_t* app, int width, int height, int* x
 		    *y -= (int)( vborder );
 		    *x = (int)( *x / pixel_scale );
 		    *y = (int)( *y / pixel_scale );
-            }
+			}
 		else 
 			{
 			*x = 0;
@@ -2912,7 +2912,7 @@ void app_coordinates_window_to_bitmap( app_t* app, int width, int height, int* x
 		int hscale = window_width / width;
 		int vscale = window_height / height;
 		int pixel_scale = pixel_scale = hscale < vscale ? hscale : vscale;
-        pixel_scale = pixel_scale < 1 ? 1 : pixel_scale;
+		pixel_scale = pixel_scale < 1 ? 1 : pixel_scale;
 		int hborder = ( window_width - pixel_scale * width ) / 2;
 		int vborder = ( window_height - pixel_scale * height ) / 2;
 		*x -= (int)( hborder );
@@ -2920,11 +2920,11 @@ void app_coordinates_window_to_bitmap( app_t* app, int width, int height, int* x
 		*x = (int)( *x / pixel_scale );
 		*y = (int)( *y / pixel_scale );
 		}
-    }
+	}
 
 
 void app_coordinates_bitmap_to_window( app_t* app, int width, int height, int* x, int* y )
-    {
+	{
 	RECT r;
 	GetClientRect( app->hwnd, &r );
 	int window_width = ( app->screenmode == APP_SCREENMODE_FULLSCREEN ) ? app->fullscreen_width : r.right - r.left;
@@ -2944,7 +2944,7 @@ void app_coordinates_bitmap_to_window( app_t* app, int width, int height, int* x
 		    *y = (int)( *y * pixel_scale );
 		    *x += (int)( hborder );
 		    *y += (int)( vborder );
-            }
+			}
 		else 
 			{
 			*x = 0;
@@ -2956,7 +2956,7 @@ void app_coordinates_bitmap_to_window( app_t* app, int width, int height, int* x
 		int hscale = window_width / width;
 		int vscale = window_height / height;
 		int pixel_scale = pixel_scale = hscale < vscale ? hscale : vscale;
-        pixel_scale = pixel_scale < 1 ? 1 : pixel_scale;
+		pixel_scale = pixel_scale < 1 ? 1 : pixel_scale;
 		int hborder = ( window_width - pixel_scale * width ) / 2;
 		int vborder = ( window_height - pixel_scale * height ) / 2;
 		*x = (int)( *x * pixel_scale );
@@ -2964,10 +2964,10 @@ void app_coordinates_bitmap_to_window( app_t* app, int width, int height, int* x
 		*x += (int)( hborder );
 		*y += (int)( vborder );
 		}
-    }
+	}
 
 #else
-    #error Undefined platform. Define APP_WINDOWS or APP_NULL.
+	#error Undefined platform. Define APP_WINDOWS or APP_NULL.
 #endif 
 
 

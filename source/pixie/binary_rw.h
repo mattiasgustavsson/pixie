@@ -1,13 +1,13 @@
 /*
 ------------------------------------------------------------------------------
-          Licensing information can be found at the end of the file.
+		  Licensing information can be found at the end of the file.
 ------------------------------------------------------------------------------
 
 binary_rw.h - v0.1 - Binary serialization of basic data types, for C/C++.
 
 
 Do this:
-    #define BINARY_RW_IMPLEMENTATION
+	#define BINARY_RW_IMPLEMENTATION
 before you include this file in *one* C/C++ file to create the implementation.
 */
 
@@ -19,54 +19,54 @@ before you include this file in *one* C/C++ file to create the implementation.
 #include <stddef.h>
 
 #ifndef BINARY_RW_CHAR
-    // on older MSVC versions, char is same as i8
-    #if !defined(_MSC_VER) || _MSC_VER >= 1600 
-        #define BINARY_RW_CHAR char
-    #endif
+	// on older MSVC versions, char is same as i8
+	#if !defined(_MSC_VER) || _MSC_VER >= 1600 
+		#define BINARY_RW_CHAR char
+	#endif
 #endif
 
 #ifndef BINARY_RW_I8
-    #define BINARY_RW_I8 signed char
+	#define BINARY_RW_I8 signed char
 #endif
 
 #ifndef BINARY_RW_I16
-    #define BINARY_RW_I16 signed short
+	#define BINARY_RW_I16 signed short
 #endif
 
 #ifndef BINARY_RW_I32
-    #define BINARY_RW_I32 signed int
+	#define BINARY_RW_I32 signed int
 #endif
 
 #ifndef BINARY_RW_I64
-    #define BINARY_RW_I64 signed long long
+	#define BINARY_RW_I64 signed long long
 #endif
 
 #ifndef BINARY_RW_U8
-    #define BINARY_RW_U8 unsigned char
+	#define BINARY_RW_U8 unsigned char
 #endif
 
 #ifndef BINARY_RW_U16
-    #define BINARY_RW_U16 unsigned short
+	#define BINARY_RW_U16 unsigned short
 #endif
 
 #ifndef BINARY_RW_U32
-    #define BINARY_RW_U32 unsigned int
+	#define BINARY_RW_U32 unsigned int
 #endif
 
 #ifndef BINARY_RW_U64
-    #define BINARY_RW_U64 unsigned long long
+	#define BINARY_RW_U64 unsigned long long
 #endif
 
 #ifndef BINARY_RW_FLOAT
-    #define BINARY_RW_FLOAT float
+	#define BINARY_RW_FLOAT float
 #endif
 
 #ifndef BINARY_RW_DOUBLE
-    #define BINARY_RW_DOUBLE double
+	#define BINARY_RW_DOUBLE double
 #endif
 
 #ifndef BINARY_RW_BOOL
-    #define BINARY_RW_BOOL bool
+	#define BINARY_RW_BOOL bool
 #endif
 
 
@@ -74,10 +74,10 @@ struct binary_rw_data_t { size_t size; void* data; };
 
 
 struct binary_rw_reader_t
-    {
-    binary_rw_data_t const* binary;
+	{
+	binary_rw_data_t const* binary;
 	size_t position;
-    };
+	};
 
 void binary_rw_reader_init( binary_rw_reader_t* reader, binary_rw_data_t const* binary );
 void binary_rw_reader_term( binary_rw_reader_t* reader );
@@ -92,7 +92,7 @@ size_t binary_rw_reader_position( binary_rw_reader_t* reader );
 #endif
 	
 #ifdef BINARY_RW_BOOL
-    int binary_rw_reader_bool( binary_rw_reader_t* reader, BINARY_RW_BOOL* value, int count );	
+	int binary_rw_reader_bool( binary_rw_reader_t* reader, BINARY_RW_BOOL* value, int count );	
 #endif
 
 int binary_rw_reader_i8( binary_rw_reader_t* reader, BINARY_RW_I8* value, int count );
@@ -115,12 +115,12 @@ struct binary_rw_writer_t
 	{
 	binary_rw_data_t* binary;
 	size_t position;
-    binary_rw_resize_func_t resize;
-    void* resize_context;
-    };
+	binary_rw_resize_func_t resize;
+	void* resize_context;
+	};
 
 void binary_rw_writer_init( binary_rw_writer_t* writer, binary_rw_data_t* binary, 
-    binary_rw_resize_func_t resize_func, void* resize_context );
+	binary_rw_resize_func_t resize_func, void* resize_context );
 void binary_rw_writer_term( binary_rw_writer_t* writer);
 
 void binary_rw_writer_reset( binary_rw_writer_t* writer );
@@ -129,11 +129,11 @@ void binary_rw_writer_position_set( binary_rw_writer_t* writer, size_t pos );
 size_t binary_rw_writer_position( binary_rw_writer_t* writer );
 	
 #ifdef BINARY_RW_CHAR
-    int binary_rw_writer_char( binary_rw_writer_t* writer, BINARY_RW_CHAR const* value, int count );
+	int binary_rw_writer_char( binary_rw_writer_t* writer, BINARY_RW_CHAR const* value, int count );
 #endif
 	
 #ifdef BINARY_RW_BOOL
-    int binary_rw_writer_bool( binary_rw_writer_t* writer, BINARY_RW_BOOL const* value, int count );	
+	int binary_rw_writer_bool( binary_rw_writer_t* writer, BINARY_RW_BOOL const* value, int count );	
 #endif
 
 int binary_rw_writer_i8( binary_rw_writer_t* writer, BINARY_RW_I8 const* value, int count );
@@ -162,34 +162,34 @@ int binary_rw_writer_double( binary_rw_writer_t* writer, BINARY_RW_DOUBLE const*
 
 
 void binary_rw_reader_init( binary_rw_reader_t* reader, binary_rw_data_t const* binary )
-    {
-    reader->binary = binary;
-    reader->position = 0;
-    }
+	{
+	reader->binary = binary;
+	reader->position = 0;
+	}
 
 
 void binary_rw_reader_term( binary_rw_reader_t* reader )
-    {
-    (void) reader;
-    }
+	{
+	(void) reader;
+	}
 
 
 void binary_rw_reader_reset( binary_rw_reader_t* reader )
-    {
-    reader->position = 0;
-    }
+	{
+	reader->position = 0;
+	}
 
 
 void binary_rw_reader_position_set( binary_rw_reader_t* reader, size_t pos )
-    {
-    reader->position = pos;
-    }
+	{
+	reader->position = pos;
+	}
 
 
 size_t binary_rw_reader_position( binary_rw_reader_t* reader )
-    {
-    return reader->position;
-    }
+	{
+	return reader->position;
+	}
 
 
 #ifdef BINARY_RW_CHAR
@@ -209,7 +209,7 @@ size_t binary_rw_reader_position( binary_rw_reader_t* reader )
 
 	
 #ifdef BINARY_RW_BOOL
-    int binary_rw_reader_bool( binary_rw_reader_t* reader, BINARY_RW_BOOL* value, int count )
+	int binary_rw_reader_bool( binary_rw_reader_t* reader, BINARY_RW_BOOL* value, int count )
 	    {
 	    if( reader->binary->data == 0 || reader->binary->size == 0 ) return 0;
 	    BINARY_RW_U8* ptr = (BINARY_RW_U8*)( ( (uintptr_t)reader->binary->data ) + reader->position ); // BOOL is stored as 8 bit unsigned
@@ -366,56 +366,56 @@ int binary_rw_reader_double( binary_rw_reader_t* reader, BINARY_RW_DOUBLE* value
 
 
 void binary_rw_writer_init( binary_rw_writer_t* writer, binary_rw_data_t* binary, 
-    binary_rw_resize_func_t resize_func, void* resize_context )
-    {
-    writer->binary = binary;
-    writer->position = 0;
-    writer->resize = resize_func;
-    writer->resize_context = resize_context;
-    }
+	binary_rw_resize_func_t resize_func, void* resize_context )
+	{
+	writer->binary = binary;
+	writer->position = 0;
+	writer->resize = resize_func;
+	writer->resize_context = resize_context;
+	}
 
 
 void binary_rw_writer_term( binary_rw_writer_t* writer)
-    {
-    (void) writer;
-    }
+	{
+	(void) writer;
+	}
 
 
 void binary_rw_writer_reset( binary_rw_writer_t* writer )
-    {
-    writer->position = 0;
-    }
+	{
+	writer->position = 0;
+	}
 
 
 void binary_rw_writer_position_set( binary_rw_writer_t* writer, size_t pos )
-    {
-    writer->position = pos;
-    }
+	{
+	writer->position = pos;
+	}
 
 
 size_t binary_rw_writer_position( binary_rw_writer_t* writer )
-    {
-    return writer->position;
-    }
+	{
+	return writer->position;
+	}
 
 
 
 #ifdef BINARY_RW_CHAR
-    int binary_rw_writer_char( binary_rw_writer_t* writer, BINARY_RW_CHAR const* value, int count )
+	int binary_rw_writer_char( binary_rw_writer_t* writer, BINARY_RW_CHAR const* value, int count )
 		{
 		if( writer->binary->data == 0 || writer->binary->size == 0 ) return 0;
-        
+		
 		BINARY_RW_CHAR* ptr = (BINARY_RW_CHAR*)( ( (uintptr_t)writer->binary->data ) + writer->position );
 		for( int i = 0; i < count; ++i ) 
 			{
 			writer->position += sizeof( *ptr );
 			if( writer->position > writer->binary->size ) 
-                {
-                if( writer->resize )
-                    writer->resize( writer->binary, writer->position, writer->resize_context );
-                else
-                    return i;
-                }
+				{
+				if( writer->resize )
+					writer->resize( writer->binary, writer->position, writer->resize_context );
+				else
+					return i;
+				}
 			*ptr++ = *value++;
 			}
 		return count;
@@ -424,7 +424,7 @@ size_t binary_rw_writer_position( binary_rw_writer_t* writer )
 	
 
 #ifdef BINARY_RW_BOOL
-    int binary_rw_writer_bool( binary_rw_writer_t* writer, BINARY_RW_BOOL const* value, int count )
+	int binary_rw_writer_bool( binary_rw_writer_t* writer, BINARY_RW_BOOL const* value, int count )
 	    {
 	    if( writer->binary->data == 0 || writer->binary->size == 0 ) return 0;
 	    BINARY_RW_U8* ptr = (BINARY_RW_U8*)( ( (uintptr_t)writer->binary->data ) + writer->position ); // BOOL is stored as 8 bit unsigned
@@ -432,12 +432,12 @@ size_t binary_rw_writer_position( binary_rw_writer_t* writer )
 		    {
 		    writer->position += sizeof( *ptr );
 			if( writer->position > writer->binary->size ) 
-                {
-                if( writer->resize )
-                    writer->resize( writer->binary, writer->position, writer->resize_context );
-                else
-                    return i;
-                }
+				{
+				if( writer->resize )
+					writer->resize( writer->binary, writer->position, writer->resize_context );
+				else
+					return i;
+				}
 		    *ptr++ = (BINARY_RW_U8)( (*value++) == 0 ? 0 : 1 ); // translate between bool and u8
 		    }
 	    return count;
@@ -453,12 +453,12 @@ int binary_rw_writer_i8( binary_rw_writer_t* writer, BINARY_RW_I8 const* value, 
 		{
 		writer->position += sizeof( *ptr );
 		if( writer->position > writer->binary->size ) 
-            {
-            if( writer->resize )
-                writer->resize( writer->binary, writer->position, writer->resize_context );
-            else
-                return i;
-            }
+			{
+			if( writer->resize )
+				writer->resize( writer->binary, writer->position, writer->resize_context );
+			else
+				return i;
+			}
 		*ptr++ = *value++;
 		}
 	return count;
@@ -473,12 +473,12 @@ int binary_rw_writer_i16( binary_rw_writer_t* writer, BINARY_RW_I16 const* value
 		{
 		writer->position += sizeof( *ptr );
 		if( writer->position > writer->binary->size ) 
-            {
-            if( writer->resize )
-                writer->resize( writer->binary, writer->position, writer->resize_context );
-            else
-                return i;
-            }
+			{
+			if( writer->resize )
+				writer->resize( writer->binary, writer->position, writer->resize_context );
+			else
+				return i;
+			}
 		*ptr++ = *value++;
 		}
 	return count;
@@ -493,12 +493,12 @@ int binary_rw_writer_i32( binary_rw_writer_t* writer, BINARY_RW_I32 const* value
 		{
 		writer->position += sizeof( *ptr );
 		if( writer->position > writer->binary->size ) 
-            {
-            if( writer->resize )
-                writer->resize( writer->binary, writer->position, writer->resize_context );
-            else
-                return i;
-            }
+			{
+			if( writer->resize )
+				writer->resize( writer->binary, writer->position, writer->resize_context );
+			else
+				return i;
+			}
 		*ptr++ = *value++;
 		}
 	return count;
@@ -513,12 +513,12 @@ int binary_rw_writer_i64( binary_rw_writer_t* writer, BINARY_RW_I64 const* value
 		{
 		writer->position += sizeof( *ptr );
 		if( writer->position > writer->binary->size ) 
-            {
-            if( writer->resize )
-                writer->resize( writer->binary, writer->position, writer->resize_context );
-            else
-                return i;
-            }
+			{
+			if( writer->resize )
+				writer->resize( writer->binary, writer->position, writer->resize_context );
+			else
+				return i;
+			}
 		*ptr++ = *value++;
 		}
 	return count;
@@ -533,12 +533,12 @@ int binary_rw_writer_u8( binary_rw_writer_t* writer, BINARY_RW_U8 const* value, 
 		{
 		writer->position += sizeof( *ptr );
 		if( writer->position > writer->binary->size ) 
-            {
-            if( writer->resize )
-                writer->resize( writer->binary, writer->position, writer->resize_context );
-            else
-                return i;
-            }
+			{
+			if( writer->resize )
+				writer->resize( writer->binary, writer->position, writer->resize_context );
+			else
+				return i;
+			}
 		*ptr++ = *value++;
 		}
 	return count;
@@ -553,12 +553,12 @@ int binary_rw_writer_u16( binary_rw_writer_t* writer, BINARY_RW_U16 const* value
 		{
 		writer->position += sizeof( *ptr );
 		if( writer->position > writer->binary->size ) 
-            {
-            if( writer->resize )
-                writer->resize( writer->binary, writer->position, writer->resize_context );
-            else
-                return i;
-            }
+			{
+			if( writer->resize )
+				writer->resize( writer->binary, writer->position, writer->resize_context );
+			else
+				return i;
+			}
 		*ptr++ = *value++;
 		}
 	return count;
@@ -573,12 +573,12 @@ int binary_rw_writer_u32( binary_rw_writer_t* writer, BINARY_RW_U32 const* value
 		{
 		writer->position += sizeof( *ptr );
 		if( writer->position > writer->binary->size ) 
-            {
-            if( writer->resize )
-                writer->resize( writer->binary, writer->position, writer->resize_context );
-            else
-                return i;
-            }
+			{
+			if( writer->resize )
+				writer->resize( writer->binary, writer->position, writer->resize_context );
+			else
+				return i;
+			}
 		*ptr++ = *value++;
 		}
 	return count;
@@ -593,12 +593,12 @@ int binary_rw_writer_u64( binary_rw_writer_t* writer, BINARY_RW_U64 const* value
 		{
 		writer->position += sizeof( *ptr );
 		if( writer->position > writer->binary->size ) 
-            {
-            if( writer->resize )
-                writer->resize( writer->binary, writer->position, writer->resize_context );
-            else
-                return i;
-            }
+			{
+			if( writer->resize )
+				writer->resize( writer->binary, writer->position, writer->resize_context );
+			else
+				return i;
+			}
 		*ptr++ = *value++;
 		}
 	return count;
@@ -613,12 +613,12 @@ int binary_rw_writer_float( binary_rw_writer_t* writer, BINARY_RW_FLOAT const* v
 		{
 		writer->position += sizeof( *ptr );
 		if( writer->position > writer->binary->size ) 
-            {
-            if( writer->resize )
-                writer->resize( writer->binary, writer->position, writer->resize_context );
-            else
-                return i;
-            }
+			{
+			if( writer->resize )
+				writer->resize( writer->binary, writer->position, writer->resize_context );
+			else
+				return i;
+			}
 		*ptr++ = *value++;
 		}
 	return count;
@@ -633,12 +633,12 @@ int binary_rw_writer_double( binary_rw_writer_t* writer, BINARY_RW_DOUBLE const*
 		{
 		writer->position += sizeof( *ptr );
 		if( writer->position > writer->binary->size ) 
-            {
-            if( writer->resize )
-                writer->resize( writer->binary, writer->position, writer->resize_context );
-            else
-                return i;
-            }
+			{
+			if( writer->resize )
+				writer->resize( writer->binary, writer->position, writer->resize_context );
+			else
+				return i;
+			}
 		*ptr++ = *value++;
 		}
 	return count;

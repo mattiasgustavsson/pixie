@@ -1,6 +1,6 @@
 /*
 ------------------------------------------------------------------------------
-          Licensing information can be found at the end of the file.
+		  Licensing information can be found at the end of the file.
 ------------------------------------------------------------------------------
 
 pixelfont.h - v0.1 - 
@@ -14,19 +14,19 @@ before you include this file in *one* C/C++ file to create the implementation.
 #define pixelfont_h
 
 #ifndef PIXELFONT_I8
-    #define PIXELFONT_I8 signed char
+	#define PIXELFONT_I8 signed char
 #endif
 
 #ifndef PIXELFONT_U8
-    #define PIXELFONT_U8 unsigned char
+	#define PIXELFONT_U8 unsigned char
 #endif
 
 #ifndef PIXELFONT_U16
-    #define PIXELFONT_U16 unsigned short
+	#define PIXELFONT_U16 unsigned short
 #endif
 
 #ifndef PIXELFONT_U32
-    #define PIXELFONT_U32 unsigned int
+	#define PIXELFONT_U32 unsigned int
 #endif
 
 typedef struct pixelfont_t
@@ -49,47 +49,47 @@ typedef enum pixelfont_align_t
 
 
 typedef enum pixelfont_bold_t
-    {
-    PIXELFONT_BOLD_OFF,
-    PIXELFONT_BOLD_ON,
-    } pixelfont_bold_t;
+	{
+	PIXELFONT_BOLD_OFF,
+	PIXELFONT_BOLD_ON,
+	} pixelfont_bold_t;
 
 
 typedef enum pixelfont_italic_t
-    {
-    PIXELFONT_ITALIC_OFF,
-    PIXELFONT_ITALIC_ON,
-    } pixelfont_italic_t;
+	{
+	PIXELFONT_ITALIC_OFF,
+	PIXELFONT_ITALIC_ON,
+	} pixelfont_italic_t;
 
 
 typedef enum pixelfont_underline_t
-    {
-    PIXELFONT_UNDERLINE_OFF,
-    PIXELFONT_UNDERLINE_ON,
-    } pixelfont_underline_t;
+	{
+	PIXELFONT_UNDERLINE_OFF,
+	PIXELFONT_UNDERLINE_ON,
+	} pixelfont_underline_t;
 
 
 typedef struct pixelfont_bounds_t
-    { 
-    int width; 
-    int height; 
-    } pixelfont_bounds_t;
+	{ 
+	int width; 
+	int height; 
+	} pixelfont_bounds_t;
 
 #endif /* pixelfont_h */
 
 
 #ifndef PIXELFONT_COLOR
-    #define PIXELFONT_COLOR PIXELFONT_U8
+	#define PIXELFONT_COLOR PIXELFONT_U8
 #endif
 
 #ifndef PIXELFONT_FUNC_NAME 
-    #define PIXELFONT_FUNC_NAME pixelfont_blit
+	#define PIXELFONT_FUNC_NAME pixelfont_blit
 #endif
 
 void PIXELFONT_FUNC_NAME( pixelfont_t const* font, int x, int y, char const* text, PIXELFONT_COLOR color, 
-    PIXELFONT_COLOR* target, int width, int height, pixelfont_align_t align, int wrap_width, int hspacing, 
-    int vspacing, int limit, pixelfont_bold_t bold, pixelfont_italic_t italic, pixelfont_underline_t underline, 
-    pixelfont_bounds_t* bounds );
+	PIXELFONT_COLOR* target, int width, int height, pixelfont_align_t align, int wrap_width, int hspacing, 
+	int vspacing, int limit, pixelfont_bold_t bold, pixelfont_italic_t italic, pixelfont_underline_t underline, 
+	pixelfont_bounds_t* bounds );
 
 
 /*
@@ -102,13 +102,13 @@ void PIXELFONT_FUNC_NAME( pixelfont_t const* font, int x, int y, char const* tex
 #undef PIXELFONT_IMPLEMENTATION
 
 #ifndef PIXELFONT_PIXEL_FUNC
-    #define PIXELFONT_PIXEL_FUNC( dst, src ) *(dst) = (src);
+	#define PIXELFONT_PIXEL_FUNC( dst, src ) *(dst) = (src);
 #endif
 
 void PIXELFONT_FUNC_NAME( pixelfont_t const* font, int x, int y, char const* text, PIXELFONT_COLOR color, 
-    PIXELFONT_COLOR* target, int width, int height, pixelfont_align_t align, int wrap_width, int hspacing, 
-    int vspacing,  int limit, pixelfont_bold_t bold, pixelfont_italic_t italic, pixelfont_underline_t underline, 
-    pixelfont_bounds_t* bounds )
+	PIXELFONT_COLOR* target, int width, int height, pixelfont_align_t align, int wrap_width, int hspacing, 
+	int vspacing,  int limit, pixelfont_bold_t bold, pixelfont_italic_t italic, pixelfont_underline_t underline, 
+	pixelfont_bounds_t* bounds )
 	{
 	int xp = x;
 	int yp = y;
@@ -118,18 +118,18 @@ void PIXELFONT_FUNC_NAME( pixelfont_t const* font, int x, int y, char const* tex
 	char const* str = text;
 	while( *str )
 		{	
-        int line_char_count = 0;
+		int line_char_count = 0;
 		int line_width = 0;
-        int last_space_char_count = 0;
-        int last_space_width = 0;
+		int last_space_char_count = 0;
+		int last_space_width = 0;
 		char const* tstr = str; 
 		while( *tstr != '\n' && *tstr != '\0' && ( wrap_width <= 0 || line_width <= wrap_width  ) )
 			{
-            if( *tstr <= ' ' )
-                {
-                last_space_char_count = line_char_count;
-                last_space_width = line_width;
-                }
+			if( *tstr <= ' ' )
+				{
+				last_space_char_count = line_char_count;
+				last_space_width = line_width;
+				}
 			PIXELFONT_U8 const* g = font->glyphs + font->offsets[ (int) *tstr ];
 			line_width += (PIXELFONT_I8) *g++;
 			int w = *g++;
@@ -140,36 +140,36 @@ void PIXELFONT_FUNC_NAME( pixelfont_t const* font, int x, int y, char const* tex
 			int kern = *g++;
 			for( int k = 0; k < kern; ++k )
 				if( *g++ == *tstr ) { line_width += (PIXELFONT_I8) *g++; break; } else ++g;
-            ++line_char_count;
+			++line_char_count;
 			}
-        bool skip_space = false;
-        if( wrap_width > 0 && line_width > wrap_width )
-            {
-            line_char_count = last_space_char_count;
-            line_width = last_space_width;
-            skip_space = true;
-            }
+		bool skip_space = false;
+		if( wrap_width > 0 && line_width > wrap_width )
+			{
+			line_char_count = last_space_char_count;
+			line_width = last_space_width;
+			skip_space = true;
+			}
 
-        if( wrap_width > 0 )
-            {
-            if( align == PIXELFONT_ALIGN_RIGHT ) x += wrap_width - line_width;
-            if( align == PIXELFONT_ALIGN_CENTER ) x += ( wrap_width - line_width ) / 2;
-            }
-        else
-            {
-            if( align == PIXELFONT_ALIGN_RIGHT ) x -= line_width;
-            if( align == PIXELFONT_ALIGN_CENTER ) x -= line_width / 2;
-            }
+		if( wrap_width > 0 )
+			{
+			if( align == PIXELFONT_ALIGN_RIGHT ) x += wrap_width - line_width;
+			if( align == PIXELFONT_ALIGN_CENTER ) x += ( wrap_width - line_width ) / 2;
+			}
+		else
+			{
+			if( align == PIXELFONT_ALIGN_RIGHT ) x -= line_width;
+			if( align == PIXELFONT_ALIGN_CENTER ) x -= line_width / 2;
+			}
 
-        for( int c = 0; c < line_char_count; ++c )
-            {
+		for( int c = 0; c < line_char_count; ++c )
+			{
 		    PIXELFONT_U8 const* g = font->glyphs + font->offsets[ (int) *str ];
-            x += (PIXELFONT_I8) *g++;
+			x += (PIXELFONT_I8) *g++;
 		    int w = *g++;
 		    int h = font->height;
 		    for( int iy = y; iy < y + h; ++iy )
-                {
-                int xs = x + ( italic ? ( h - ( iy - y ) ) / 2 - 1 : 0 );
+				{
+				int xs = x + ( italic ? ( h - ( iy - y ) ) / 2 - 1 : 0 );
 			    for( int ix = xs; ix < xs + w; ++ix )
 				    {
 				    if( *g++ && target ) 
@@ -179,41 +179,41 @@ void PIXELFONT_FUNC_NAME( pixelfont_t const* font, int x, int y, char const* tex
 							    last_x_on_line = ix >= last_x_on_line ? ix + ( bold ? 1 : 0 ) : last_x_on_line;
 							    PIXELFONT_PIXEL_FUNC( ( &target[ ix + iy * width ] ), color );
 							    if( bold && ix + 1 < width ) 
-                                    PIXELFONT_PIXEL_FUNC( ( &target[ ix + 1 + iy * width ] ), color );
+									PIXELFONT_PIXEL_FUNC( ( &target[ ix + 1 + iy * width ] ), color );
 							    }
 				    }
-                }
-   			
+				}
+			
 		    x += (PIXELFONT_I8) *g++;
-            x += hspacing + ( bold ? 1 : 0 );
+			x += hspacing + ( bold ? 1 : 0 );
 		    ++str;
 		    ++count;
 
-            int kern = *g++;
-            for( int k = 0; k < kern; ++k )
-                if( *g++ == *str ) { x += (PIXELFONT_I8) *g++; break; } else ++g;
+			int kern = *g++;
+			for( int k = 0; k < kern; ++k )
+				if( *g++ == *str ) { x += (PIXELFONT_I8) *g++; break; } else ++g;
 		
-            }
+			}
 
-            if( underline && target && y + font->baseline + 1 >= 0 && y + font->baseline + 1 < height && last_x_on_line > xp ) 
+			if( underline && target && y + font->baseline + 1 >= 0 && y + font->baseline + 1 < height && last_x_on_line > xp ) 
 				for( int ix = xp; ix <= last_x_on_line; ++ix ) 
-                    if( ix >= 0 && ix < width ) 
-                        PIXELFONT_PIXEL_FUNC( ( &target[ ix + ( y + font->baseline + 1 ) * width ] ), color );
+					if( ix >= 0 && ix < width ) 
+						PIXELFONT_PIXEL_FUNC( ( &target[ ix + ( y + font->baseline + 1 ) * width ] ), color );
 			last_x_on_line = xp;
 			max_x = x > max_x ? x : max_x; 
 			x = xp; 
 			y += font->line_spacing + vspacing;  
-            if( *str == '\n' ) ++str;
-            if( *str && skip_space && *str <= ' ' ) ++str;
+			if( *str == '\n' ) ++str;
+			if( *str && skip_space && *str <= ' ' ) ++str;
 		}
 
-    if( bounds )
-        {
+	if( bounds )
+		{
 	    bounds->width = wrap_width > 0 ? wrap_width : ( max_x - xp );
 	    bounds->height = y - yp;
 	    }
 	}
-    
+	
 #endif /* PIXELFONT_IMPLEMENTATION */
 
 

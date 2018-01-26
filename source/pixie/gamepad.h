@@ -1,6 +1,6 @@
 /*
 ------------------------------------------------------------------------------
-          Licensing information can be found at the end of the file.
+		  Licensing information can be found at the end of the file.
 ------------------------------------------------------------------------------
 
 gamepad.h - v0.1 - 
@@ -10,13 +10,13 @@ gamepad.h - v0.1 -
 #define gamepad_h
 
 #ifndef GAMEPAD_I16
-    #define GAMEPAD_I16 short
+	#define GAMEPAD_I16 short
 #endif
 #ifndef GAMEPAD_U16
-    #define GAMEPAD_U16 unsigned short 
+	#define GAMEPAD_U16 unsigned short 
 #endif
 #ifndef GAMEPAD_U8
-    #define GAMEPAD_U8 unsigned char
+	#define GAMEPAD_U8 unsigned char
 #endif
 
 typedef enum gamepad_result_t
@@ -80,8 +80,8 @@ gamepad_result_t gamepad_read( gamepad_t* gamepad, int index, gamepad_state_t* s
 
 
 #ifndef GAMEPAD_MALLOC
-    #define _CRT_NONSTDC_NO_DEPRECATE 
-    #define _CRT_SECURE_NO_WARNINGS
+	#define _CRT_NONSTDC_NO_DEPRECATE 
+	#define _CRT_SECURE_NO_WARNINGS
 	#include <stdlib.h>
 	#if defined(__cplusplus)
 		#define GAMEPAD_MALLOC( ctx, size ) ( ::malloc( size ) )
@@ -129,8 +129,8 @@ gamepad_t* gamepad_create( void* memctx )
 
 	HMODULE dll = 0;
 	int version = 4;
-    char const* dll_name[] = { "xinput1_0.dll", "xinput1_1.dll", "xinput1_2.dll", "xinput1_3.dll", "xinput1_4.dll" };
-    char const* dll_name9[] = { "xinput9_1_0.dll", "xinput9_1_1.dll", "xinput9_1_2.dll", "xinput9_1_3.dll", "xinput9_1_4.dll" };
+	char const* dll_name[] = { "xinput1_0.dll", "xinput1_1.dll", "xinput1_2.dll", "xinput1_3.dll", "xinput1_4.dll" };
+	char const* dll_name9[] = { "xinput9_1_0.dll", "xinput9_1_1.dll", "xinput9_1_2.dll", "xinput9_1_3.dll", "xinput9_1_4.dll" };
 	while( !dll && version >= 0 )
 		{
 		dll = LoadLibraryA( dll_name[ version ] );

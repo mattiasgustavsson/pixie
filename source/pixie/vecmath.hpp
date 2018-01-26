@@ -1,6 +1,6 @@
 /*
 ------------------------------------------------------------------------------
-          Licensing information can be found at the end of the file.
+		  Licensing information can be found at the end of the file.
 ------------------------------------------------------------------------------
 
 vecmath.hpp - v0.1 - simple HLSL style vector math library for C++.
@@ -1535,23 +1535,23 @@ float vecmath::internal::tanhf( float x ) { return (float)::tanh( (double) x ); 
 
 #else
 
-    float vecmath::internal::log2f( float x ) 
-        { 
-        return (float)( ::log10( (double) x ) / ::log10( 2.0 ) ); 
-        }
+	float vecmath::internal::log2f( float x ) 
+		{ 
+		return (float)( ::log10( (double) x ) / ::log10( 2.0 ) ); 
+		}
 	
 	float vecmath::internal::roundf( float x ) 
 		{ 
-        double i, r;
-        double fraction = modf( (double) x, &i );
-        modf( 2.0 * fraction, &r );
-        return (float)( i + r );
-        }
+		double i, r;
+		double fraction = modf( (double) x, &i );
+		modf( 2.0 * fraction, &r );
+		return (float)( i + r );
+		}
 
-    float vecmath::internal::truncf( float x ) 
-        { 
-        return (float)( x > 0.0f ? ( ::floor( (double) x ) ) : ( ::ceil( (double) x ) ) );
-        }
+	float vecmath::internal::truncf( float x ) 
+		{ 
+		return (float)( x > 0.0f ? ( ::floor( (double) x ) ) : ( ::ceil( (double) x ) ) );
+		}
 #endif
 
 

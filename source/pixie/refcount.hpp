@@ -1,6 +1,6 @@
 /*
 ------------------------------------------------------------------------------
-          Licensing information can be found at the end of the file.
+		  Licensing information can be found at the end of the file.
 ------------------------------------------------------------------------------
 
 refcount.hpp - v0.1 - Simple reference counting pointer wrapper for C++.
@@ -115,10 +115,10 @@ template< typename T > void alloc_helper( void** ptr, int** count )
 	}
 
 template< typename T > void destroy_helper( void* ptr ) 
-    { 
-    ( (T*) ptr )->~T(); 
-    mem_free( ptr ); 
-    }  
+	{ 
+	( (T*) ptr )->~T(); 
+	mem_free( ptr ); 
+	}  
 
 } /* namespace internal */ } /* namespace refcount */
 
@@ -412,8 +412,8 @@ ref<T> new_ref( P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8, P
 
 
 #ifndef REFCOUNT_MALLOC
-    #define _CRT_NONSTDC_NO_DEPRECATE 
-    #define _CRT_SECURE_NO_WARNINGS
+	#define _CRT_NONSTDC_NO_DEPRECATE 
+	#define _CRT_SECURE_NO_WARNINGS
 	#include <stdlib.h>
 	#if defined(__cplusplus)
 		#define REFCOUNT_MALLOC( size ) ( ::malloc( size ) )
@@ -426,15 +426,15 @@ ref<T> new_ref( P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8, P
 
 
 void* refcount::internal::mem_alloc( size_t size )
-    {
-    return REFCOUNT_MALLOC( size );
-    }
+	{
+	return REFCOUNT_MALLOC( size );
+	}
 
 
 void refcount::internal::mem_free( void* ptr )
-    {
-    REFCOUNT_FREE( ptr );
-    }
+	{
+	REFCOUNT_FREE( ptr );
+	}
 
 
 #endif /* REFCOUNT_IMPLEMENTATION */

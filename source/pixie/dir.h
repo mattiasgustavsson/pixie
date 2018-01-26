@@ -1,7 +1,7 @@
 
 /*
 ------------------------------------------------------------------------------
-          Licensing information can be found at the end of the dir.
+		  Licensing information can be found at the end of the dir.
 ------------------------------------------------------------------------------
 
 dir.h - v0.1 - Directory listing functions for C/C++
@@ -37,8 +37,8 @@ int dir_is_folder( dir_entry_t* entry );
 #undef DIR_IMPLEMENTATION
 
 #ifndef DIR_MALLOC
-    #define _CRT_NONSTDC_NO_DEPRECATE 
-    #define _CRT_SECURE_NO_WARNINGS
+	#define _CRT_NONSTDC_NO_DEPRECATE 
+	#define _CRT_SECURE_NO_WARNINGS
 	#include <stdlib.h>
 	#if defined(__cplusplus)
 		#define DIR_MALLOC( size ) ( ::malloc( size ) )
@@ -72,92 +72,92 @@ int dir_is_folder( dir_entry_t* entry );
 #pragma warning( pop )
 
 struct dir_entry_t 
-    {
-    char name[ MAX_PATH ];
-    BOOL is_folder;
-    };
+	{
+	char name[ MAX_PATH ];
+	BOOL is_folder;
+	};
 
 
 struct dir_t
-    {
-    HANDLE handle;
-    WIN32_FIND_DATAA data;
-    dir_entry_t entry;
-    };
+	{
+	HANDLE handle;
+	WIN32_FIND_DATAA data;
+	dir_entry_t entry;
+	};
 
 
 dir_t* dir_open( char const* path )
-    {
-    if( !path ) return 0;
+	{
+	if( !path ) return 0;
 
-    size_t path_len = strlen( path );
-    BOOL trailing_path_separator = path[ path_len - 1 ] == '\\' || path[ path_len - 1 ] == '/';
-    const char* string_to_append = "*.*";
-    if( path_len + strlen( string_to_append ) + ( trailing_path_separator ? 0 : 1 ) >= MAX_PATH ) return NULL;
-    char search_pattern[ MAX_PATH ];
-    strcpy( search_pattern, path );
-    if( !trailing_path_separator ) strcat( search_pattern, "\\" );
-    strcat( search_pattern, string_to_append );
+	size_t path_len = strlen( path );
+	BOOL trailing_path_separator = path[ path_len - 1 ] == '\\' || path[ path_len - 1 ] == '/';
+	const char* string_to_append = "*.*";
+	if( path_len + strlen( string_to_append ) + ( trailing_path_separator ? 0 : 1 ) >= MAX_PATH ) return NULL;
+	char search_pattern[ MAX_PATH ];
+	strcpy( search_pattern, path );
+	if( !trailing_path_separator ) strcat( search_pattern, "\\" );
+	strcat( search_pattern, string_to_append );
 
-    WIN32_FIND_DATAA data;
-    HANDLE handle = FindFirstFileA( search_pattern, &data );
-    if( handle == INVALID_HANDLE_VALUE ) return NULL;
+	WIN32_FIND_DATAA data;
+	HANDLE handle = FindFirstFileA( search_pattern, &data );
+	if( handle == INVALID_HANDLE_VALUE ) return NULL;
 
-    dir_t* dir = (dir_t*) DIR_MALLOC( sizeof( dir_t ) );
-    dir->handle = handle;
-    dir->data = data;
+	dir_t* dir = (dir_t*) DIR_MALLOC( sizeof( dir_t ) );
+	dir->handle = handle;
+	dir->data = data;
 
-    return dir;
-    }
+	return dir;
+	}
 
 
 void dir_close( dir_t* dir )
-    {
-    if( !dir ) return;
+	{
+	if( !dir ) return;
 
-    if( dir->handle != INVALID_HANDLE_VALUE ) FindClose( dir->handle );
-    DIR_FREE( dir );
-    }
+	if( dir->handle != INVALID_HANDLE_VALUE ) FindClose( dir->handle );
+	DIR_FREE( dir );
+	}
 
 
 dir_entry_t* dir_read( dir_t* dir )
-    {
-    if( !dir ) return NULL;
-    if( dir->handle == INVALID_HANDLE_VALUE ) return NULL;
+	{
+	if( !dir ) return NULL;
+	if( dir->handle == INVALID_HANDLE_VALUE ) return NULL;
 
-    strcpy( dir->entry.name, dir->data.cFileName );
-    dir->entry.is_folder = ( dir->data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY ) != 0;
+	strcpy( dir->entry.name, dir->data.cFileName );
+	dir->entry.is_folder = ( dir->data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY ) != 0;
 
-    BOOL result = FindNextFileA( dir->handle, &dir->data );
-    if( !result )
-        {
-        FindClose( dir->handle );
-        dir->handle = INVALID_HANDLE_VALUE;      
-        }
+	BOOL result = FindNextFileA( dir->handle, &dir->data );
+	if( !result )
+		{
+		FindClose( dir->handle );
+		dir->handle = INVALID_HANDLE_VALUE;      
+		}
 
-    return &dir->entry;    
-    }
+	return &dir->entry;    
+	}
 
 
 char const* dir_name( dir_entry_t* entry )
-    {
-    if( !entry ) return NULL;
-    return entry->name;
-    }
+	{
+	if( !entry ) return NULL;
+	return entry->name;
+	}
 
 
 int dir_is_file( dir_entry_t* entry )
-    {
-    if( !entry ) return 0;
-    return entry->is_folder == FALSE;
-    }
+	{
+	if( !entry ) return 0;
+	return entry->is_folder == FALSE;
+	}
 
 
 int dir_is_folder( dir_entry_t* entry )
-    {
-    if( !entry ) return 0;
-    return entry->is_folder == TRUE;
-    }
+	{
+	if( !entry ) return 0;
+	return entry->is_folder == TRUE;
+	}
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -169,45 +169,45 @@ int dir_is_folder( dir_entry_t* entry )
 
 
 dir_t* dir_open( char const* path )
-    {
-    DIR* dir = opendir( path );
-    return (dir_t*) dir;
-    }
+	{
+	DIR* dir = opendir( path );
+	return (dir_t*) dir;
+	}
 
 
 void dir_close( dir_t* dir )
-    {
-    if( !dir ) return;
-    closedir( (DIR*) dir );
-    }
+	{
+	if( !dir ) return;
+	closedir( (DIR*) dir );
+	}
 
 
 dir_entry_t* dir_read( dir_t* dir )
-    {
-    if( !dir ) return NULL;
-    return (dir_entry_t*)readdir( (DIR*) dir );
-    }
+	{
+	if( !dir ) return NULL;
+	return (dir_entry_t*)readdir( (DIR*) dir );
+	}
 
 
 char const* dir_name( dir_entry_t* entry )
-    {
-    if( !entry ) return NULL;
-    return ( (struct dirent*)entry )->d_name;
-    }
+	{
+	if( !entry ) return NULL;
+	return ( (struct dirent*)entry )->d_name;
+	}
 
 
 int dir_is_file( dir_entry_t* entry )
-    {
-    if( !entry ) return 0;
-    return ( (struct dirent*)entry )->d_type == DT_REG;
-    }
+	{
+	if( !entry ) return 0;
+	return ( (struct dirent*)entry )->d_type == DT_REG;
+	}
 
 
 int dir_is_folder( dir_entry_t* entry )
-    {
-    if( !entry ) return 0;
-    return ( (struct dirent*)entry )->d_type == DT_DIR;
-    }
+	{
+	if( !entry ) return 0;
+	return ( (struct dirent*)entry )->d_type == DT_DIR;
+	}
 
 
 
@@ -217,7 +217,7 @@ int dir_is_folder( dir_entry_t* entry )
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #else
 
-    #error Undefined platform. Define DIR_WINDOWS or DIR_POSIX.
+	#error Undefined platform. Define DIR_WINDOWS or DIR_POSIX.
 
 #endif 
 

@@ -1,6 +1,6 @@
 /*
 ------------------------------------------------------------------------------
-          Licensing information can be found at the end of the file.
+		  Licensing information can be found at the end of the file.
 ------------------------------------------------------------------------------
 
 file_util.h - v0.1 - Utilities for working with files, folders and paths.
@@ -10,7 +10,7 @@ Do this:
 before you include this file in *one* C/C++ file to create the implementation.
 
 Dependencies:
-    dir.h
+	dir.h
 */
 
 #ifndef file_util_h
@@ -65,14 +65,14 @@ int is_folder( char const* path );
 	    #undef _WIN32_WINNT
 	    #define _WIN32_WINNT 0x0501 // requires Windows XP minimum
 	#endif
-    // 0x0400=Windows NT 4.0, 0x0500=Windows 2000, 0x0501=Windows XP, 0x0502=Windows Server 2003, 0x0600=Windows Vista, 
-    // 0x0601=Windows 7, 0x0602=Windows 8, 0x0603=Windows 8.1, 0x0A00=Windows 10, 
-    #define _WINSOCKAPI_
-    #pragma warning( push )
-    #pragma warning( disable: 4668 ) // 'symbol' is not defined as a preprocessor macro, replacing with '0' for 'directives'
-    #pragma warning( disable: 4255 ) // 'function' : no function prototype given: converting '()' to '(void)'
-    #include <windows.h>
-    #pragma warning( pop )
+	// 0x0400=Windows NT 4.0, 0x0500=Windows 2000, 0x0501=Windows XP, 0x0502=Windows Server 2003, 0x0600=Windows Vista, 
+	// 0x0601=Windows 7, 0x0602=Windows 8, 0x0603=Windows 8.1, 0x0A00=Windows 10, 
+	#define _WINSOCKAPI_
+	#pragma warning( push )
+	#pragma warning( disable: 4668 ) // 'symbol' is not defined as a preprocessor macro, replacing with '0' for 'directives'
+	#pragma warning( disable: 4255 ) // 'function' : no function prototype given: converting '()' to '(void)'
+	#include <windows.h>
+	#pragma warning( pop )
 
 	#define mkdir hide_windows_mkdir
 	#define rmdir hide_windows_rmdir
@@ -87,144 +87,144 @@ int is_folder( char const* path );
 
 
 char const* basename( char const* const path, char const* const extension )
-    {
-    static char result[ MAX_PATH ];
-    strcpy( result, "" );
+	{
+	static char result[ MAX_PATH ];
+	strcpy( result, "" );
 
-    if( path )
-        {
-        char const* lastForwardSlash = strrchr( path, '/' );
-        char const* lastBackSlash = strrchr( path, '\\' );
-        
-        char const* name = 0;
-        
-        if( !lastBackSlash && !lastForwardSlash )
-            {
-            name = path;
-            }
-        else if( !lastBackSlash )
-            {
-            name = lastForwardSlash + 1;
-            }
-        else if( !lastForwardSlash )
-            {
-            name = lastBackSlash + 1;
-            }
-        else if( lastForwardSlash > lastBackSlash )
-            {
-            name = lastForwardSlash + 1;
-            }
-        else
-            {
-            name = lastBackSlash + 1;
-            }
-            
-        strncpy( result, name, sizeof( result ) );
-            
-        if( extension )
-            {
-            size_t extlen = strlen( extension );
-            size_t reslen = strlen( result );
-            
-            if( reslen >= extlen )
-                {
-                if( stricmp( result + (reslen - extlen), extension ) == 0 )
-                    {
-                    result[ reslen - extlen ] = 0;
-                    }
-                }
-            
-            }
-        }
+	if( path )
+		{
+		char const* lastForwardSlash = strrchr( path, '/' );
+		char const* lastBackSlash = strrchr( path, '\\' );
+		
+		char const* name = 0;
+		
+		if( !lastBackSlash && !lastForwardSlash )
+			{
+			name = path;
+			}
+		else if( !lastBackSlash )
+			{
+			name = lastForwardSlash + 1;
+			}
+		else if( !lastForwardSlash )
+			{
+			name = lastBackSlash + 1;
+			}
+		else if( lastForwardSlash > lastBackSlash )
+			{
+			name = lastForwardSlash + 1;
+			}
+		else
+			{
+			name = lastBackSlash + 1;
+			}
+			
+		strncpy( result, name, sizeof( result ) );
+			
+		if( extension )
+			{
+			size_t extlen = strlen( extension );
+			size_t reslen = strlen( result );
+			
+			if( reslen >= extlen )
+				{
+				if( stricmp( result + (reslen - extlen), extension ) == 0 )
+					{
+					result[ reslen - extlen ] = 0;
+					}
+				}
+			
+			}
+		}
 
-    return result;
-    }
+	return result;
+	}
 
 
 char const* dirname( char const* const path )
-    {
-    static char result[ MAX_PATH ];
-    strcpy( result, "" );
+	{
+	static char result[ MAX_PATH ];
+	strcpy( result, "" );
 
-    if( path )
-        {
-        char* lastForwardSlash;
-        char* lastBackSlash;
-        
-        strncpy( result, path, sizeof( result ) );
-        lastForwardSlash = strrchr( result, '/' );
-        lastBackSlash = strrchr( result, '\\' );
-        
-        if( !lastBackSlash && !lastForwardSlash )
-            {
-            result[ 0 ] = 0;
-            }
-        else if( !lastBackSlash )
-            {
-            *(lastForwardSlash + 1) = 0;
-            }
-        else if( !lastForwardSlash )
-            {
-            *(lastBackSlash +1 ) = 0;
-            }
-        else if( lastForwardSlash > lastBackSlash )
-            {
-            *(lastForwardSlash + 1 ) = 0;
-            }
-        else
-            {
-            *(lastBackSlash + 1) = 0;
-            }
-        }
+	if( path )
+		{
+		char* lastForwardSlash;
+		char* lastBackSlash;
+		
+		strncpy( result, path, sizeof( result ) );
+		lastForwardSlash = strrchr( result, '/' );
+		lastBackSlash = strrchr( result, '\\' );
+		
+		if( !lastBackSlash && !lastForwardSlash )
+			{
+			result[ 0 ] = 0;
+			}
+		else if( !lastBackSlash )
+			{
+			*(lastForwardSlash + 1) = 0;
+			}
+		else if( !lastForwardSlash )
+			{
+			*(lastBackSlash +1 ) = 0;
+			}
+		else if( lastForwardSlash > lastBackSlash )
+			{
+			*(lastForwardSlash + 1 ) = 0;
+			}
+		else
+			{
+			*(lastBackSlash + 1) = 0;
+			}
+		}
 
-    return result;
-    }
+	return result;
+	}
 
-    
+	
 char const* extname( char const* const path )
-    {
-    static char result[ MAX_PATH ];
-    strcpy( result, "" );
+	{
+	static char result[ MAX_PATH ];
+	strcpy( result, "" );
 
-    if( path )
-        {
-        char const* lastForwardSlash = strrchr( path, '/' );
-        char const* lastBackSlash = strrchr( path, '\\' );
-        
-        char const* name = 0;
-        char const* ext = 0;
-        
-        if( !lastBackSlash && !lastForwardSlash )
-            {
-            name = path;
-            }
-        else if( !lastBackSlash )
-            {
-            name = lastForwardSlash + 1;
-            }
-        else if( !lastForwardSlash )
-            {
-            name = lastBackSlash + 1;
-            }
-        else if( lastForwardSlash > lastBackSlash )
-            {
-            name = lastForwardSlash + 1;
-            }
-        else
-            {
-            name = lastBackSlash + 1;
-            }
-            
-        ext = strrchr( name, '.' );
-        
-        if( ext && !( ext[ 0 ] == '.' && ext[ 1 ] == 0 ) )
-            {
-            strncpy( result, ext, sizeof( result ) );            
-            }
-        }
+	if( path )
+		{
+		char const* lastForwardSlash = strrchr( path, '/' );
+		char const* lastBackSlash = strrchr( path, '\\' );
+		
+		char const* name = 0;
+		char const* ext = 0;
+		
+		if( !lastBackSlash && !lastForwardSlash )
+			{
+			name = path;
+			}
+		else if( !lastBackSlash )
+			{
+			name = lastForwardSlash + 1;
+			}
+		else if( !lastForwardSlash )
+			{
+			name = lastBackSlash + 1;
+			}
+		else if( lastForwardSlash > lastBackSlash )
+			{
+			name = lastForwardSlash + 1;
+			}
+		else
+			{
+			name = lastBackSlash + 1;
+			}
+			
+		ext = strrchr( name, '.' );
+		
+		if( ext && !( ext[ 0 ] == '.' && ext[ 1 ] == 0 ) )
+			{
+			strncpy( result, ext, sizeof( result ) );            
+			}
+		}
  
-    return result;
-    }  
+	return result;
+	}  
    
 
 char* basename( char* path, char* const extension ) { return (char*) basename( (char const*)path, (char const*)extension ); }
@@ -278,18 +278,18 @@ void replace_extension( char* const output, char const* const filename, char con
 
 
 void mkdir( char const* const path )
-    {
-    #ifdef _WIN32
-        CreateDirectoryA( path, NULL );
+	{
+	#ifdef _WIN32
+		CreateDirectoryA( path, NULL );
 	#else /* _WIN32 */
 		#error unsupported platform
 	#endif
-    }
+	}
 
 
 void rmdir( char const* const path )
 	{
-    #ifdef _WIN32
+	#ifdef _WIN32
 		RemoveDirectoryA( path );
 	#else /* _WIN32 */
 		#error unsupported platform
@@ -298,10 +298,10 @@ void rmdir( char const* const path )
 
 
 static int recursive_create_path( char* const fullpath,  char* const dirname )
-    {
+	{
 	if( dirname )
-        {
-        char* next_dir = strtok( 0, "/\\" ); 
+		{
+		char* next_dir = strtok( 0, "/\\" ); 
 	    dir_t* dir = dir_open( fullpath );
 
 	    if( dir )
@@ -315,9 +315,9 @@ static int recursive_create_path( char* const fullpath,  char* const dirname )
 			    if( stricmp( dir_name( ent ), dirname ) == 0 )
 			        {
 			        if( dir_is_folder( ent ) )
-    			        {
-    			        dir_found = 1;
-    			        break;
+				        {
+				        dir_found = 1;
+				        break;
 			            }
 			        else if( dir_is_file( ent ) )
 			            {
@@ -325,67 +325,67 @@ static int recursive_create_path( char* const fullpath,  char* const dirname )
 			            return 0;
 			            }
 			        }
-                ent = dir_read( dir );
+				ent = dir_read( dir );
 			    }
 
-            dir_close( dir );
+			dir_close( dir );
 		    
-            len = strlen( fullpath );
-            if( len > 0 && fullpath[ len - 1 ] != '\\' && fullpath[ len - 1 ] != '/')
-                {
-                strncat( fullpath, "/", MAX_PATH - strlen( fullpath ) );
-                }
-            strncat( fullpath, dirname, MAX_PATH - strlen( fullpath ) );
+			len = strlen( fullpath );
+			if( len > 0 && fullpath[ len - 1 ] != '\\' && fullpath[ len - 1 ] != '/')
+				{
+				strncat( fullpath, "/", MAX_PATH - strlen( fullpath ) );
+				}
+			strncat( fullpath, dirname, MAX_PATH - strlen( fullpath ) );
 
 		    if( !dir_found )
 		        {
 		        mkdir( fullpath );
 		        }
 
-            if( next_dir )
-                {
-                return recursive_create_path( fullpath, next_dir );
-                }
-            else
-                {
-                return 1;
-                }
+			if( next_dir )
+				{
+				return recursive_create_path( fullpath, next_dir );
+				}
+			else
+				{
+				return 1;
+				}
 
 		    }    
-        }
+		}
 
 	return 0;
-    }
+	}
 
 
 int create_path( char const* const path )
-    {
-    int retval = 0;
-    
-    if( path )
-        {
-        char fullpath[ MAX_PATH ] = "";
-        char str[ MAX_PATH ];
-        strncpy( str, path, MAX_PATH );
-        if( str[1] == ':' )
-            {
-            strncpy( fullpath, str, 3);
-            retval = recursive_create_path( fullpath, strtok( str + 2, "/\\" ) );        
-            }
-        else
-            {
-            strcpy( fullpath, "./" );
-            retval = recursive_create_path( fullpath, strtok( str, "/\\" ) );        
-            }
-        }
-    
-    return retval;
-    }
+	{
+	int retval = 0;
+	
+	if( path )
+		{
+		char fullpath[ MAX_PATH ] = "";
+		char str[ MAX_PATH ];
+		strncpy( str, path, MAX_PATH );
+		if( str[1] == ':' )
+			{
+			strncpy( fullpath, str, 3);
+			retval = recursive_create_path( fullpath, strtok( str + 2, "/\\" ) );        
+			}
+		else
+			{
+			strcpy( fullpath, "./" );
+			retval = recursive_create_path( fullpath, strtok( str, "/\\" ) );        
+			}
+		}
+	
+	return retval;
+	}
 
 
 void copy_file( char const* const source, char const* const destination )
 	{
-    #ifdef _WIN32
+	#ifdef _WIN32
 		CopyFileA( source, destination, FALSE );
 	#else /* _WIN32 */
 		#error unsupported platform
@@ -394,162 +394,162 @@ void copy_file( char const* const source, char const* const destination )
 
 
 size_t file_size( char const* const filename )
-    {
-    if( filename )
-        {
-        struct stat result;
-        int ret;   
-        ret = stat( filename, &result );
-        if( ret  == 0 )
+	{
+	if( filename )
+		{
+		struct stat result;
+		int ret;   
+		ret = stat( filename, &result );
+		if( ret  == 0 )
 	        {
-            return (size_t) result.st_size;
+			return (size_t) result.st_size;
 	        }
-        }
+		}
 	    
-    return 0;	    
-    }
+	return 0;	    
+	}
 
 
 time_t file_last_changed( char const* const filename )
-    {
-    if( filename )
-        {
-        struct stat result;
-        int ret;   
-        ret = stat( filename, &result );
-        if( ret  == 0 )
+	{
+	if( filename )
+		{
+		struct stat result;
+		int ret;   
+		ret = stat( filename, &result );
+		if( ret  == 0 )
 	        {
-            return result.st_mtime;
+			return result.st_mtime;
 	        }
-        }
+		}
 	    
-    return 0;	    
-    }
+	return 0;	    
+	}
 
 
 time_t most_recent_file_modification( char const* const path )
-    {
-    time_t time = 0;
-    
-    if( path )
-        {
-        time = file_last_changed( path );
-        dir_t* dir = dir_open( path );
-        if( dir )
-            {
-            dir_entry_t* ent = dir_read( dir );
-            while( ent )
-                {
-                if( dir_is_file( ent ) )
-                    {
-                    char filename[ MAX_PATH ];
-                    strcat( strcat ( strcpy( filename, path ), "/" ), dir_name( ent ) );
-                    time_t file_time = file_last_changed( filename );
-                    if (file_time > time )
-                        {
-                        time = file_time;
-                        }                    
-                    }
-            
-                ent = dir_read( dir );
-                }
-            dir_close( dir );
-            }
-        }
+	{
+	time_t time = 0;
+	
+	if( path )
+		{
+		time = file_last_changed( path );
+		dir_t* dir = dir_open( path );
+		if( dir )
+			{
+			dir_entry_t* ent = dir_read( dir );
+			while( ent )
+				{
+				if( dir_is_file( ent ) )
+					{
+					char filename[ MAX_PATH ];
+					strcat( strcat ( strcpy( filename, path ), "/" ), dir_name( ent ) );
+					time_t file_time = file_last_changed( filename );
+					if (file_time > time )
+						{
+						time = file_time;
+						}                    
+					}
+			
+				ent = dir_read( dir );
+				}
+			dir_close( dir );
+			}
+		}
 
-    return time;
-    }
-        
+	return time;
+	}
+		
 
 int file_more_recent( char const* const source_path,  char const* const output_path  )
-    {
-    return file_last_changed( source_path ) > file_last_changed( output_path );
-    }
+	{
+	return file_last_changed( source_path ) > file_last_changed( output_path );
+	}
 
 
 int contains_more_recent_file( char const* const source_path,  char const* const output_path )
-    {
-    time_t source_time = 0;
-    time_t output_time = 0; 
-    
-    if( is_folder( source_path ) )
-        {
-        source_time = most_recent_file_modification( source_path );    
-        }
-    else
-        {
-        source_time = file_last_changed( source_path );        
-        }
-    
-    if( is_folder( output_path ) )
-        {
-        output_time = most_recent_file_modification( output_path );    
-        }
-    else
-        {
-        output_time = file_last_changed( output_path );        
-        }
+	{
+	time_t source_time = 0;
+	time_t output_time = 0; 
+	
+	if( is_folder( source_path ) )
+		{
+		source_time = most_recent_file_modification( source_path );    
+		}
+	else
+		{
+		source_time = file_last_changed( source_path );        
+		}
+	
+	if( is_folder( output_path ) )
+		{
+		output_time = most_recent_file_modification( output_path );    
+		}
+	else
+		{
+		output_time = file_last_changed( output_path );        
+		}
 
-    return source_time > output_time;
-    }
+	return source_time > output_time;
+	}
 
 
 int folder_count( char const* const path )
-    {
-    int count = 0;
-    
-    if( path )
-        {
-        dir_t* dir = dir_open( path );
-        if( dir )
-            {
-            dir_entry_t* ent = dir_read( dir );
-            while( ent )
-                {
+	{
+	int count = 0;
+	
+	if( path )
+		{
+		dir_t* dir = dir_open( path );
+		if( dir )
+			{
+			dir_entry_t* ent = dir_read( dir );
+			while( ent )
+				{
 				char const* d_name = dir_name( ent );
 				int namlen = (int) strlen( d_name );
-                if( dir_is_folder( ent ) && namlen > 0 && strcmp( d_name, "." ) != 0 && strcmp( d_name, ".." ) != 0 )
-                    {
-                    count++;
-                    }
-            
-                ent = dir_read( dir );
-                }
-            dir_close( dir );
-            }
-        }
+				if( dir_is_folder( ent ) && namlen > 0 && strcmp( d_name, "." ) != 0 && strcmp( d_name, ".." ) != 0 )
+					{
+					count++;
+					}
+			
+				ent = dir_read( dir );
+				}
+			dir_close( dir );
+			}
+		}
 
-    return count;
-    }
+	return count;
+	}
 
 
 int file_count( char const* const path )
-    {
-    int count = 0;
-    
-    if( path )
-        {
-        dir_t* dir = dir_open( path );
-        if( dir )
-            {
-            dir_entry_t* ent = dir_read( dir );
-            while( ent )
-                {
-                if( dir_is_file( ent ) == 0 )
-                    {
-                    count++;
-                    }
-            
-                ent = dir_read( dir );
-                }
-            dir_close( dir );
-            }
-        }
+	{
+	int count = 0;
+	
+	if( path )
+		{
+		dir_t* dir = dir_open( path );
+		if( dir )
+			{
+			dir_entry_t* ent = dir_read( dir );
+			while( ent )
+				{
+				if( dir_is_file( ent ) == 0 )
+					{
+					count++;
+					}
+			
+				ent = dir_read( dir );
+				}
+			dir_close( dir );
+			}
+		}
 
-    return count;
-    }
-    
-    
+	return count;
+	}
+	
+	
 int folder_exists( char const* const path )
 	{
 	struct stat result;
@@ -579,20 +579,20 @@ int file_exists( char const* const filename )
 
 
 int is_folder( char const* const path )
-    {
-    if( path )
-        {
-        struct stat result;
-        int ret;   
-        ret = stat( path, &result );
-        if( ret  == 0 )
+	{
+	if( path )
+		{
+		struct stat result;
+		int ret;   
+		ret = stat( path, &result );
+		if( ret  == 0 )
 	        {
-            return result.st_mode & S_IFDIR;
+			return result.st_mode & S_IFDIR;
 	        }
-        }
+		}
 	    
-    return false;	    
-    }
+	return false;	    
+	}
 
 
 #endif /* FILE_UTIL_IMPLEMENTATION */

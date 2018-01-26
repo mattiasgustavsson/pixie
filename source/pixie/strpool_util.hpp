@@ -1,6 +1,6 @@
 /*
 ------------------------------------------------------------------------------
-          Licensing information can be found at the end of the file.
+		  Licensing information can be found at the end of the file.
 ------------------------------------------------------------------------------
 
 strpool_util.hpp - v0.1 - utility functions for strpool.
@@ -10,7 +10,7 @@ Do this:
 before you include this file in *one* C++ file to create the implementation.
 
 Dependencies: 
-    strpool.hpp
+	strpool.hpp
 */
 
 #ifndef strpool_util_hpp
@@ -75,7 +75,7 @@ template< typename POOL >  string_type<POOL> format( string_type<POOL> format_st
 
 
 namespace strpool { namespace internal {
-    
+	
 int snprintf( char* s, size_t n, char const* format, ... );
 int toupper( int c );
 int tolower( int c );
@@ -229,48 +229,48 @@ template< typename POOL > int instr( string_type<POOL> const& haystack, string_t
 	}
 
 template< typename POOL > int any( string_type<POOL> const& haystack, char const* needles, int start )
-    {
+	{
 	char const* const str_a = haystack.c_str();
 	char const* const str_b = needles;
 	int const len_a = haystack.length();
-    int const len_b = (int) strlen( needles );
+	int const len_b = (int) strlen( needles );
 
 	if( start < 0 ) start = 0;
 	if( start > len_a ) start = len_a;
-    
-    for( int i = start; i < len_a; ++i )
-        {
-        for( int j = 0; j < len_b; ++j )
-            {
-            if( str_a[ i ] == str_b[ j ] )
-                return i;            
-            }
-        }
+	
+	for( int i = start; i < len_a; ++i )
+		{
+		for( int j = 0; j < len_b; ++j )
+			{
+			if( str_a[ i ] == str_b[ j ] )
+				return i;            
+			}
+		}
 
 	return -1; 
-    }
+	}
 
 template< typename POOL > int any( string_type<POOL> const& haystack, string_type<POOL> const& needles, int start )
-    {
+	{
 	char const* const str_a = haystack.c_str();
 	char const* const str_b = needles.c_str();
 	int const len_a = haystack.length();
-    int const len_b = needles.length();
+	int const len_b = needles.length();
 
 	if( start < 0 ) start = 0;
 	if( start > len_a ) start = len_a;
-    
-    for( int i = start; i < len_a; ++i )
-        {
-        for( int j = 0; j < len_b; ++j )
-            {
-            if( str_a[ i ] == str_b[ j ] )
-                return i;            
-            }
-        }
+	
+	for( int i = start; i < len_a; ++i )
+		{
+		for( int j = 0; j < len_b; ++j )
+			{
+			if( str_a[ i ] == str_b[ j ] )
+				return i;            
+			}
+		}
 
 	return -1; 
-    }
+	}
 
 template< typename POOL > string_type<POOL> upper( string_type<POOL> const& old )
 	{
@@ -401,10 +401,10 @@ char* format( char* (*temp_buffer_func)( int ), char const* format_string, char*
 
 template< typename POOL > string_type<POOL> format( string_type<POOL> format_string, ... )
 	{
-    va_list args;
-    va_start( args, format_string );
+	va_list args;
+	va_start( args, format_string );
 	char* temp = internal::format( internal::temp_buffer<POOL>, format_string.c_str(), args );
-    va_end( args );
+	va_end( args );
 	return temp;
 	}
 
@@ -429,30 +429,30 @@ template< typename POOL > string_type<POOL> format( string_type<POOL> format_str
 #include <stdio.h>
 
 namespace strpool { namespace internal {
-    
+	
 int snprintf( char* s, size_t n, char const* format, ... )
-    {
-    va_list args;
-    va_start( args, format );
-    #ifdef _WIN32
-        int r = _vsnprintf( s, n, format, args );
-    #else
+	{
+	va_list args;
+	va_start( args, format );
+	#ifdef _WIN32
+		int r = _vsnprintf( s, n, format, args );
+	#else
 	    int r = vsnprintf( s, n, format, args );
-    #endif
-    va_end( args );
-    return r;
-    }
+	#endif
+	va_end( args );
+	return r;
+	}
 
 
 char* format( char* (*temp_buffer_func)( int ), char const* format_string, va_list args )
 	{
 	char* temp = temp_buffer_func( 256 );
-    #ifdef _WIN32
-        int size = _vscprintf( format_string, args );
-    #else
+	#ifdef _WIN32
+		int size = _vscprintf( format_string, args );
+	#else
 	    int size = vsnprintf( temp, 0, format_string, args );
-    #endif
-    temp = temp_buffer_func( size + 1 );
+	#endif
+	temp = temp_buffer_func( size + 1 );
 	#ifdef _WIN32
 		_vsnprintf( temp, (size_t) size + 1, format_string, args );
 	#else
@@ -463,20 +463,20 @@ char* format( char* (*temp_buffer_func)( int ), char const* format_string, va_li
 
 
 int toupper( int c )
-    {
-    return ::toupper( c );
-    }
+	{
+	return ::toupper( c );
+	}
 
 
 int tolower( int c )
-    {
-    return ::tolower( c );
-    }
+	{
+	return ::tolower( c );
+	}
 
 char* strtok( char* str, char const* delimiters )
-    {
-    return ::strtok( str, delimiters );
-    }
+	{
+	return ::strtok( str, delimiters );
+	}
 
 float atof( char const* str )
 	{

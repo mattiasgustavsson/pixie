@@ -40,28 +40,28 @@ struct dictionary : array_ns::array_type< entry_t<KEY, T>, CAPACITY, array_ns::N
 		}
 		
 
-    T const* find( KEY const& key ) const
-        {
-        for( int i = 0; i < count(); ++i )
+	T const* find( KEY const& key ) const
+		{
+		for( int i = 0; i < count(); ++i )
 			if( array_ns::array_type<entry_t<KEY, T>, CAPACITY, array_ns::NOT_POD>::operator[]( i ).key == key )
 				return &( array_ns::array_type<entry_t<KEY, T>, CAPACITY, array_ns::NOT_POD>::operator[]( i ).value );
-        }
+		}
 
-    T* find( KEY const& key ) 
-        {
-        for( int i = 0; i < count(); ++i )
+	T* find( KEY const& key ) 
+		{
+		for( int i = 0; i < count(); ++i )
 			if( array_ns::array_type<entry_t<KEY, T>, CAPACITY, array_ns::NOT_POD>::operator[](i).key == key )
 				return &( array_ns::array_type<entry_t<KEY, T>, CAPACITY, array_ns::NOT_POD>::operator[]( i ).value );
 		return 0;
-        }
+		}
 
-    void remove( KEY const& key ) 
-        {
-        for( int i = 0; i < count(); ++i )
+	void remove( KEY const& key ) 
+		{
+		for( int i = 0; i < count(); ++i )
 			if( array_ns::array_type<entry_t<KEY, T>, CAPACITY, array_ns::NOT_POD>::operator[]( i ).key == key )
 				array_ns::array_type<entry_t<KEY, T>, CAPACITY, array_ns::NOT_POD>::remove( i );
-        }
-        
+		}
+		
 		
 	KEY const& key( int index ) const
 		{
@@ -78,9 +78,9 @@ struct dictionary : array_ns::array_type< entry_t<KEY, T>, CAPACITY, array_ns::N
 		return array_ns::array_type<entry_t<KEY, T>, CAPACITY, array_ns::NOT_POD>::operator[]( index ).value;
 		} 
 
-    T& operator[]( KEY const& key )
-        {
-        for( int i = 0; i < count(); ++i )
+	T& operator[]( KEY const& key )
+		{
+		for( int i = 0; i < count(); ++i )
 			if( array_ns::array_type<entry_t<KEY, T>, CAPACITY, array_ns::NOT_POD>::operator[]( i ).key == key )
 				return array_ns::array_type<entry_t<KEY, T>, CAPACITY, array_ns::NOT_POD>::operator[]( i ).value;
 			
@@ -88,9 +88,9 @@ struct dictionary : array_ns::array_type< entry_t<KEY, T>, CAPACITY, array_ns::N
 		entry.key = key;
 		entry.value = T();
 		return entry.value;
-        }
+		}
 
-    };
+	};
 
 #pragma warning( pop ) 
 

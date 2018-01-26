@@ -1,6 +1,6 @@
 /*
 ------------------------------------------------------------------------------
-          Licensing information can be found at the end of the file.
+		  Licensing information can be found at the end of the file.
 ------------------------------------------------------------------------------
 
 graph.hpp - v0.1 - Util lib for basic graphics drawing, for C++.
@@ -16,7 +16,7 @@ template< typename SCREEN_TYPE, typename COLOR_TYPE >
 struct graph
 	{
 	graph();
-    graph( SCREEN_TYPE* scr );
+	graph( SCREEN_TYPE* scr );
 
 	void pset( int x, int y, COLOR_TYPE color );
 	COLOR_TYPE pget( int x, int y );
@@ -35,7 +35,7 @@ struct graph
 	void ellipse( int x, int y, int rx, int ry, COLOR_TYPE color );
 	void ellipse_fill( int x, int y, int rx, int ry, COLOR_TYPE color );
 
-    void polygon( int* points_xy, int count, COLOR_TYPE color );
+	void polygon( int* points_xy, int count, COLOR_TYPE color );
 	template< int MAX_POLYGON_POINTS > void polygon_fill( int* points_xy, int count, COLOR_TYPE color );
 	
 	SCREEN_TYPE* screen;
@@ -103,10 +103,10 @@ template< typename SCREEN_TYPE, typename COLOR_TYPE >
 void graph<SCREEN_TYPE, COLOR_TYPE>::line( int x1, int y1, int x2, int y2, COLOR_TYPE color )
 	{
 	int dx = x2 - x1;
-    dx = dx < 0 ? -dx : dx;
+	dx = dx < 0 ? -dx : dx;
 	int sx = x1 < x2 ? 1 : -1;
 	int dy = y2 - y1;
-    dy = dy < 0 ? -dy : dy;
+	dy = dy < 0 ? -dy : dy;
 	int sy = y1 < y2 ? 1 : -1; 
 	int err = ( dx > dy ? dx : -dy ) / 2;
 	 
@@ -198,11 +198,11 @@ void graph<SCREEN_TYPE, COLOR_TYPE>::circle_fill( int x, int y, int r, COLOR_TYP
 			hline( x - ix, y + iy, 2 * ix, color );
 			hline( x - ix, y - iy, 2 * ix, color );
 
-            --iy;
+			--iy;
 			dy += 2;
 			f += dy;
 			}
-        ++ix;
+		++ix;
 		dx += 2;
 		f += dx + 1;    
 		}

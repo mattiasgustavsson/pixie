@@ -1,12 +1,12 @@
 /*
 ------------------------------------------------------------------------------
-          Licensing information can be found at the end of the file.
+		  Licensing information can be found at the end of the file.
 ------------------------------------------------------------------------------
 
 funccall.hpp - v0.1 - C++ wrapper for delayed function/method calls.
 
 Dependencies: 
-    refcount.hpp
+	refcount.hpp
 */
 
 #ifndef funccall_hpp
@@ -196,7 +196,7 @@ struct func_lambda_call0 : func_call
 	{
 	void operator()() { f(); }
 	void call() { f(); }
-    func_lambda_call0& operator=( func_lambda_call0& ) = delete;
+	func_lambda_call0& operator=( func_lambda_call0& ) = delete;
 	private:
 		friend struct refcount::ref<func_lambda_call0>;
 		func_lambda_call0( F f ) : 
@@ -209,7 +209,7 @@ struct func_lambda_call1 : func_call
 	{
 	void operator()() { f( p0 ); }
 	void call() { f( p0 ); }
-    func_lambda_call1& operator=( func_lambda_call1& ) = delete;
+	func_lambda_call1& operator=( func_lambda_call1& ) = delete;
 	private:
 		friend struct refcount::ref<func_lambda_call1>;
 		func_lambda_call1( F f, P0 p0 ) : 
@@ -223,7 +223,7 @@ struct func_lambda_call2 : func_call
 	{
 	void operator()() { f( p0, p1 ); }
 	void call() { f( p0, p1 ); }
-    func_lambda_call2& operator=( func_lambda_call2& ) = delete;
+	func_lambda_call2& operator=( func_lambda_call2& ) = delete;
 	private:
 		friend struct refcount::ref<func_lambda_call2>;
 		func_lambda_call2( F f, P0 p0, P1 p1 ) : 
@@ -237,7 +237,7 @@ struct func_lambda_call3 : func_call
 	{
 	void operator()() { f( p0, p1, p2 ); }
 	void call() { f( p0, p1, p2 ); }
-    func_lambda_call3& operator=( func_lambda_call3& ) = delete;
+	func_lambda_call3& operator=( func_lambda_call3& ) = delete;
 	private:
 		friend struct refcount::ref<func_lambda_call3>;
 		func_lambda_call3( F f, P0 p0, P1 p1, P2 p2 ) : 
@@ -251,7 +251,7 @@ struct func_lambda_call4 : func_call
 	{
 	void operator()() { f( p0, p1, p2, p3 ); }
 	void call() { f( p0, p1, p2, p3 ); }
-    func_lambda_call4& operator=( func_lambda_call4& ) = delete;
+	func_lambda_call4& operator=( func_lambda_call4& ) = delete;
 	private:
 		friend struct refcount::ref<func_lambda_call4>;
 		func_lambda_call4( F f, P0 p0, P1 p1, P2 p2, P3 p3 ) : 
@@ -265,7 +265,7 @@ struct func_lambda_call5 : func_call
 	{
 	void operator()() { f( p0, p1, p2, p3, p4 ); }
 	void call() { f( p0, p1, p2, p3, p4 ); }
-    func_lambda_call5& operator=( func_lambda_call5& ) = delete;
+	func_lambda_call5& operator=( func_lambda_call5& ) = delete;
 	private:
 		friend struct refcount::ref<func_lambda_call5>;
 		func_lambda_call5( F f, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4 ) : 
@@ -279,7 +279,7 @@ struct func_lambda_call6 : func_call
 	{
 	void operator()() { f( p0, p1, p2, p3, p4, p5 ); }
 	void call() { f( p0, p1, p2, p3, p4, p5 ); }
-    func_lambda_call6& operator=( func_lambda_call6& ) = delete;
+	func_lambda_call6& operator=( func_lambda_call6& ) = delete;
 	private:
 		friend struct refcount::ref<func_lambda_call6>;
 		func_lambda_call6( F f, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5 ) : 
@@ -293,7 +293,7 @@ struct func_lambda_call7 : func_call
 	{
 	void operator()() { f( p0, p1, p2, p3, p4, p5, p6 ); }
 	void call() { f( p0, p1, p2, p3, p4, p5, p6 ); }
-    func_lambda_call7& operator=( func_lambda_call7& ) = delete;
+	func_lambda_call7& operator=( func_lambda_call7& ) = delete;
 	private:
 		friend struct refcount::ref<func_lambda_call7>;
 		func_lambda_call7( F f, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6 ) : 
@@ -307,7 +307,7 @@ struct func_lambda_call8 : func_call
 	{
 	void operator()() { f( p0, p1, p2, p3, p4, p5, p6, p7 ); }
 	void call() { f( p0, p1, p2, p3, p4, p5, p6, p7 ); }
-    func_lambda_call8& operator=( func_lambda_call8& ) = delete;
+	func_lambda_call8& operator=( func_lambda_call8& ) = delete;
 	private:
 		friend struct refcount::ref<func_lambda_call8>;
 		func_lambda_call8( F f, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7 ) : 
@@ -321,7 +321,7 @@ struct func_lambda_call9 : func_call
 	{
 	void operator()() { f( p0, p1, p2, p3, p4, p5, p6, p7, p8 ); }
 	void call() { f( p0, p1, p2, p3, p4, p5, p6, p7, p8 ); }
-    func_lambda_call9& operator=( func_lambda_call9& ) = delete;
+	func_lambda_call9& operator=( func_lambda_call9& ) = delete;
 	private:
 		friend struct refcount::ref<func_lambda_call9>;
 		func_lambda_call9( F f, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8 ) : 
@@ -335,7 +335,7 @@ struct func_lambda_call10 : func_call
 	{
 	void operator()() { f( p0, p1, p2, p3, p4, p5, p6, p7, p8, p9 ); }
 	void call() { f( p0, p1, p2, p3, p4, p5, p6, p7, p8, p9 ); }
-    func_lambda_call10& operator=( func_lambda_call10& ) = delete;
+	func_lambda_call10& operator=( func_lambda_call10& ) = delete;
 	private:
 		friend struct refcount::ref<func_lambda_call10>;
 		func_lambda_call10( F f, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8, P9 p9 ) : 

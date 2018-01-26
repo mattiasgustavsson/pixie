@@ -1,6 +1,6 @@
 /*
 ------------------------------------------------------------------------------
-          Licensing information can be found at the end of the file.
+		  Licensing information can be found at the end of the file.
 ------------------------------------------------------------------------------
 
 cpp_compat.hpp - v0.1 - C++ compatibility workarounds for some systems/compilers.
@@ -83,8 +83,8 @@ Makes available the basic integer types from <stdint.h> for all compilers.
 		struct CPP_COMPAT_CONCAT_MACRO( static_assert_, __COUNTER__ ) \
 			{ int (message) : !!( (expression) ); } 
 #else
-    #define STATIC_ASSERT( expression, message ) \
-        static_assert( expression, #message )
+	#define STATIC_ASSERT( expression, message ) \
+		static_assert( expression, #message )
 #endif
 
 // stdint

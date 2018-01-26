@@ -1,6 +1,6 @@
 /*
 ------------------------------------------------------------------------------
-          Licensing information can be found at the end of the file.
+		  Licensing information can be found at the end of the file.
 ------------------------------------------------------------------------------
 
 math_util.hpp - v0.1 - math helper functions for C++.
@@ -16,11 +16,11 @@ before you include this file in *one* C++ file to create the implementation.
 namespace math_util {
 
 #ifdef max 
-    #undef max
+	#undef max
 #endif
 
 #ifdef min
-    #undef min
+	#undef min
 #endif
 
 template< typename T, typename T1, typename T2 > T max( T1 const& a, T2 const& b );
@@ -115,21 +115,21 @@ template< typename T > void swap( T& a, T& b )
 #pragma warning( pop )
 
 #ifndef MATH_UTIL_ASSERT
-    #undef _CRT_NONSTDC_NO_DEPRECATE 
-    #define _CRT_NONSTDC_NO_DEPRECATE 
-    #undef _CRT_SECURE_NO_WARNINGS
-    #define _CRT_SECURE_NO_WARNINGS
-    #include <assert.h>
-    #define MATH_UTIL_ASSERT( expression, message ) assert( ( expression ) && ( message ) )
+	#undef _CRT_NONSTDC_NO_DEPRECATE 
+	#define _CRT_NONSTDC_NO_DEPRECATE 
+	#undef _CRT_SECURE_NO_WARNINGS
+	#define _CRT_SECURE_NO_WARNINGS
+	#include <assert.h>
+	#define MATH_UTIL_ASSERT( expression, message ) assert( ( expression ) && ( message ) )
 #endif
 
 #if ( defined( _M_IX86_FP ) && ( _M_IX86_FP > 0 ) ) || defined( _M_X64 )
-    #define _CRT_NONSTDC_NO_DEPRECATE 
-    #define _CRT_SECURE_NO_WARNINGS
-    #pragma warning( push )
-    #pragma warning( disable: 4548 ) // expression before comma has no effect; expected expression with side-effect
-    #include <xmmintrin.h>
-    #pragma warning( pop )
+	#define _CRT_NONSTDC_NO_DEPRECATE 
+	#define _CRT_SECURE_NO_WARNINGS
+	#pragma warning( push )
+	#pragma warning( disable: 4548 ) // expression before comma has no effect; expected expression with side-effect
+	#include <xmmintrin.h>
+	#pragma warning( pop )
 #endif
 
 namespace math_util {
@@ -191,16 +191,16 @@ unsigned int pow2_ceil( unsigned int x )
 
 int fast_round( float x )
 	{
-    #if ( defined( _M_IX86_FP ) && ( _M_IX86_FP > 0 ) ) || defined( _M_X64 )
-        __m128 m;
-        m.m128_f32[ 0 ] = x;
-        return _mm_cvtss_si32( m );
-    #else
-        MATH_UTIL_ASSERT( fabs( x )<=0x003fffff, "Only 23 bit values handled" );
-        float f = x + ( 3 << 22 );
-        int i = *(int*)&f;    
-        return ( i & 0x007fffff ) - 0x00400000;
-    #endif
+	#if ( defined( _M_IX86_FP ) && ( _M_IX86_FP > 0 ) ) || defined( _M_X64 )
+		__m128 m;
+		m.m128_f32[ 0 ] = x;
+		return _mm_cvtss_si32( m );
+	#else
+		MATH_UTIL_ASSERT( fabs( x )<=0x003fffff, "Only 23 bit values handled" );
+		float f = x + ( 3 << 22 );
+		int i = *(int*)&f;    
+		return ( i & 0x007fffff ) - 0x00400000;
+	#endif
 	}
 
 

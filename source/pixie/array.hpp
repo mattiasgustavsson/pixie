@@ -1,6 +1,6 @@
 /*
 ------------------------------------------------------------------------------
-          Licensing information can be found at the end of the file.
+		  Licensing information can be found at the end of the file.
 ------------------------------------------------------------------------------
 
 array.hpp - v0.1 - Generic ordered array implementation for C++.
@@ -38,7 +38,7 @@ struct array_type
 	T& insert( int index );
 	void set( int index, T const& item);
 	void remove( int index );
-    void unordered_remove( int index );
+	void unordered_remove( int index );
 	void clear();
 	void resize( int new_count, T const& item );
 	void resize( int new_count );	
@@ -119,11 +119,11 @@ struct array_type
 		T* items_;
 		T* data_large_;
 		
-        #define ARRAY_ALIGNMENT_PADDING( T ) ( ( (size_t)&( ( ( internal::align_helper<T>*) 0 )->y ) ) - 1U )
+		#define ARRAY_ALIGNMENT_PADDING( T ) ( ( (size_t)&( ( ( internal::align_helper<T>*) 0 )->y ) ) - 1U )
 		#define ARRAY_CAPACITY_FIX( x ) ( ( x ) > ( 0 ) ? ( x ) : ( 1 ) )
 		unsigned char data_[ ARRAY_CAPACITY_FIX( CAPACITY * sizeof( T ) + ARRAY_ALIGNMENT_PADDING( T ) ) ];	
 		#undef ARRAY_CAPACITY_FIX
-        #undef ARRAY_ALIGNMENT_PADDING
+		#undef ARRAY_ALIGNMENT_PADDING
 	};
 
 
@@ -134,10 +134,10 @@ struct array_type
 template< typename T, int CAPACITY = 16 > 
 struct array : array_type< T, CAPACITY, NOT_POD >
 	{ 
-    explicit array( int initial_capacity = CAPACITY, void* memctx = 0 ) : array_type<T, CAPACITY, NOT_POD>( initial_capacity, memctx ) {}
+	explicit array( int initial_capacity = CAPACITY, void* memctx = 0 ) : array_type<T, CAPACITY, NOT_POD>( initial_capacity, memctx ) {}
 	template< typename U > array( U const& other ) : array_type<T, CAPACITY, NOT_POD>( other ) {}
 	template< typename U > array( U const* items, int count, void* memctx = 0 ) : array_type<T, CAPACITY, NOT_POD>( items, count, memctx ) {}
-    };
+	};
 
 
 template< typename T, int CAPACITY = 16 > 
@@ -146,7 +146,7 @@ struct pod_array : array_type< T, CAPACITY, IS_POD >
 	explicit pod_array( int initial_capacity = CAPACITY, void* memctx = 0 ) : array_type<T, CAPACITY, IS_POD>( initial_capacity, memctx ) {}
 	template< typename U > pod_array( U const& other ) : array_type<T, CAPACITY, IS_POD>( other ) {}
 	template< typename U > pod_array( U const* items, int count, void* memctx = 0  ) : array_type<T, CAPACITY, IS_POD>( items, count, memctx ) {}
-    };
+	};
 
 #pragma warning( pop ) 
 
@@ -176,24 +176,24 @@ inline void* operator new( size_t, void* p ) throw() { return p; } inline void o
 #define _CRT_SECURE_NO_WARNINGS
 
 #ifndef ARRAY_ASSERT
-    #define _CRT_NONSTDC_NO_DEPRECATE 
-    #define _CRT_SECURE_NO_WARNINGS
-    #include <assert.h>
-    #define ARRAY_ASSERT( expression, message ) assert( ( expression ) && ( message ) )
+	#define _CRT_NONSTDC_NO_DEPRECATE 
+	#define _CRT_SECURE_NO_WARNINGS
+	#include <assert.h>
+	#define ARRAY_ASSERT( expression, message ) assert( ( expression ) && ( message ) )
 #endif
 
 #ifndef ARRAY_MEMSET
-    #define _CRT_NONSTDC_NO_DEPRECATE 
-    #define _CRT_SECURE_NO_WARNINGS
-    #include <string.h>
-    #define ARRAY_MEMSET( ptr, val, cnt ) ( memset( ptr, val, cnt ) )
+	#define _CRT_NONSTDC_NO_DEPRECATE 
+	#define _CRT_SECURE_NO_WARNINGS
+	#include <string.h>
+	#define ARRAY_MEMSET( ptr, val, cnt ) ( memset( ptr, val, cnt ) )
 #endif 
 
 #ifndef ARRAY_MEMCPY
-    #define _CRT_NONSTDC_NO_DEPRECATE 
-    #define _CRT_SECURE_NO_WARNINGS
-    #include <string.h>
-    #define ARRAY_MEMCPY( dst, src, cnt ) ( memcpy( dst, src, cnt ) )
+	#define _CRT_NONSTDC_NO_DEPRECATE 
+	#define _CRT_SECURE_NO_WARNINGS
+	#include <string.h>
+	#define ARRAY_MEMCPY( dst, src, cnt ) ( memcpy( dst, src, cnt ) )
 #endif 
 
 namespace array_ns { namespace internal {
@@ -206,7 +206,7 @@ template< typename T > struct MUST_BE_POD<T, IS_POD >{ MUST_BE_POD() { union T_m
 
 template< typename T > T* aligned_pointer( T* const ptr )
 	{
-    size_t const alignment = ( (size_t)&( ( ( internal::align_helper<T>*) 0 )->y ) );
+	size_t const alignment = ( (size_t)&( ( ( internal::align_helper<T>*) 0 )->y ) );
 	size_t const alignment_bits = alignment - 1U;
 	return (T*) ( ( ( (uintptr_t) ptr ) + alignment_bits ) & ~alignment_bits );
 	}
@@ -371,10 +371,10 @@ void array_type<T, CAPACITY, POD>::ensure_capacity( implementation<IS_POD>, int 
 
 		if( data_large_ )
 			{
-            T* new_large = (T*) internal::array_malloc( memctx_, sizeof( T ) * new_capacity );
-            if( count_ > 0 ) ARRAY_MEMCPY( new_large, data_large_, sizeof( T ) * count_ );
-            internal::array_free( memctx_, data_large_ );
-            data_large_ = new_large;
+			T* new_large = (T*) internal::array_malloc( memctx_, sizeof( T ) * new_capacity );
+			if( count_ > 0 ) ARRAY_MEMCPY( new_large, data_large_, sizeof( T ) * count_ );
+			internal::array_free( memctx_, data_large_ );
+			data_large_ = new_large;
 			}
 		else
 			{
@@ -452,7 +452,7 @@ T& array_type<T, CAPACITY, POD>::add( implementation<NOT_POD> )
 	// set the item
 	T* slot = items_ + count_;
 	#pragma warning( push ) 
-    #pragma warning( disable: 4619 ) // there is no warning number '4345'
+	#pragma warning( disable: 4619 ) // there is no warning number '4345'
 	#pragma warning( disable: 4345 ) // behavior change: an object of POD type constructed with an initializer of the form () will be default-initialized
 	new ( slot ) T(); // Placement new 
 	#pragma warning( pop )
@@ -570,7 +570,7 @@ T& array_type<T, CAPACITY, POD>::insert( implementation<NOT_POD>, int index )
 	slot->~T();
 
 	#pragma warning( push ) 
-    #pragma warning( disable: 4619 ) // there is no warning number '4345'
+	#pragma warning( disable: 4619 ) // there is no warning number '4345'
 	#pragma warning( disable: 4345 ) // behavior change: an object of POD type constructed with an initializer of the form () will be default-initialized
 	new ( slot ) T(); // Placement new
 	#pragma warning( pop )
@@ -665,10 +665,10 @@ void array_type<T, CAPACITY, POD>::unordered_remove( implementation<NOT_POD>, in
 	ARRAY_ASSERT( index < count_, "Index out of range" );
 	if( index >= count_ ) return;
 
-    --count;
+	--count;
 	items_[ index ].~T();
-    new ( items_ + index ) T( items_[ count ] );
-    items_[ count ].~T();		
+	new ( items_ + index ) T( items_[ count ] );
+	items_[ count ].~T();		
 	}
 
 
@@ -681,7 +681,7 @@ void array_type<T, CAPACITY, POD>::unordered_remove( implementation<IS_POD>, int
 	ARRAY_ASSERT( index < count_, "Index out of range" );
 	if( index >= count_ ) return;
 
-    items_[ index ] = items_[ --count_ ];
+	items_[ index ] = items_[ --count_ ];
 	}
 
 
@@ -818,7 +818,7 @@ void array_type<T, CAPACITY, POD>::resize( implementation<NOT_POD>, int new_coun
 
 	// Initialize new items
 	#pragma warning( push ) 
-    #pragma warning( disable: 4619 ) // there is no warning number '4345'
+	#pragma warning( disable: 4619 ) // there is no warning number '4345'
 	#pragma warning( disable: 4345 ) // behavior change: an object of POD type constructed with an initializer of the form () will be default-initialized
 
 	for( int i = count_; i < new_count; ++i )
@@ -1014,8 +1014,8 @@ void array_type<T, CAPACITY, POD>::init( implementation<IS_POD>, T const* items,
 #undef ARRAY_IMPLEMENTATION
 
 #ifndef ARRAY_MALLOC
-    #define _CRT_NONSTDC_NO_DEPRECATE 
-    #define _CRT_SECURE_NO_WARNINGS
+	#define _CRT_NONSTDC_NO_DEPRECATE 
+	#define _CRT_SECURE_NO_WARNINGS
 	#include <stdlib.h>
 	#define ARRAY_MALLOC( ctx, size ) ( ::malloc( size ) )
 	#define ARRAY_FREE( ctx, ptr ) ( ::free( ptr ) )

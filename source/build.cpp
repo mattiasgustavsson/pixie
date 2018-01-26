@@ -24,16 +24,16 @@
 #include "pixie/pixie_build.hpp"
 
 int main( int argc, char** argv )
-    {
+	{
 	(void) argc, argv;
-    #ifndef NDEBUG
-        int flag = _CrtSetDbgFlag( _CRTDBG_REPORT_FLAG ); // Get current flag
-        flag ^= _CRTDBG_LEAK_CHECK_DF; // Turn on leak-checking bit
-        _CrtSetDbgFlag( flag ); // Set flag to the new value
+	#ifndef NDEBUG
+		int flag = _CrtSetDbgFlag( _CRTDBG_REPORT_FLAG ); // Get current flag
+		flag ^= _CRTDBG_LEAK_CHECK_DF; // Turn on leak-checking bit
+		_CrtSetDbgFlag( flag ); // Set flag to the new value
 //        _CrtSetBreakAlloc( 0 );
-    #endif
-    
-    // run asset builder on commandline switches -build, -rebuild, clean
+	#endif
+	
+	// run asset builder on commandline switches -build, -rebuild, clean
 	pixie_build::build_action build = pixie_build::BUILD_ACTION_UNDEFINED;
 	for( int i = 1; i < argc; ++i ) 
 		{
@@ -54,7 +54,7 @@ int main( int argc, char** argv )
 		return pixie_build::build( build, "../source_data", "../.build_temp/data", "data", 
 			compiler_list, sizeof( compiler_list ) / sizeof( *compiler_list ) );
 		}
-    }
+	}
 
 extern "C" int __stdcall WinMain( struct HINSTANCE__*, struct HINSTANCE__*, char*, int ) { return main( __argc, __argv ); }
 

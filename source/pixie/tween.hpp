@@ -1,14 +1,14 @@
 /*
 ------------------------------------------------------------------------------
-          Licensing information can be found at the end of the file.
+		  Licensing information can be found at the end of the file.
 ------------------------------------------------------------------------------
 
 tween.hpp - v0.1 - Generic interpolation library for C++.
 
 Dependencies: 
-    handles.h
-    funccall.hpp
-    refcount.hpp
+	handles.h
+	funccall.hpp
+	refcount.hpp
 */
 
 #ifndef tween_hpp
@@ -20,7 +20,7 @@ Dependencies:
 namespace tween {
 
 #ifndef TWEEN_U64
-    #define TWEEN_U64 unsigned long long 
+	#define TWEEN_U64 unsigned long long 
 #endif
 
 namespace internal { struct system_t; }
@@ -55,9 +55,9 @@ template< typename T > struct property
 
 struct tweener
 	{
-    tweener();
+	tweener();
 
-    bool completed() const;
+	bool completed() const;
 
 	template< typename T > 
 	tweener property( tween::property<T>* prop, T const& target, T (*lerp_func)( T, T, float ) = 0 );
@@ -69,7 +69,7 @@ struct tweener
 
 	typedef float (*ease_func_t)( float );
 	tweener ease( ease_func_t ease_func );
-    tweener repeat( int times = -1 );
+	tweener repeat( int times = -1 );
 	tweener pingpong( bool value = true );
 	tweener reverse( bool value = true );
 	
@@ -78,108 +78,108 @@ struct tweener
 	tweener on_update( refcount::ref<funccall::func_call> const& handler );
 
 
-    template<typename F > 
-    tweener on_complete( F handler );
+	template<typename F > 
+	tweener on_complete( F handler );
 
-    template<typename F, typename P0 > 
-    tweener on_complete( F handler, P0 p0 );
+	template<typename F, typename P0 > 
+	tweener on_complete( F handler, P0 p0 );
 
-    template<typename F, typename P0, typename P1 > 
-    tweener on_complete( F handler, P0 p0, P1 p1 );
+	template<typename F, typename P0, typename P1 > 
+	tweener on_complete( F handler, P0 p0, P1 p1 );
 
-    template<typename F, typename P0, typename P1, typename P2 > 
-    tweener on_complete( F handler, P0 p0, P1 p1, P2 p2 );
+	template<typename F, typename P0, typename P1, typename P2 > 
+	tweener on_complete( F handler, P0 p0, P1 p1, P2 p2 );
 
-    template<typename F, typename P0, typename P1, typename P2, typename P3 > 
-    tweener on_complete( F handler, P0 p0, P1 p1, P2 p2, P3 p3 );
+	template<typename F, typename P0, typename P1, typename P2, typename P3 > 
+	tweener on_complete( F handler, P0 p0, P1 p1, P2 p2, P3 p3 );
 
-    template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4 > 
-    tweener on_complete( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4 );
+	template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4 > 
+	tweener on_complete( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4 );
 
-    template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5 > 
-    tweener on_complete( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5 );
+	template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5 > 
+	tweener on_complete( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5 );
 
-    template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6 > 
-    tweener on_complete( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6 );
+	template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6 > 
+	tweener on_complete( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6 );
 
-    template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7 > 
-    tweener on_complete( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7 );
+	template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7 > 
+	tweener on_complete( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7 );
 
-    template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7, typename P8 > 
-    tweener on_complete( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8 );
+	template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7, typename P8 > 
+	tweener on_complete( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8 );
 
-    template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7, typename P8, typename P9 > 
-    tweener on_complete( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8, P9 p9 );
-
-
-    template<typename F > 
-    tweener on_repeat( F handler );
-
-    template<typename F, typename P0 > 
-    tweener on_repeat( F handler, P0 p0 );
-
-    template<typename F, typename P0, typename P1 > 
-    tweener on_repeat( F handler, P0 p0, P1 p1 );
-
-    template<typename F, typename P0, typename P1, typename P2 > 
-    tweener on_repeat( F handler, P0 p0, P1 p1, P2 p2 );
-
-    template<typename F, typename P0, typename P1, typename P2, typename P3 > 
-    tweener on_repeat( F handler, P0 p0, P1 p1, P2 p2, P3 p3 );
-
-    template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4 > 
-    tweener on_repeat( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4 );
-
-    template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5 > 
-    tweener on_repeat( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5 );
-
-    template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6 > 
-    tweener on_repeat( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6 );
-
-    template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7 > 
-    tweener on_repeat( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7 );
-
-    template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7, typename P8 > 
-    tweener on_repeat( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8 );
-
-    template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7, typename P8, typename P9 > 
-    tweener on_repeat( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8, P9 p9 );
+	template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7, typename P8, typename P9 > 
+	tweener on_complete( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8, P9 p9 );
 
 
-    template<typename F > 
-    tweener on_update( F handler );
+	template<typename F > 
+	tweener on_repeat( F handler );
 
-    template<typename F, typename P0 > 
-    tweener on_update( F handler, P0 p0 );
+	template<typename F, typename P0 > 
+	tweener on_repeat( F handler, P0 p0 );
 
-    template<typename F, typename P0, typename P1 > 
-    tweener on_update( F handler, P0 p0, P1 p1 );
+	template<typename F, typename P0, typename P1 > 
+	tweener on_repeat( F handler, P0 p0, P1 p1 );
 
-    template<typename F, typename P0, typename P1, typename P2 > 
-    tweener on_update( F handler, P0 p0, P1 p1, P2 p2 );
+	template<typename F, typename P0, typename P1, typename P2 > 
+	tweener on_repeat( F handler, P0 p0, P1 p1, P2 p2 );
 
-    template<typename F, typename P0, typename P1, typename P2, typename P3 > 
-    tweener on_update( F handler, P0 p0, P1 p1, P2 p2, P3 p3 );
+	template<typename F, typename P0, typename P1, typename P2, typename P3 > 
+	tweener on_repeat( F handler, P0 p0, P1 p1, P2 p2, P3 p3 );
 
-    template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4 > 
-    tweener on_update( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4 );
+	template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4 > 
+	tweener on_repeat( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4 );
 
-    template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5 > 
-    tweener on_update( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5 );
+	template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5 > 
+	tweener on_repeat( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5 );
 
-    template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6 > 
-    tweener on_update( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6 );
+	template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6 > 
+	tweener on_repeat( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6 );
 
-    template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7 > 
-    tweener on_update( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7 );
+	template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7 > 
+	tweener on_repeat( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7 );
 
-    template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7, typename P8 > 
-    tweener on_update( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8 );
+	template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7, typename P8 > 
+	tweener on_repeat( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8 );
 
-    template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7, typename P8, typename P9 > 
-    tweener on_update( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8, P9 p9 );
+	template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7, typename P8, typename P9 > 
+	tweener on_repeat( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8, P9 p9 );
 
-    private:
+
+	template<typename F > 
+	tweener on_update( F handler );
+
+	template<typename F, typename P0 > 
+	tweener on_update( F handler, P0 p0 );
+
+	template<typename F, typename P0, typename P1 > 
+	tweener on_update( F handler, P0 p0, P1 p1 );
+
+	template<typename F, typename P0, typename P1, typename P2 > 
+	tweener on_update( F handler, P0 p0, P1 p1, P2 p2 );
+
+	template<typename F, typename P0, typename P1, typename P2, typename P3 > 
+	tweener on_update( F handler, P0 p0, P1 p1, P2 p2, P3 p3 );
+
+	template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4 > 
+	tweener on_update( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4 );
+
+	template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5 > 
+	tweener on_update( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5 );
+
+	template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6 > 
+	tweener on_update( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6 );
+
+	template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7 > 
+	tweener on_update( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7 );
+
+	template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7, typename P8 > 
+	tweener on_update( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8 );
+
+	template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7, typename P8, typename P9 > 
+	tweener on_update( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8, P9 p9 );
+
+	private:
 		friend tweener tween_system::tween( float );
 		tweener( internal::system_t* system, float duration );
 
@@ -481,204 +481,204 @@ template< typename T > tweener tweener::property( refcount::ref< tween::property
 
 template<typename F > 
 tweener tweener::on_complete( F handler )
-    {
-    return on_complete( funccall::make_func_call( handler ) );
-    }
+	{
+	return on_complete( funccall::make_func_call( handler ) );
+	}
 
 template<typename F, typename P0 > 
 tweener tweener::on_complete( F handler, P0 p0 )
-    {
-    return on_complete( funccall::make_func_call( handler, p0 ) );
-    }
+	{
+	return on_complete( funccall::make_func_call( handler, p0 ) );
+	}
 
 template<typename F, typename P0, typename P1 > 
 tweener tweener::on_complete( F handler, P0 p0, P1 p1 )
-    {
-    return on_complete( funccall::make_func_call( handler, p0, p1 ) );
-    }
+	{
+	return on_complete( funccall::make_func_call( handler, p0, p1 ) );
+	}
 
 template<typename F, typename P0, typename P1, typename P2 > 
 tweener tweener::on_complete( F handler, P0 p0, P1 p1, P2 p2 )
-    {
-    return on_complete( funccall::make_func_call( handler, p0, p1, p2 ) );
-    }
+	{
+	return on_complete( funccall::make_func_call( handler, p0, p1, p2 ) );
+	}
 
 template<typename F, typename P0, typename P1, typename P2, typename P3 > 
 tweener tweener::on_complete( F handler, P0 p0, P1 p1, P2 p2, P3 p3 )
-    {
-    return on_complete( funccall::make_func_call( handler, p0, p1, p2, p3 ) );
-    }
+	{
+	return on_complete( funccall::make_func_call( handler, p0, p1, p2, p3 ) );
+	}
 
 template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4 > 
 tweener tweener::on_complete( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4 )
-    {
-    return on_complete( funccall::make_func_call( handler, p0, p1, p2, p3, p4 ) );
-    }
+	{
+	return on_complete( funccall::make_func_call( handler, p0, p1, p2, p3, p4 ) );
+	}
 
 template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5 > 
 tweener tweener::on_complete( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5 )
-    {
-    return on_complete( funccall::make_func_call( handler, p0, p1, p2, p3, p4, p5 ) );
-    }
+	{
+	return on_complete( funccall::make_func_call( handler, p0, p1, p2, p3, p4, p5 ) );
+	}
 
 template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6 > 
 tweener tweener::on_complete( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6 )
-    {
-    return on_complete( funccall::make_func_call( handler, p0, p1, p2, p3, p4, p5, p6 ) );
-    }
+	{
+	return on_complete( funccall::make_func_call( handler, p0, p1, p2, p3, p4, p5, p6 ) );
+	}
 
 template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7 > 
 tweener tweener::on_complete( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7 )
-    {
-    return on_complete( funccall::make_func_call( handler, p0, p1, p2, p3, p4, p5, p6, p7 ) );
-    }
+	{
+	return on_complete( funccall::make_func_call( handler, p0, p1, p2, p3, p4, p5, p6, p7 ) );
+	}
 
 template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7, typename P8 > 
 tweener tweener::on_complete( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8 )
-    {
-    return on_complete( funccall::make_func_call( handler, p0, p1, p2, p3, p4, p5, p6, p7, p8 ) );
-    }
+	{
+	return on_complete( funccall::make_func_call( handler, p0, p1, p2, p3, p4, p5, p6, p7, p8 ) );
+	}
 
 template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7, typename P8, typename P9 > 
 tweener tweener::on_complete( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8, P9 p9 )
-    {
-    return on_complete( funccall::make_func_call( handler, p0, p1, p2, p3, p4, p5, p6, p7, p8, p9 ) );
-    }
+	{
+	return on_complete( funccall::make_func_call( handler, p0, p1, p2, p3, p4, p5, p6, p7, p8, p9 ) );
+	}
 
 
 
 template<typename F > 
 tweener tweener::on_repeat( F handler )
-    {
-    return on_repeat( funccall::make_func_call( handler ) );
-    }
+	{
+	return on_repeat( funccall::make_func_call( handler ) );
+	}
 
 template<typename F, typename P0 > 
 tweener tweener::on_repeat( F handler, P0 p0 )
-    {
-    return on_repeat( funccall::make_func_call( handler, p0 ) );
-    }
+	{
+	return on_repeat( funccall::make_func_call( handler, p0 ) );
+	}
 
 template<typename F, typename P0, typename P1 > 
 tweener tweener::on_repeat( F handler, P0 p0, P1 p1 )
-    {
-    return on_repeat( funccall::make_func_call( handler, p0, p1 ) );
-    }
+	{
+	return on_repeat( funccall::make_func_call( handler, p0, p1 ) );
+	}
 
 template<typename F, typename P0, typename P1, typename P2 > 
 tweener tweener::on_repeat( F handler, P0 p0, P1 p1, P2 p2 )
-    {
-    return on_repeat( funccall::make_func_call( handler, p0, p1, p2 ) );
-    }
+	{
+	return on_repeat( funccall::make_func_call( handler, p0, p1, p2 ) );
+	}
 
 template<typename F, typename P0, typename P1, typename P2, typename P3 > 
 tweener tweener::on_repeat( F handler, P0 p0, P1 p1, P2 p2, P3 p3 )
-    {
-    return on_repeat( funccall::make_func_call( handler, p0, p1, p2, p3 ) );
-    }
+	{
+	return on_repeat( funccall::make_func_call( handler, p0, p1, p2, p3 ) );
+	}
 
 template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4 > 
 tweener tweener::on_repeat( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4 )
-    {
-    return on_repeat( funccall::make_func_call( handler, p0, p1, p2, p3, p4 ) );
-    }
+	{
+	return on_repeat( funccall::make_func_call( handler, p0, p1, p2, p3, p4 ) );
+	}
 
 template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5 > 
 tweener tweener::on_repeat( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5 )
-    {
-    return on_repeat( funccall::make_func_call( handler, p0, p1, p2, p3, p4, p5 ) );
-    }
+	{
+	return on_repeat( funccall::make_func_call( handler, p0, p1, p2, p3, p4, p5 ) );
+	}
 
 template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6 > 
 tweener tweener::on_repeat( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6 )
-    {
-    return on_repeat( funccall::make_func_call( handler, p0, p1, p2, p3, p4, p5, p6 ) );
-    }
+	{
+	return on_repeat( funccall::make_func_call( handler, p0, p1, p2, p3, p4, p5, p6 ) );
+	}
 
 template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7 > 
 tweener tweener::on_repeat( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7 )
-    {
-    return on_repeat( funccall::make_func_call( handler, p0, p1, p2, p3, p4, p5, p6, p7 ) );
-    }
+	{
+	return on_repeat( funccall::make_func_call( handler, p0, p1, p2, p3, p4, p5, p6, p7 ) );
+	}
 
 template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7, typename P8 > 
 tweener tweener::on_repeat( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8 )
-    {
-    return on_repeat( funccall::make_func_call( handler, p0, p1, p2, p3, p4, p5, p6, p7, p8 ) );
-    }
+	{
+	return on_repeat( funccall::make_func_call( handler, p0, p1, p2, p3, p4, p5, p6, p7, p8 ) );
+	}
 
 template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7, typename P8, typename P9 > 
 tweener tweener::on_repeat( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8, P9 p9 )
-    {
-    return on_repeat( funccall::make_func_call( handler, p0, p1, p2, p3, p4, p5, p6, p7, p8, p9 ) );
-    }
+	{
+	return on_repeat( funccall::make_func_call( handler, p0, p1, p2, p3, p4, p5, p6, p7, p8, p9 ) );
+	}
 
 
 template<typename F > 
 tweener tweener::on_update( F handler )
-    {
-    return on_update( funccall::make_func_call( handler ) );
-    }
+	{
+	return on_update( funccall::make_func_call( handler ) );
+	}
 
 template<typename F, typename P0 > 
 tweener tweener::on_update( F handler, P0 p0 )
-    {
-    return on_update( funccall::make_func_call( handler, p0 ) );
-    }
+	{
+	return on_update( funccall::make_func_call( handler, p0 ) );
+	}
 
 template<typename F, typename P0, typename P1 > 
 tweener tweener::on_update( F handler, P0 p0, P1 p1 )
-    {
-    return on_update( funccall::make_func_call( handler, p0, p1 ) );
-    }
+	{
+	return on_update( funccall::make_func_call( handler, p0, p1 ) );
+	}
 
 template<typename F, typename P0, typename P1, typename P2 > 
 tweener tweener::on_update( F handler, P0 p0, P1 p1, P2 p2 )
-    {
-    return on_update( funccall::make_func_call( handler, p0, p1, p2 ) );
-    }
+	{
+	return on_update( funccall::make_func_call( handler, p0, p1, p2 ) );
+	}
 
 template<typename F, typename P0, typename P1, typename P2, typename P3 > 
 tweener tweener::on_update( F handler, P0 p0, P1 p1, P2 p2, P3 p3 )
-    {
-    return on_update( funccall::make_func_call( handler, p0, p1, p2, p3 ) );
-    }
+	{
+	return on_update( funccall::make_func_call( handler, p0, p1, p2, p3 ) );
+	}
 
 template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4 > 
 tweener tweener::on_update( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4 )
-    {
-    return on_update( funccall::make_func_call( handler, p0, p1, p2, p3, p4 ) );
-    }
+	{
+	return on_update( funccall::make_func_call( handler, p0, p1, p2, p3, p4 ) );
+	}
 
 template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5 > 
 tweener tweener::on_update( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5 )
-    {
-    return on_update( funccall::make_func_call( handler, p0, p1, p2, p3, p4, p5 ) );
-    }
+	{
+	return on_update( funccall::make_func_call( handler, p0, p1, p2, p3, p4, p5 ) );
+	}
 
 template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6 > 
 tweener tweener::on_update( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6 )
-    {
-    return on_update( funccall::make_func_call( handler, p0, p1, p2, p3, p4, p5, p6 ) );
-    }
+	{
+	return on_update( funccall::make_func_call( handler, p0, p1, p2, p3, p4, p5, p6 ) );
+	}
 
 template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7 > 
 tweener tweener::on_update( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7 )
-    {
-    return on_update( funccall::make_func_call( handler, p0, p1, p2, p3, p4, p5, p6, p7 ) );
-    }
+	{
+	return on_update( funccall::make_func_call( handler, p0, p1, p2, p3, p4, p5, p6, p7 ) );
+	}
 
 template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7, typename P8 > 
 tweener tweener::on_update( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8 )
-    {
-    return on_update( funccall::make_func_call( handler, p0, p1, p2, p3, p4, p5, p6, p7, p8 ) );
-    }
+	{
+	return on_update( funccall::make_func_call( handler, p0, p1, p2, p3, p4, p5, p6, p7, p8 ) );
+	}
 
 template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7, typename P8, typename P9 > 
 tweener tweener::on_update( F handler, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8, P9 p9 )
-    {
-    return on_update( funccall::make_func_call( handler, p0, p1, p2, p3, p4, p5, p6, p7, p8, p9 ) );
-    }
+	{
+	return on_update( funccall::make_func_call( handler, p0, p1, p2, p3, p4, p5, p6, p7, p8, p9 ) );
+	}
 
 template< typename T > refcount::ref< property<T> > make_property( T* variable )
 	{
@@ -754,8 +754,8 @@ template< typename T, typename U > refcount::ref< property<T> > make_property( r
 #undef TWEEN_IMPLEMENTATION
 
 #ifndef TWEEN_MALLOC
-    #define _CRT_NONSTDC_NO_DEPRECATE 
-    #define _CRT_SECURE_NO_WARNINGS
+	#define _CRT_NONSTDC_NO_DEPRECATE 
+	#define _CRT_SECURE_NO_WARNINGS
 	#include <stdlib.h>
 	#define TWEEN_MALLOC( ctx, size ) ( (void)ctx,::malloc( size ) )
 	#define TWEEN_FREE( ctx, ptr ) ( (void)ctx,::free( ptr ) )
@@ -790,7 +790,7 @@ struct instance_t
 	
 struct system_t
 	{
-    void* memctx;
+	void* memctx;
 	handles_t handles;
 	
 	instance_t* instances;
@@ -834,10 +834,10 @@ static TWEEN_U64 reg( system_t* system )
 	if( system->instances_count >= system->instances_capacity )
 		{
 		system->instances_capacity *= 2;
-        instance_t* new_instances = (instance_t*) TWEEN_MALLOC( system->memctx, system->instances_capacity * sizeof( instance_t ) );
-        memcpy( new_instances, system->instances, system->instances_count * sizeof( instance_t ) );
-        TWEEN_FREE( system->memctx, system->instances );
-        system->instances = new_instances;
+		instance_t* new_instances = (instance_t*) TWEEN_MALLOC( system->memctx, system->instances_capacity * sizeof( instance_t ) );
+		memcpy( new_instances, system->instances, system->instances_count * sizeof( instance_t ) );
+		TWEEN_FREE( system->memctx, system->instances );
+		system->instances = new_instances;
 		}
 	int index = system->instances_count++;
 	TWEEN_U64 handle = handles_to_u64( &system->handles, handles_alloc( &system->handles, index ) );
@@ -893,17 +893,17 @@ void add_interpolator( struct system_t* system, TWEEN_U64 const handle, refcount
 		{
 		instance->interpolators_capacity *= 2;
 		if( instance->interpolators_large )
-            {
-            refcount::ref<interpolator>* new_large = (refcount::ref<interpolator>*) TWEEN_MALLOC( system->memctx, instance->interpolators_capacity * sizeof( refcount::ref<interpolator> ) );
-            memcpy( new_large, instance->interpolators_large, instance->interpolators_count * sizeof( refcount::ref<interpolator> ) );
-            TWEEN_FREE( system->memctx, instance->interpolators_large );
-            instance->interpolators_large = new_large;
-            }
+			{
+			refcount::ref<interpolator>* new_large = (refcount::ref<interpolator>*) TWEEN_MALLOC( system->memctx, instance->interpolators_capacity * sizeof( refcount::ref<interpolator> ) );
+			memcpy( new_large, instance->interpolators_large, instance->interpolators_count * sizeof( refcount::ref<interpolator> ) );
+			TWEEN_FREE( system->memctx, instance->interpolators_large );
+			instance->interpolators_large = new_large;
+			}
 		else
-            {
+			{
 			instance->interpolators_large = (refcount::ref<interpolator>*) TWEEN_MALLOC( system->memctx, instance->interpolators_capacity * sizeof( refcount::ref<interpolator> ) );
-            memcpy( instance->interpolators_large, instance->interpolators, instance->interpolators_count * sizeof( refcount::ref<interpolator> ) );
-            }
+			memcpy( instance->interpolators_large, instance->interpolators, instance->interpolators_count * sizeof( refcount::ref<interpolator> ) );
+			}
 		}
 
 	refcount::ref<interpolator>* interpolators = instance->interpolators_large ? instance->interpolators_large : instance->interpolators;
@@ -912,11 +912,11 @@ void add_interpolator( struct system_t* system, TWEEN_U64 const handle, refcount
 
 
 static bool completed( system_t* system, TWEEN_U64 handle )
-    {
+	{
 	int index = handles_index( &system->handles, handles_from_u64( &system->handles, handle ) );
-    if( index < 0 ) return true;
+	if( index < 0 ) return true;
 	return system->instances[ index ].done;
-    }
+	}
 
 
 static void duration_set( system_t* system, TWEEN_U64 handle, float duration )
@@ -997,7 +997,7 @@ namespace tween {
 tween_system::tween_system( void* memctx )
 	{
 	internals_ = (internal::system_t*) TWEEN_MALLOC( memctx, sizeof( internal::system_t ) );
-    internals_->memctx = memctx;
+	internals_->memctx = memctx;
 	internals_->instances_count = 0;
 	internals_->instances_capacity = 256;
 	internals_->instances = (internal::instance_t*) TWEEN_MALLOC( internals_->memctx, internals_->instances_capacity * sizeof( internal::instance_t ) );
@@ -1093,21 +1093,21 @@ void tween_system::stop_all()
 
 
 tweener::tweener():
-    system_( 0 )
-    {
-    }
+	system_( 0 )
+	{
+	}
 
 
 bool tweener::completed() const
-    {
-    if( !system_ ) return true;
-    return internal::completed( system_, instance_->handle );
-    }
+	{
+	if( !system_ ) return true;
+	return internal::completed( system_, instance_->handle );
+	}
 
 
 tweener tweener::delay( float const duration ) 
 	{ 
-    if( !system_ ) return *this;
+	if( !system_ ) return *this;
 	internal::delay_set( system_, instance_->handle, duration );
 	return *this; 
 	}
@@ -1115,7 +1115,7 @@ tweener tweener::delay( float const duration )
 
 tweener tweener::ease( ease_func_t const ease_func ) 
 	{ 
-    if( !system_ ) return *this;
+	if( !system_ ) return *this;
 	internal::ease_set( system_, instance_->handle, ease_func );
 	return *this; 
 	}
@@ -1123,7 +1123,7 @@ tweener tweener::ease( ease_func_t const ease_func )
 
 tweener tweener::repeat( int const times ) 
 	{ 
-    if( !system_ ) return *this;
+	if( !system_ ) return *this;
 	internal::repeat_set( system_, instance_->handle, times );
 	return *this; 
 	}
@@ -1131,7 +1131,7 @@ tweener tweener::repeat( int const times )
 
 tweener tweener::pingpong( bool const value ) 
 	{ 
-    if( !system_ ) return *this;
+	if( !system_ ) return *this;
 	internal::pingpong_set( system_, instance_->handle, value );
 	return *this; 
 	}
@@ -1139,15 +1139,15 @@ tweener tweener::pingpong( bool const value )
 
 tweener tweener::reverse( bool const value ) 
 	{ 
-    if( !system_ ) return *this;
-    internal::reverse_set( system_, instance_->handle, value );
+	if( !system_ ) return *this;
+	internal::reverse_set( system_, instance_->handle, value );
 	return *this; 
 	}
 
 
 tweener tweener::on_complete( refcount::ref<funccall::func_call> const& handler ) 
 	{ 
-    if( !system_ ) return *this;
+	if( !system_ ) return *this;
 	internal::on_complete_set( system_, instance_->handle, handler );
 	return *this; 
 	}
@@ -1155,7 +1155,7 @@ tweener tweener::on_complete( refcount::ref<funccall::func_call> const& handler 
 
 tweener tweener::on_repeat( refcount::ref<funccall::func_call> const& handler ) 
 	{ 
-    if( !system_ ) return *this;
+	if( !system_ ) return *this;
 	internal::on_repeat_set( system_, instance_->handle, handler );
 	return *this; 
 	}
@@ -1163,7 +1163,7 @@ tweener tweener::on_repeat( refcount::ref<funccall::func_call> const& handler )
 
 tweener tweener::on_update( refcount::ref<funccall::func_call> const& handler ) 
 	{ 
-    if( !system_ ) return *this;
+	if( !system_ ) return *this;
 	internal::on_update_set( system_, instance_->handle, handler );
 	return *this; 
 	}
@@ -1175,13 +1175,13 @@ tweener::tweener( internal::system_t* system, float const duration ) :
 	instance_ = refcount::ref<instance>::make_new();
 	instance_->handle = reg( system_ );
 	instance_->system = system_;
-    internal::duration_set( system_, instance_->handle, duration );
+	internal::duration_set( system_, instance_->handle, duration );
 	}
 
 
 tweener::instance::~instance()
 	{
-    if( !system ) internal::unregister( system, handle );
+	if( !system ) internal::unregister( system, handle );
 	}
 
 

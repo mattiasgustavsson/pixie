@@ -1,6 +1,6 @@
 /*
 ------------------------------------------------------------------------------
-          Licensing information can be found at the end of the file.
+		  Licensing information can be found at the end of the file.
 ------------------------------------------------------------------------------
 
 sort.hpp - v1.0 - High quality sort function for C++. 
@@ -40,19 +40,19 @@ template< typename T, int (*COMPARE_FUNC)( T const&, T const& ) > void sort( T* 
 Example
 =======
 
-    #include "sort.hpp"
-    using namespace sort_ns;
+	#include "sort.hpp"
+	using namespace sort_ns;
 
-    int main( int argc, char** argv )
-        {
-        (void) argc, argv;
-        
-        int values[ 10 ] = { 7, 6, 3, 9, 5, 4, 8, 2, 0, 1 };
-        sort( values, 10 );
-        for( int i = 0; i < 10; ++i ) printf( "%d ", values[ i ] );
-        return 0;
-        }
-    
+	int main( int argc, char** argv )
+		{
+		(void) argc, argv;
+		
+		int values[ 10 ] = { 7, 6, 3, 9, 5, 4, 8, 2, 0, 1 };
+		sort( values, 10 );
+		for( int i = 0; i < 10; ++i ) printf( "%d ", values[ i ] );
+		return 0;
+		}
+	
 
 
 
@@ -62,8 +62,8 @@ API Documentation
 sort
 ----
 
-    template< typename T > void sort( T* array, int count );
-    template< typename T, int (*COMPARE_FUNC)( T const&, T const& ) > void sort( T* array, int count );
+	template< typename T > void sort( T* array, int count );
+	template< typename T, int (*COMPARE_FUNC)( T const&, T const& ) > void sort( T* array, int count );
 
 Sorts the given array, containing `count` items. `COMPARE_FUNC` is a custom compare function, used to compare two 
 elements for sorting. It must return a negative integer value if the first argument is less than the second, 
@@ -85,92 +85,92 @@ namespace sort_ns {
 
 template< typename T, int (*COMPARE_FUNC)( T const&, T const& ) > 
 void sort( T* array, int count )
-    {
-    #define SORT_INTERNAL_MED3( a, b, c ) \
-        ( COMPARE_FUNC( *(a), *(b) ) < 0 \
-            ? ( COMPARE_FUNC( *(b), *(c) ) < 0 ? (b) : COMPARE_FUNC( *(a), *(c) ) < 0 ? (c) : (a) ) \
-            : ( COMPARE_FUNC( *(b), *(c) ) > 0 ? (b) : COMPARE_FUNC( *(a), *(c) ) > 0 ? (c) : (a)) )
+	{
+	#define SORT_INTERNAL_MED3( a, b, c ) \
+		( COMPARE_FUNC( *(a), *(b) ) < 0 \
+			? ( COMPARE_FUNC( *(b), *(c) ) < 0 ? (b) : COMPARE_FUNC( *(a), *(c) ) < 0 ? (c) : (a) ) \
+			: ( COMPARE_FUNC( *(b), *(c) ) > 0 ? (b) : COMPARE_FUNC( *(a), *(c) ) > 0 ? (c) : (a)) )
 
-    #define SORT_INTERNAL_SWAP( a, b ) \
-        { T t = *(a); *(a) = *(b); *(b) = t; }
-    
-    #define SORT_INTERNAL_SWAP_RANGE( a, b, n ) \
-        { int sn = (n); T* sa = (a); T* sb = (b); while( sn > 0 ) { SORT_INTERNAL_SWAP( sa, sb ); ++sa; ++sb; --sn; } }
+	#define SORT_INTERNAL_SWAP( a, b ) \
+		{ T t = *(a); *(a) = *(b); *(b) = t; }
+	
+	#define SORT_INTERNAL_SWAP_RANGE( a, b, n ) \
+		{ int sn = (n); T* sa = (a); T* sb = (b); while( sn > 0 ) { SORT_INTERNAL_SWAP( sa, sb ); ++sa; ++sb; --sn; } }
 
-    #define SORT_INTERNAL_MIN( a, b ) \
-        ( ( (a) < (b) ) ? (a) : (b) )
+	#define SORT_INTERNAL_MIN( a, b ) \
+		( ( (a) < (b) ) ? (a) : (b) )
 
-    struct { int start; int count; } stack[ 32 ];
-    
+	struct { int start; int count; } stack[ 32 ];
+	
 	int top = 0;
-    stack[ top ].start = 0;
-    stack[ top ].count = count;
+	stack[ top ].start = 0;
+	stack[ top ].count = count;
 
-    while ( top >= 0 )    
-        {
-        T* a = array + stack[ top ].start;
-        count = stack[ top-- ].count;
+	while ( top >= 0 )    
+		{
+		T* a = array + stack[ top ].start;
+		count = stack[ top-- ].count;
 		
-        if( count < 24 ) // Insertion sort on smallest arrays
+		if( count < 24 ) // Insertion sort on smallest arrays
 			{
-            for( T* pm = a + 1; pm < a + count; ++pm )
-                for( T* pl = pm; pl > a && COMPARE_FUNC( *( pl - 1 ), *pl ) > 0; --pl )
-                    SORT_INTERNAL_SWAP( pl, pl - 1 );
-            continue;
-            }
-        T* pm = a + count / 2; // Small arrays, middle element
-        if( count > 40 ) // Big arrays, pseudomedian of 9
-            {
-            T* pl = a;
-            T* pn = a + count - 1;
+			for( T* pm = a + 1; pm < a + count; ++pm )
+				for( T* pl = pm; pl > a && COMPARE_FUNC( *( pl - 1 ), *pl ) > 0; --pl )
+					SORT_INTERNAL_SWAP( pl, pl - 1 );
+			continue;
+			}
+		T* pm = a + count / 2; // Small arrays, middle element
+		if( count > 40 ) // Big arrays, pseudomedian of 9
+			{
+			T* pl = a;
+			T* pn = a + count - 1;
 			int s = count / 8;
 			pl = SORT_INTERNAL_MED3( pl, pl + s, pl + 2 * s );
 			pm = SORT_INTERNAL_MED3( pm - s, pm, pm + s );
 			pn = SORT_INTERNAL_MED3( pn - 2 * s, pn - s, pn );
-            pm = SORT_INTERNAL_MED3( pl, pm, pn ); // Mid-size, med of 3
-            }
-        T* pv = a; SORT_INTERNAL_SWAP( pv, pm ); // pv points to partition value
-        T* pa = a;
+			pm = SORT_INTERNAL_MED3( pl, pm, pn ); // Mid-size, med of 3
+			}
+		T* pv = a; SORT_INTERNAL_SWAP( pv, pm ); // pv points to partition value
+		T* pa = a;
 		T* pb = a;
-        T* pc = a + count - 1;
+		T* pc = a + count - 1;
 		T* pd = pc;
-        for( ;; ) 
-            {
+		for( ;; ) 
+			{
 			int r;
-            while( pb <= pc && ( r = COMPARE_FUNC( *pb, *pv ) ) <= 0 ) 
-                {
-                if( r == 0 ) { SORT_INTERNAL_SWAP( pa, pb ); ++pa; }
-                ++pb;
-                }
-            while( pc >= pb && ( r = COMPARE_FUNC( *pc, *pv ) ) >= 0 ) 
-                {
-                if( r == 0 ) { SORT_INTERNAL_SWAP( pc, pd ); --pd; }
-                --pc;
-                }
-            if( pb > pc ) break;
-            SORT_INTERNAL_SWAP( pb, pc ); 
-            ++pb; --pc;
-            }
-        T* pn = a + count;
-        int s = (int)SORT_INTERNAL_MIN( pa - a, pb - pa ); SORT_INTERNAL_SWAP_RANGE( a, pb - s, s );
-        s = (int)SORT_INTERNAL_MIN( pd - pc, pn - pd - 1 ); SORT_INTERNAL_SWAP_RANGE( pb, pn - s, s );     
-        if( ( s = (int)( pb - pa ) ) > 1 ) 
-            {
-            if( ++top >= sizeof( stack) / sizeof( *stack ) ) { --top; sort<T, COMPARE_FUNC>( a, s ); }
-            else { stack[ top ].start = (int)( a - array ); stack[ top ].count = s; }
-            }
-        if( ( s = (int)( pd - pc ) ) > 1 ) 
-            {
-            if( ++top >= sizeof( stack) / sizeof( *stack ) ) { --top; sort<T, COMPARE_FUNC>( pn - s, s ); }
-            else { stack[ top ].start = (int)( ( pn - s ) - array ); stack[ top ].count = s; }
-            }
-        }
-    
-    #undef SORT_INTERNAL_MED3
-    #undef SORT_INTERNAL_SWAP
-    #undef SORT_INTERNAL_SWAP_RANGE
-    #undef SORT_INTERNAL_MIN
-    }
+			while( pb <= pc && ( r = COMPARE_FUNC( *pb, *pv ) ) <= 0 ) 
+				{
+				if( r == 0 ) { SORT_INTERNAL_SWAP( pa, pb ); ++pa; }
+				++pb;
+				}
+			while( pc >= pb && ( r = COMPARE_FUNC( *pc, *pv ) ) >= 0 ) 
+				{
+				if( r == 0 ) { SORT_INTERNAL_SWAP( pc, pd ); --pd; }
+				--pc;
+				}
+			if( pb > pc ) break;
+			SORT_INTERNAL_SWAP( pb, pc ); 
+			++pb; --pc;
+			}
+		T* pn = a + count;
+		int s = (int)SORT_INTERNAL_MIN( pa - a, pb - pa ); SORT_INTERNAL_SWAP_RANGE( a, pb - s, s );
+		s = (int)SORT_INTERNAL_MIN( pd - pc, pn - pd - 1 ); SORT_INTERNAL_SWAP_RANGE( pb, pn - s, s );     
+		if( ( s = (int)( pb - pa ) ) > 1 ) 
+			{
+			if( ++top >= sizeof( stack) / sizeof( *stack ) ) { --top; sort<T, COMPARE_FUNC>( a, s ); }
+			else { stack[ top ].start = (int)( a - array ); stack[ top ].count = s; }
+			}
+		if( ( s = (int)( pd - pc ) ) > 1 ) 
+			{
+			if( ++top >= sizeof( stack) / sizeof( *stack ) ) { --top; sort<T, COMPARE_FUNC>( pn - s, s ); }
+			else { stack[ top ].start = (int)( ( pn - s ) - array ); stack[ top ].count = s; }
+			}
+		}
+	
+	#undef SORT_INTERNAL_MED3
+	#undef SORT_INTERNAL_SWAP
+	#undef SORT_INTERNAL_SWAP_RANGE
+	#undef SORT_INTERNAL_MIN
+	}
 
 
 template< typename T > 

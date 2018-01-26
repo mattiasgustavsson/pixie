@@ -1,6 +1,6 @@
 /*
 ------------------------------------------------------------------------------
-          Licensing information can be found at the end of the file.
+		  Licensing information can be found at the end of the file.
 ------------------------------------------------------------------------------
 
 inputmap.h - v0.1 - 
@@ -137,15 +137,15 @@ float inputmap_action( inputmap_t* inputmap, int action );
 #undef INPUTMAP_IMPLEMENTATION
 
 #ifndef INPUTMAP_ASSERT
-    #define _CRT_NONSTDC_NO_DEPRECATE 
-    #define _CRT_SECURE_NO_WARNINGS
+	#define _CRT_NONSTDC_NO_DEPRECATE 
+	#define _CRT_SECURE_NO_WARNINGS
 	#include <assert.h>
 	#define INPUTMAP_ASSERT( expression, message ) assert( ( expression ) && ( message ) )
 #endif
 
 #ifndef INPUTMAP_MALLOC
-    #define _CRT_NONSTDC_NO_DEPRECATE 
-    #define _CRT_SECURE_NO_WARNINGS
+	#define _CRT_NONSTDC_NO_DEPRECATE 
+	#define _CRT_SECURE_NO_WARNINGS
 	#include <stdlib.h>
 	#if defined(__cplusplus)
 		#define INPUTMAP_MALLOC( ctx, size ) ( ::malloc( size ) )
@@ -203,7 +203,7 @@ typedef struct internal_inputmap_action_state_t
 
 struct inputmap_t
 	{
-    void* memctx;
+	void* memctx;
 	int is_updating;
 
 	int mappings_count;
@@ -229,7 +229,7 @@ inputmap_t* inputmap_create( void* memctx )
 	{ 
 	inputmap_t* inputmap = (inputmap_t*) INPUTMAP_MALLOC( memctx, sizeof( inputmap_t ) );
 
-    inputmap->memctx = memctx;
+	inputmap->memctx = memctx;
 	inputmap->is_updating = 0;
 
 	inputmap->mappings_count = 0;

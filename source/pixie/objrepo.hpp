@@ -1,6 +1,6 @@
 /*
 ------------------------------------------------------------------------------
-          Licensing information can be found at the end of the file.
+		  Licensing information can be found at the end of the file.
 ------------------------------------------------------------------------------
 
 objrepo.hpp - v0.1 - Generic object repositories with type-based lookup for C++.
@@ -143,12 +143,12 @@ object_list_repo::list<T> object_list_repo::get() const
 #endif
 
 #ifndef OBJREPO_ASSERT
-    #undef _CRT_NONSTDC_NO_DEPRECATE 
-    #define _CRT_NONSTDC_NO_DEPRECATE 
-    #undef _CRT_SECURE_NO_WARNINGS
-    #define _CRT_SECURE_NO_WARNINGS
-    #include <assert.h>
-    #define OBJREPO_ASSERT( expression, message ) assert( ( expression ) && ( message ) )
+	#undef _CRT_NONSTDC_NO_DEPRECATE 
+	#define _CRT_NONSTDC_NO_DEPRECATE 
+	#undef _CRT_SECURE_NO_WARNINGS
+	#define _CRT_SECURE_NO_WARNINGS
+	#include <assert.h>
+	#define OBJREPO_ASSERT( expression, message ) assert( ( expression ) && ( message ) )
 #endif
 
 namespace objrepo { namespace internal {
@@ -168,9 +168,9 @@ void objects_add( object_t** objects, int* capacity, int* count, void* object, t
 	if( *count >= *capacity )
 		{
 		*capacity *= 2;
-        object_t* new_objects = (object_t*) OBJREPO_MALLOC( memctx, *capacity * sizeof( **objects ) );
-        memcpy( new_objects, *objects, *count * sizeof( **objects ) );
-        OBJREPO_FREE( memctx, *objects );
+		object_t* new_objects = (object_t*) OBJREPO_MALLOC( memctx, *capacity * sizeof( **objects ) );
+		memcpy( new_objects, *objects, *count * sizeof( **objects ) );
+		OBJREPO_FREE( memctx, *objects );
 		*objects = new_objects;
 		}
 	object_t* entry = &(*objects)[ (*count)++ ];
@@ -238,10 +238,10 @@ void lists_add( list_t** lists, int* capacity, int* count, void* object, type_id
 		if( *count >= *capacity )
 			{
 			*capacity *= 2;
-            list_t* new_lists = (list_t*) OBJREPO_MALLOC( memctx, *capacity * sizeof( **lists ) );
-            memcpy( new_lists, *lists, *count * sizeof( **lists ) );
-            OBJREPO_FREE( memctx, *lists );
-            *lists = new_lists;
+			list_t* new_lists = (list_t*) OBJREPO_MALLOC( memctx, *capacity * sizeof( **lists ) );
+			memcpy( new_lists, *lists, *count * sizeof( **lists ) );
+			OBJREPO_FREE( memctx, *lists );
+			*lists = new_lists;
 			}
 		list = &(*lists)[ (*count)++ ];
 		list->count = 0;
@@ -253,9 +253,9 @@ void lists_add( list_t** lists, int* capacity, int* count, void* object, type_id
 	if( list->count >= list->capacity )
 		{
 		list->capacity *= 2;
-        void** new_instances = (void**) OBJREPO_MALLOC( memctx, list->capacity * sizeof( *list->instances ) );
-        memcpy( new_instances, list->instances, list->count * sizeof( *list->instances ) );
-        OBJREPO_FREE( memctx, list->instances );
+		void** new_instances = (void**) OBJREPO_MALLOC( memctx, list->capacity * sizeof( *list->instances ) );
+		memcpy( new_instances, list->instances, list->count * sizeof( *list->instances ) );
+		OBJREPO_FREE( memctx, list->instances );
 		list->instances = new_instances;
 		}
 

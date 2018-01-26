@@ -133,18 +133,18 @@ static float stb__perlin_grad(int hash, float x, float y, float z)
 {
    static float basis[12][4] =
    {
-      {  1, 1, 0 },
-      { -1, 1, 0 },
-      {  1,-1, 0 },
-      { -1,-1, 0 },
-      {  1, 0, 1 },
-      { -1, 0, 1 },
-      {  1, 0,-1 },
-      { -1, 0,-1 },
-      {  0, 1, 1 },
-      {  0,-1, 1 },
-      {  0, 1,-1 },
-      {  0,-1,-1 },
+	  {  1, 1, 0 },
+	  { -1, 1, 0 },
+	  {  1,-1, 0 },
+	  { -1,-1, 0 },
+	  {  1, 0, 1 },
+	  { -1, 0, 1 },
+	  {  1, 0,-1 },
+	  { -1, 0,-1 },
+	  {  0, 1, 1 },
+	  {  0,-1, 1 },
+	  {  0, 1,-1 },
+	  {  0,-1,-1 },
    };
 
    // perlin's gradient has 12 cases so some get used 1/16th of the time
@@ -152,12 +152,12 @@ static float stb__perlin_grad(int hash, float x, float y, float z)
    // to 5/64ths and 6/64ths, and the same 4 cases get the extra weight.
    static unsigned char indices[64] =
    {
-      0,1,2,3,4,5,6,7,8,9,10,11,
-      0,9,1,11,
-      0,1,2,3,4,5,6,7,8,9,10,11,
-      0,1,2,3,4,5,6,7,8,9,10,11,
-      0,1,2,3,4,5,6,7,8,9,10,11,
-      0,1,2,3,4,5,6,7,8,9,10,11,
+	  0,1,2,3,4,5,6,7,8,9,10,11,
+	  0,9,1,11,
+	  0,1,2,3,4,5,6,7,8,9,10,11,
+	  0,1,2,3,4,5,6,7,8,9,10,11,
+	  0,1,2,3,4,5,6,7,8,9,10,11,
+	  0,1,2,3,4,5,6,7,8,9,10,11,
    };
 
    // if you use reference permutation table, change 63 below to 15 to match reference
@@ -227,14 +227,14 @@ float stb_perlin_ridge_noise3(float x, float y, float z,float lacunarity, float 
    float sum = 0.0f;
 
    for (i = 0; i < octaves; i++) {
-      float r = (float)(stb_perlin_noise3(x*frequency,y*frequency,z*frequency,x_wrap,y_wrap,z_wrap));
-      r = r<0 ? -r : r; // fabs()
-      r = offset - r;
-      r = r*r;
-      sum += r*amplitude*prev;
-      prev = r;
-      frequency *= lacunarity;
-      amplitude *= gain;
+	  float r = (float)(stb_perlin_noise3(x*frequency,y*frequency,z*frequency,x_wrap,y_wrap,z_wrap));
+	  r = r<0 ? -r : r; // fabs()
+	  r = offset - r;
+	  r = r*r;
+	  sum += r*amplitude*prev;
+	  prev = r;
+	  frequency *= lacunarity;
+	  amplitude *= gain;
    }
    return sum;
 }
@@ -247,9 +247,9 @@ float stb_perlin_fbm_noise3(float x, float y, float z,float lacunarity, float ga
    float sum = 0.0f;
    
    for (i = 0; i < octaves; i++) {
-      sum += stb_perlin_noise3(x*frequency,y*frequency,z*frequency,x_wrap,y_wrap,z_wrap)*amplitude;
-      frequency *= lacunarity;
-      amplitude *= gain;
+	  sum += stb_perlin_noise3(x*frequency,y*frequency,z*frequency,x_wrap,y_wrap,z_wrap)*amplitude;
+	  frequency *= lacunarity;
+	  amplitude *= gain;
    }
    return sum;
 }
@@ -262,11 +262,11 @@ float stb_perlin_turbulence_noise3(float x, float y, float z, float lacunarity, 
    float sum = 0.0f;
    
    for (i = 0; i < octaves; i++) {
-      float r = stb_perlin_noise3(x*frequency,y*frequency,z*frequency,x_wrap,y_wrap,z_wrap)*amplitude;
-      r = r<0 ? -r : r; // fabs()
-      sum += r;
-      frequency *= lacunarity;
-      amplitude *= gain;
+	  float r = stb_perlin_noise3(x*frequency,y*frequency,z*frequency,x_wrap,y_wrap,z_wrap)*amplitude;
+	  r = r<0 ? -r : r; // fabs()
+	  sum += r;
+	  frequency *= lacunarity;
+	  amplitude *= gain;
    }
    return sum;
 }

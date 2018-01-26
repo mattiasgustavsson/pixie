@@ -1,6 +1,6 @@
 /*
 ------------------------------------------------------------------------------
-          Licensing information can be found at the end of the file.
+		  Licensing information can be found at the end of the file.
 ------------------------------------------------------------------------------
 
 resources.hpp - v0.1 - Efficient refcounted resource management for C++.
@@ -10,7 +10,7 @@ Do this:
 before you include this file in *one* C/C++ file to create the implementation.
 
 Dependencies: 
-    hashtable.h
+	hashtable.h
 */
 
 #ifndef resources_hpp
@@ -19,7 +19,7 @@ Dependencies:
 namespace resources { 
 
 #ifndef RESOURCES_U64
-    typedef unsigned long long RESOURCES_U64;
+	typedef unsigned long long RESOURCES_U64;
 #endif
 
 namespace internal { struct system_t; }
@@ -120,10 +120,10 @@ template< typename T > struct resource
 #define resources_impl 
 
 #ifndef RESOURCES_ASSERT
-    #define _CRT_NONSTDC_NO_DEPRECATE 
-    #define _CRT_SECURE_NO_WARNINGS
-    #include <assert.h>
-    #define RESOURCES_ASSERT( expression, message ) assert( ( expression ) && ( message ) )
+	#define _CRT_NONSTDC_NO_DEPRECATE 
+	#define _CRT_SECURE_NO_WARNINGS
+	#include <assert.h>
+	#define RESOURCES_ASSERT( expression, message ) assert( ( expression ) && ( message ) )
 #endif
 
 namespace resources { namespace internal {
@@ -398,7 +398,7 @@ template< typename T > typename resource<T>::list resource<T>::resource_list()
 #include <string.h>	
 
 #ifndef RESOURCES_U32
-    #define RESOURCES_U32 unsigned int
+	#define RESOURCES_U32 unsigned int
 #endif
 
 #ifndef RESOURCES_MALLOC
@@ -577,8 +577,8 @@ info_t inject( system_t* system, type_id_t type, resource_key const* key, destro
 			system->list_capacity *= 2;
 			list_t* new_list = (list_t*) RESOURCES_MALLOC( system->memctx, system->list_capacity * sizeof( *system->lists ) );
 			RESOURCES_ASSERT( new_list, "Allocation failed" );
-            memcpy( new_list, system->lists, system->list_count * sizeof( *system->lists ) );
-            RESOURCES_FREE( system->memctx, system->lists );
+			memcpy( new_list, system->lists, system->list_count * sizeof( *system->lists ) );
+			RESOURCES_FREE( system->memctx, system->lists );
 			system->lists = new_list;
 			}
 	
@@ -619,11 +619,11 @@ info_t inject( system_t* system, type_id_t type, resource_key const* key, destro
 		if( system->handle_count >= system->handle_capacity )
 			{
 			system->handle_capacity *= 2;
-            int* new_handles = (int*) RESOURCES_MALLOC( system->memctx, system->handle_capacity * sizeof( *system->handles ) );
+			int* new_handles = (int*) RESOURCES_MALLOC( system->memctx, system->handle_capacity * sizeof( *system->handles ) );
 			RESOURCES_ASSERT( new_handles, "Allocation failed" );
-            memcpy( new_handles, system->handles, system->handle_count * sizeof( *system->handles ) );
+			memcpy( new_handles, system->handles, system->handle_count * sizeof( *system->handles ) );
 			RESOURCES_FREE( system->memctx, system->handles );
-            system->handles = new_handles;
+			system->handles = new_handles;
 			}
 		
 		handle = system->handle_count++;
@@ -639,16 +639,16 @@ info_t inject( system_t* system, type_id_t type, resource_key const* key, destro
 	if( list->count >= list->capacity )
 		{
 		list->capacity *= 2;
-        
-        void** new_instances = (void**) RESOURCES_MALLOC( system->memctx, list->capacity * sizeof( *list->instances ) );
+		
+		void** new_instances = (void**) RESOURCES_MALLOC( system->memctx, list->capacity * sizeof( *list->instances ) );
 		RESOURCES_ASSERT( new_instances, "Allocation failed" );
-        memcpy( new_instances, list->instances, list->count * sizeof( *list->instances ) );
+		memcpy( new_instances, list->instances, list->count * sizeof( *list->instances ) );
 		RESOURCES_FREE( system->memctx, list->instances );
-        list->instances = new_instances;
+		list->instances = new_instances;
 
 		list_t::info_t* new_info = (list_t::info_t*) RESOURCES_MALLOC( system->memctx,list->capacity * sizeof( *list->info ) );
 		RESOURCES_ASSERT( new_info, "Allocation failed" );
-        memcpy( new_info, list->info, list->count * sizeof( *list->info ) );
+		memcpy( new_info, list->info, list->count * sizeof( *list->info ) );
 		RESOURCES_FREE( system->memctx, list->info );        
 		list->info = new_info;
 		}
