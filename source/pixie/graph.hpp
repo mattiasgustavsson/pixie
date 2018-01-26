@@ -416,11 +416,6 @@ void graph<SCREEN_TYPE, COLOR_TYPE>::polygon_fill( int* points_xy, int count, CO
 /*
 ------------------------------------------------------------------------------
 
-NOTE THAT THE `FILL` FUNCTION IS UNDER A DIFFERENT LICENSE (GRAPHICS GEMS),
-INCLUDED IN FULLL NEXT TO THE IMPLEMENTATION OF THE FUNCTION IN THIS FILE.
-
-------------------------------------------------------------------------------
-
 This software is available under 2 licenses - you may choose the one you like.
 
 ------------------------------------------------------------------------------
