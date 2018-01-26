@@ -63,14 +63,10 @@ int mygame()
 		.shadow( darkest_color() )
 		;
 
-	pixie::tween( 5.0f )
-		.on_complete( 
-			[&intro]() 
-				{ 
-				slowprint( &intro, "This is a small demo for the Pixie library, showing just a few features. The whole library is still very much in an early pre-beta stage - there are bugs, incomplete and untested features and weird behaviour everywhere, and there is no documentation at all. It might be interesting to have a look at, but I wouldn't recommend using it in it's current stage, and I have no idea when there will be a stable release.\n\n                        /Mattias Gustavsson", 0.015f );
-				}
-			)
-		;
+	slowprint( &intro, "This is a small demo for the Pixie library, showing just a few features. The whole library is still very much in an early "
+		"pre-beta stage - there are bugs, incomplete and untested features and weird behaviour everywhere, and there is no documentation at all. "
+		"It might be interesting to have a look at, but I wouldn't recommend using it in it's current stage, and I have no idea when there will "
+		"be a stable release.\n\n                        /Mattias Gustavsson", 0.015f ).delay( 5 );
 
 	while( is_running() )
 		{
