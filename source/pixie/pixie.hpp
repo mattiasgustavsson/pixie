@@ -96,7 +96,7 @@ using strpool::str; using strpool::trim; using strpool::ltrim; using strpool::rt
 using strpool::right; using strpool::mid; using strpool::instr; using strpool::any; using strpool::upper; 
 using strpool::lower; using strpool::val; using strpool::integer; using strpool::space; using strpool::flip; 
 using strpool::repeat; using strpool::chr; using strpool::asc; using strpool::len; using strpool::format;
-using tween::tweener; using refcount::ref; using tween::make_property; using tween::property;
+using tween_ns::tweener; using refcount::ref; using tween_ns::make_property; using tween_ns::property;
 using vecmath::float2; using vecmath::float3; using vecmath::float4; using vecmath::float2x2;
 using vecmath::float2x3; using vecmath::float3x2; using vecmath::float3x3; using vecmath::float2x4; 
 using vecmath::float3x4; using vecmath::float4x2; using vecmath::float4x3; using vecmath::float4x4; using vecmath::abs; 
@@ -2744,7 +2744,7 @@ struct pixie::internal::internals_t final
 	
 	gamestate::game_state_system<> game_states;
 	rnd_pcg_t rng_instance;
-	tween::tween_system tween_system;
+	tween_ns::tween_system tween_system;
 	objrepo::object_repo systems;
 
 	sprite_manager default_sprite_manager;

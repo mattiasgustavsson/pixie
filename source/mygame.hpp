@@ -18,17 +18,17 @@ int mygame()
 		.position_y( -200 )
 		;
 
-	pixie::tween( 1.0f )
+	tween( 1.0f )
 		.delay( 2.0f )
-		.property( pixie::property_position_y( &background ), 0.0f )
-		.ease( pixie::ease_bounce_out )
+		.property( property_position_y( &background ), 0.0f )
+		.ease( ease_bounce_out )
 		.on_complete( 
 			[&background]() 
 				{ 
-				pixie::tween( 1.0f )
+				tween( 1.0f )
 					.delay( 12.0f )
-					.property( pixie::property_position_y( &background ), 200.0f )
-					.ease( pixie::ease_back_in )
+					.property( property_position_y( &background ), 200.0f )
+					.ease( ease_back_in )
 					;
 				} 
 			)
@@ -46,10 +46,10 @@ int mygame()
 		.shadow( 0, 2.0f, 2.0f )
 		;
 
-	pixie::tween( 1.0f )
+	tween( 1.0f )
 		.delay( 1.0f )
-		.property( pixie::property_position_x( &title ), 160.0f )
-		.ease( pixie::ease_quad_out )
+		.property( property_position_x( &title ), 160.0f )
+		.ease( ease_quad_out )
 		;
 	
 	label intro;
@@ -77,12 +77,12 @@ int mygame()
 		random_seed( seed );
 		for( int i = 0; i < 100; ++i )
 			{
-			int x = pixie::random( 0, 319 );
-			int y = pixie::random( 0, 199 );
-			int r = pixie::random( 1, 40 );
-			int c = pixie::random( 1, 31 );
-			pixie::circle_fill( x, y, r, c );
-			pixie::circle( x, y, r, 0 );
+			int x = random( 0, 319 );
+			int y = random( 0, 199 );
+			int r = random( 1, 40 );
+			int c = random( 1, 31 );
+			circle_fill( x, y, r, c );
+			circle( x, y, r, 0 );
 			}
 		
 		if( exit_requested() ) end(); // exit immediately if user closes window

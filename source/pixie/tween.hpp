@@ -17,7 +17,7 @@ Dependencies:
 #include "funccall.hpp"
 #include "refcount.hpp"
 
-namespace tween {
+namespace tween_ns {
 
 #ifndef TWEEN_U64
 	#define TWEEN_U64 unsigned long long 
@@ -60,10 +60,10 @@ struct tweener
 	bool completed() const;
 
 	template< typename T > 
-	tweener property( tween::property<T>* prop, T const& target, T (*lerp_func)( T, T, float ) = 0 );
+	tweener property( tween_ns::property<T>* prop, T const& target, T (*lerp_func)( T, T, float ) = 0 );
 
 	template< typename T > 
-	tweener property( refcount::ref< tween::property<T> > const& prop, T const& target, T (*lerp_func)( T, T, float ) = 0  );
+	tweener property( refcount::ref< tween_ns::property<T> > const& prop, T const& target, T (*lerp_func)( T, T, float ) = 0  );
 
 	tweener delay( float duration );
 
@@ -211,7 +211,7 @@ template< typename T, typename U > refcount::ref< property<T> > make_property( r
 template< typename T, typename U > refcount::ref< property<T> > make_property( refcount::ref<U> const& instance, T (U::*get)() const, void (U::*set)( T ) );
 template< typename T, typename U > refcount::ref< property<T> > make_property( refcount::ref<U> const& instance, T (U::*get)() const, U& (U::*set)( T ) );
 
-} /* namespace tween */
+} /* namespace tween_ns */
 
 #endif /* tween_hpp */
 
@@ -224,7 +224,7 @@ template< typename T, typename U > refcount::ref< property<T> > make_property( r
 #ifndef tween_impl
 #define tween_impl
 
-namespace tween { namespace internal {
+namespace tween_ns { namespace internal {
 
 struct interpolator
 	{
@@ -249,7 +249,7 @@ template< typename T > struct interpolator_ref : interpolator
 			return a + ( b - a ) * t;
 			}
 
-		interpolator_ref( refcount::ref< tween::property<T> > const& prop, T const& target, T (* const lerp_func )( T, T, float ) ):
+		interpolator_ref( refcount::ref< tween_ns::property<T> > const& prop, T const& target, T (* const lerp_func )( T, T, float ) ):
 			started_( false ),
 			property_( prop ),
 			target_( target ),
@@ -258,7 +258,7 @@ template< typename T > struct interpolator_ref : interpolator
 			}
 
 		T (*lerp_func_)( T, T, float );
-		refcount::ref< tween::property<T> > property_;
+		refcount::ref< tween_ns::property<T> > property_;
 		T initial_;
 		T target_;
 		bool started_;
@@ -281,7 +281,7 @@ template< typename T > struct interpolator_ptr : interpolator
 			return a + ( b - a ) * t;
 			}
 
-		interpolator_ptr( tween::property<T>* const prop, T const& target, T (* const lerp_func)( T, T, float ) ):
+		interpolator_ptr( tween_ns::property<T>* const prop, T const& target, T (* const lerp_func)( T, T, float ) ):
 			started_( false ),
 			property_( prop ),
 			target_( target ),
@@ -290,7 +290,7 @@ template< typename T > struct interpolator_ptr : interpolator
 			}
 
 		T (*lerp_func_)( T, T, float );
-		tween::property<T>* property_;
+		tween_ns::property<T>* property_;
 		T initial_;
 		T target_;
 		bool started_;
@@ -455,13 +455,13 @@ template< typename T, typename U > struct ref_member_funcs_const_flow : property
 		U& (U::*set_)( T );
 	};
 
-} /* namespace internal */ } /* namespace tween */
+} /* namespace internal */ } /* namespace tween_ns */
 
 
-namespace tween {
+namespace tween_ns {
 
 
-template< typename T > tweener tweener::property( tween::property<T>* const prop, T const& target, T (* const lerp_func)( T, T, float ) ) 
+template< typename T > tweener tweener::property( tween_ns::property<T>* const prop, T const& target, T (* const lerp_func)( T, T, float ) ) 
 	{ 
 	refcount::ref<internal::interpolator> interp = 
 		refcount::ref< internal::interpolator_ptr<T> >::make_new( prop, target, lerp_func );
@@ -470,7 +470,7 @@ template< typename T > tweener tweener::property( tween::property<T>* const prop
 	}
 
 
-template< typename T > tweener tweener::property( refcount::ref< tween::property<T> > const& prop, T const& target, T (* const lerp_func)( T, T, float ) ) 
+template< typename T > tweener tweener::property( refcount::ref< tween_ns::property<T> > const& prop, T const& target, T (* const lerp_func)( T, T, float ) ) 
 	{ 
 	refcount::ref<internal::interpolator> interp = 
 		refcount::ref< internal::interpolator_ref<T> >::make_new( prop, target, lerp_func );
@@ -744,7 +744,7 @@ template< typename T, typename U > refcount::ref< property<T> > make_property( r
 	return refcount::ref< internal::ref_member_funcs_const_flow<T, U> >::make_new( instance, get, set );
 	}
 
-} /* namespace tween */
+} /* namespace tween_ns */
 
 
 #endif /* tween_impl */
@@ -763,7 +763,7 @@ template< typename T, typename U > refcount::ref< property<T> > make_property( r
 
 #include "handles.h"
 
-namespace tween { namespace internal {
+namespace tween_ns { namespace internal {
 	
 struct instance_t
 	{
@@ -990,9 +990,9 @@ static void reverse_set( system_t* system, TWEEN_U64 handle, bool value )
 	system->instances[ index ].reverse = value;
 	}
 
-} /* namespace internal */ } /* namespace tween */
+} /* namespace internal */ } /* namespace tween_ns */
 
-namespace tween {
+namespace tween_ns {
 
 tween_system::tween_system( void* memctx )
 	{
@@ -1185,7 +1185,7 @@ tweener::instance::~instance()
 	}
 
 
-} /* namespace tween */
+} /* namespace tween_ns */
 
 #endif /* TWEEN_IMPLEMENTATION */
 
