@@ -1150,8 +1150,8 @@ compilation_result compiler_pixie_bitmap_single( compile_context const* context 
 		paldither_palette_t* pal = paldither_palette_create_from_data( file->data, file->size, 0 );
 		file_destroy( file );
 		
-		int w, h, c;
-		stbi_uc* img = stbi_load( input_file.c_str(), &w, &h, &c, 4 );
+		int w, h, n;
+		stbi_uc* img = stbi_load( input_file.c_str(), &w, &h, &n, 4 );
 		
 		char const header[] = "PIXIE_PIX";
 		int version = 1;
@@ -1159,6 +1159,20 @@ compilation_result compiler_pixie_bitmap_single( compile_context const* context 
 		u8* output = (u8*) malloc( size );
 		memcpy( output, header, sizeof( header ) );
 		memcpy( output + sizeof( header ), &version, sizeof( version ) );
+		
+		for( int i = 0; i < w * h; ++i )
+			{
+			u32 c = ( (u32*)img )[ i ];
+			u32 r = c & 0xff;
+			u32 g = ( c >> 8 ) & 0xff;
+			u32 b = ( c >> 16 ) & 0xff;
+			u32 a = ( c >> 24 ) & 0xff;
+			r = ( r * a ) >> 8;
+			g = ( g * a ) >> 8;
+			b = ( b * a ) >> 8;
+			c = ( a << 24 ) | ( b << 16 ) | ( g << 8 ) | r;
+			( (u32*)img )[ i ] = c;
+			}
 		
 		int* offset_and_pitch = (int*)( output + sizeof( header ) + sizeof( version ) + 5 * sizeof ( int ) );
 		

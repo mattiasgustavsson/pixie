@@ -148,24 +148,14 @@ float to_degrees( float const radians )
 
 float angle_diff( float const a, float const b )
 	{
-	float d = b - a;
-		
-	// Make sure result is in the range 0 to TWO_PI
-	d = fmodf( d, TWO_PI );
-	if( d < 0) d += TWO_PI;
-
-	// Make sure result is in the range -PI to PI
-	if( d >= PI ) d -= TWO_PI;
-
-	return d;
+	float d = fmodf( b - a, TWO_PI );
+	return fmodf( 2.0f * d, TWO_PI ) - d;
 	}
 
 
 float angle_lerp( float const a, float const b, float const t )
 	{
-	float d = a - b;
-	d = ( fabsf( a - b ) >= TWO_PI ) ? d : angle_diff( a, b );
-	return a + d * t;
+	return a + angle_diff( b, a ) * t;
 	}
 
 

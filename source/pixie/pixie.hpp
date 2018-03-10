@@ -128,6 +128,7 @@ void wait( int jiffys );
 void wait( float time );
 void wait_key();
 
+void request_exit();
 bool exit_requested();
 void cancel_exit_request();
 
@@ -323,6 +324,8 @@ struct rgb final
 	operator float4();
 	};
 
+void default_palette();
+
 void load_palette( string const& filename );
 void load_palette( string const& filename, rgb colors[ 256 ] );
 rgb const* palette();
@@ -510,6 +513,9 @@ void remove_event_handler( event_handler* handler );
 
 tweener tween( float duration );
 void stop_all_tweeners();
+void pause_all_tweeners();
+void resume_all_tweeners();
+
 
 template< typename T > void register_state();
 template< typename T > void switch_state( float trans_out = 0.0f, float trans_in = 0.0f );
@@ -895,7 +901,7 @@ struct sprite_manager final
 
 		struct 
 			{
-			pod_array<internal_sprite*> sprites;
+			pod_array<internal_sprite*, 256> sprites;
 			pod_array<event_handler*> event_handlers;
 			float origin_x;
 			float origin_y;
@@ -1347,18 +1353,17 @@ float ease_circle_in_out( float t );
 tweener slowprint( label* lbl, string text, float delay = 0.1f );
 	
 
-template< typename T > struct pool;
-template< typename T > ref<T> pool_ref( pool<T>* pool_instance );
-template< typename T, typename P0 > ref<T> pool_ref( pool<T>* pool_instance, P0 p0 );
-template< typename T, typename P0, typename P1 > ref<T> pool_ref( pool<T>* pool_instance, P0 p0, P1 p1 );
-template< typename T, typename P0, typename P1, typename P2 > ref<T> pool_ref( pool<T>* pool_instance, P0 p0, P1 p1, P2 p2 );
-template< typename T, typename P0, typename P1, typename P2, typename P3 > ref<T> pool_ref( pool<T>* pool_instance, P0 p0, P1 p1, P2 p2, P3 p3 );
-template< typename T, typename P0, typename P1, typename P2, typename P3, typename P4 > ref<T> pool_ref( pool<T>* pool_instance, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4 );
-template< typename T, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5 > ref<T> pool_ref( pool<T>* pool_instance, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5 );
-template< typename T, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6 > ref<T> pool_ref( pool<T>* pool_instance, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6 );
-template< typename T, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7 > ref<T> pool_ref( pool<T>* pool_instance, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7 );
-template< typename T, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7, typename P8 > ref<T> pool_ref( pool<T>* pool_instance, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8 );
-template< typename T, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7, typename P8, typename P9 > ref<T> pool_ref( pool<T>* pool_instance, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8, P9 p9 );
+template< typename T > ref<T> pool_ref( mempool<T>* pool_instance );
+template< typename T, typename P0 > ref<T> pool_ref( mempool<T>* pool_instance, P0 p0 );
+template< typename T, typename P0, typename P1 > ref<T> pool_ref( mempool<T>* pool_instance, P0 p0, P1 p1 );
+template< typename T, typename P0, typename P1, typename P2 > ref<T> pool_ref( mempool<T>* pool_instance, P0 p0, P1 p1, P2 p2 );
+template< typename T, typename P0, typename P1, typename P2, typename P3 > ref<T> pool_ref( mempool<T>* pool_instance, P0 p0, P1 p1, P2 p2, P3 p3 );
+template< typename T, typename P0, typename P1, typename P2, typename P3, typename P4 > ref<T> pool_ref( mempool<T>* pool_instance, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4 );
+template< typename T, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5 > ref<T> pool_ref( mempool<T>* pool_instance, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5 );
+template< typename T, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6 > ref<T> pool_ref( mempool<T>* pool_instance, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6 );
+template< typename T, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7 > ref<T> pool_ref( mempool<T>* pool_instance, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7 );
+template< typename T, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7, typename P8 > ref<T> pool_ref( mempool<T>* pool_instance, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8 );
+template< typename T, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7, typename P8, typename P9 > ref<T> pool_ref( mempool<T>* pool_instance, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8, P9 p9 );
 
 } /* namespace pixie */
 
@@ -1484,30 +1489,6 @@ template<> inline strpool::internal::string_pool& strpool::internal::pool_instan
 	return pixie::internal::string_id_pool();
 	}
 
-template< typename T > 
-void pixie::create_system()
-	{
-	#pragma warning( push )
-	#pragma warning( disable: 4619 ) // there is no warning number '4345'
-	#pragma warning( disable: 4345 ) // behavior change: an object of POD type constructed with an initializer of the form () will be default-initialized
-
-	void* storage = internal::systems_alloc( sizeof( T ) );
-	T* sys = new (storage) T();
-	add_system( sys );
-
-	#pragma warning( pop )
-	}
-
-template< typename T > void pixie::destroy_system()
-	{
-	T* sys = system<T>();
-	if( sys ) 
-		{       
-		sys->~T();
-		internal::systems_free( sys );
-		internal::object_repo()->remove( sys );
-		}   
-	}
 
 
 template< typename T > void pixie::add_system( T* system )
@@ -1526,6 +1507,7 @@ template< typename T > void pixie::remove_system()
 
 template< typename T > T* pixie::system()
 	{
+	if( !internal::object_repo() ) return 0;
 	return internal::object_repo()->get<T>();
 	}
 
@@ -1739,7 +1721,7 @@ namespace pixie { namespace internal {
 
 template< typename T > void destroy_instance( void* instance ) 
 	{ 
-	pool<T>::item_t* item = (pool<T>::item_t*) instance;
+	mempool<T>::item_t* item = (mempool<T>::item_t*) instance;
 	item->owner->destroy( &(item->item) );
 	}
 
@@ -1749,89 +1731,89 @@ inline void destroy_count( int* ) { /* do nothing - refcount is stored along wit
 
 
 template< typename T >
-pixie::ref<T> pixie::pool_ref( pool<T>* pool_instance )
+pixie::ref<T> pixie::pool_ref( mempool<T>* pool_instance )
 	{
-	pool<T>::item_t* item = (pool<T>::item_t*) pool_instance->create();
+	mempool<T>::item_t* item = (mempool<T>::item_t*) pool_instance->create();
 	return refcount::make_ref( &item->item, internal::destroy_instance<T>, &item->ref_count, internal::destroy_count );
 	}
 
 
 template< typename T, typename P0 > 
-pixie::ref<T> pixie::pool_ref( pool<T>* pool_instance, P0 p0 )
+pixie::ref<T> pixie::pool_ref( mempool<T>* pool_instance, P0 p0 )
 	{
-	pool<T>::item_t* item = (pool<T>::item_t*) pool_instance->create( p0 );
+	mempool<T>::item_t* item = (mempool<T>::item_t*) pool_instance->create( p0 );
 	return refcount::make_ref( &item->item, internal::destroy_instance<T>, &item->ref_count, internal::destroy_count );
 	}
 
 
 template< typename T, typename P0, typename P1 > 
-pixie::ref<T> pixie::pool_ref( pool<T>* pool_instance, P0 p0, P1 p1 )
+pixie::ref<T> pixie::pool_ref( mempool<T>* pool_instance, P0 p0, P1 p1 )
 	{
-	pool<T>::item_t* item = (pool<T>::item_t*) pool_instance->create( p0, p1 );
+	mempool<T>::item_t* item = (mempool<T>::item_t*) pool_instance->create( p0, p1 );
 	return refcount::make_ref( &item->item, internal::destroy_instance<T>, &item->ref_count, internal::destroy_count );
 	}
 
 
 template< typename T, typename P0, typename P1, typename P2 > 
-pixie::ref<T> pixie::pool_ref( pool<T>* pool_instance, P0 p0, P1 p1, P2 p2 )
+pixie::ref<T> pixie::pool_ref( mempool<T>* pool_instance, P0 p0, P1 p1, P2 p2 )
 	{
-	pool<T>::item_t* item = (pool<T>::item_t*) pool_instance->create( p0, p1, p2 );
+	mempool<T>::item_t* item = (mempool<T>::item_t*) pool_instance->create( p0, p1, p2 );
 	return refcount::make_ref( &item->item, internal::destroy_instance<T>, &item->ref_count, internal::destroy_count );
 	}
 
 
 template< typename T, typename P0, typename P1, typename P2, typename P3 > 
-pixie::ref<T> pixie::pool_ref( pool<T>* pool_instance, P0 p0, P1 p1, P2 p2, P3 p3 )
+pixie::ref<T> pixie::pool_ref( mempool<T>* pool_instance, P0 p0, P1 p1, P2 p2, P3 p3 )
 	{
-	pool<T>::item_t* item = (pool<T>::item_t*) pool_instance->create( p0, p1, p2, p3 );
+	mempool<T>::item_t* item = (mempool<T>::item_t*) pool_instance->create( p0, p1, p2, p3 );
 	return refcount::make_ref( &item->item, internal::destroy_instance<T>, &item->ref_count, internal::destroy_count );
 	}
 
 
 template< typename T, typename P0, typename P1, typename P2, typename P3, typename P4 > 
-pixie::ref<T> pixie::pool_ref( pool<T>* pool_instance, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4 )
+pixie::ref<T> pixie::pool_ref( mempool<T>* pool_instance, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4 )
 	{
-	pool<T>::item_t* item = (pool<T>::item_t*) pool_instance->create( p0, p1, p2, p3, p4 );
+	mempool<T>::item_t* item = (mempool<T>::item_t*) pool_instance->create( p0, p1, p2, p3, p4 );
 	return refcount::make_ref( &item->item, internal::destroy_instance<T>, &item->ref_count, internal::destroy_count );
 	}
 
 
 template< typename T, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5 > 
-pixie::ref<T> pixie::pool_ref( pool<T>* pool_instance, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5 )
+pixie::ref<T> pixie::pool_ref( mempool<T>* pool_instance, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5 )
 	{
-	pool<T>::item_t* item = (pool<T>::item_t*) pool_instance->create( p0, p1, p2, p3, p4, p5 );
+	mempool<T>::item_t* item = (mempool<T>::item_t*) pool_instance->create( p0, p1, p2, p3, p4, p5 );
 	return refcount::make_ref( &item->item, internal::destroy_instance<T>, &item->ref_count, internal::destroy_count );
 	}
 
 
 template< typename T, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6 > 
-pixie::ref<T> pixie::pool_ref( pool<T>* pool_instance, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6 )
+pixie::ref<T> pixie::pool_ref( mempool<T>* pool_instance, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6 )
 	{
-	pool<T>::item_t* item = (pool<T>::item_t*) pool_instance->create( p0, p1, p2, p3, p4, p5, p6 );
+	mempool<T>::item_t* item = (mempool<T>::item_t*) pool_instance->create( p0, p1, p2, p3, p4, p5, p6 );
 	return refcount::make_ref( &item->item, internal::destroy_instance<T>, &item->ref_count, internal::destroy_count );
 	}
 
 
 template< typename T, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7 > 
-pixie::ref<T> pixie::pool_ref( pool<T>* pool_instance, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7 )
+pixie::ref<T> pixie::pool_ref( mempool<T>* pool_instance, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7 )
 	{
-	pool<T>::item_t* item = (pool<T>::item_t*) pool_instance->create( p0, p1, p2, p3, p4, p5, p6, p7 );
+	mempool<T>::item_t* item = (mempool<T>::item_t*) pool_instance->create( p0, p1, p2, p3, p4, p5, p6, p7 );
 	return refcount::make_ref( &item->item, internal::destroy_instance<T>, &item->ref_count, internal::destroy_count );
 	}
 
 
 template< typename T, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7, typename P8 > 
-pixie::ref<T> pixie::pool_ref( pool<T>* pool_instance, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8 )
+pixie::ref<T> pixie::pool_ref( mempool<T>* pool_instance, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8 )
 	{
-	pool<T>::item_t* item = (pool<T>::item_t*) pool_instance->create( p0, p1, p2, p3, p4, p5, p6, p7, p8 );
+	mempool<T>::item_t* item = (mempool<T>::item_t*) pool_instance->create( p0, p1, p2, p3, p4, p5, p6, p7, p8 );
 	return refcount::make_ref( &item->item, internal::destroy_instance<T>, &item->ref_count, internal::destroy_count );
 	}
 
 
 template< typename T, typename P0, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7, typename P8, typename P9 > 
-pixie::ref<T> pixie::pool_ref( pool<T>* pool_instance, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8, P9 p9 )
+pixie::ref<T> pixie::pool_ref( mempool<T>* pool_instance, P0 p0, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8, P9 p9 )
 	{
-	pool<T>::item_t* item = (pool<T>::item_t*) pool_instance->create( p0, p1, p2, p3, p4, p5, p6, p7, p8, p9 );
+	mempool<T>::item_t* item = (mempool<T>::item_t*) pool_instance->create( p0, p1, p2, p3, p4, p5, p6, p7, p8, p9 );
 	return refcount::make_ref( &item->item, internal::destroy_instance<T>, &item->ref_count, internal::destroy_count );
 	}
 
@@ -2744,7 +2726,8 @@ struct pixie::internal::internals_t final
 	
 	gamestate::game_state_system<> game_states;
 	rnd_pcg_t rng_instance;
-	tween_ns::tween_system tween_system;
+	tween::tween_system tween_system;
+	float tween_scale;
 	objrepo::object_repo systems;
 
 	sprite_manager default_sprite_manager;
@@ -2762,7 +2745,7 @@ struct pixie::internal::internals_t final
 	array<gamepadbutton_event_t> gamepad_released_events;
 	array<gamepadaxis_event_t> gamepad_axis_events;
 
-	array<pinned_resource> pinned_resources;
+	array<pinned_resource,1024> pinned_resources;
 
 	bool exit_requested;
 
@@ -2790,6 +2773,7 @@ pixie::internal::internals_t::internals_t( void* memctx_, frame_data_t* frame_da
 	resource_sys( memctx_ ),
 	tween_system( memctx_ ),
 	screenmode( APP_SCREENMODE_FULLSCREEN ),
+	tween_scale( 1.0f ),
 	next_audio_handle( 0 ),
 	master_volume( 1.0f ),
 	music_volume( 1.0f ),
@@ -2820,7 +2804,6 @@ pixie::internal::internals_t::internals_t( void* memctx_, frame_data_t* frame_da
 		palette[ i ].b = (u8)( default_palette[ i ] & 0xff );
 		palette[ i ].g = (u8)( ( default_palette[ i ] >> 8 ) & 0xff );
 		palette[ i ].r = (u8)( ( default_palette[ i ] >> 16 ) & 0xff );
-
 		}
 	brightest_color = 255;
 	darkest_color = 0;
@@ -2853,6 +2836,11 @@ pixie::internal::internals_t::internals_t( void* memctx_, frame_data_t* frame_da
 pixie::internal::internals_t::~internals_t() 
 	{ 
 	PIXIE_ASSERT( current_sounds.count() == 0, "Sound cleanup not finished" );
+
+	game_states.pop( -1 );
+	game_states.update( 0.0f );
+	tween_system.stop_all();    
+
 	pinned_resources.clear();
 	gamepad_destroy( gamepad );
 	inputmap_destroy( inputmap );
@@ -4149,7 +4137,7 @@ void pixie::execute_frame()
 	send_events( internals );
 		
 	// update game 
-	internals->tween_system.update( internals->delta_time );    
+	internals->tween_system.update( internals->delta_time * internals->tween_scale );    
 
 	}
 
@@ -5183,6 +5171,11 @@ size_t pixie::mem_used( int* alloc_count, size_t* peak_use )
 	return (size_t) memtrack->current;
 	}
 
+void pixie::request_exit()
+	{
+	internal::internals_t* internals = internal::internals();
+	internals->exit_requested = true;
+	}
 
 bool pixie::exit_requested()
 	{
@@ -5491,6 +5484,19 @@ pixie::rgb::operator pixie::float4()
 	}
 
 
+void pixie::default_palette()
+	{
+	internal::internals_t* internals = internal::internals();
+	for( int i = 0; i < 256; ++i )
+		{
+		internals->palette[ i ].b = (u8)( internal::default_palette[ i ] & 0xff );
+		internals->palette[ i ].g = (u8)( ( internal::default_palette[ i ] >> 8 ) & 0xff );
+		internals->palette[ i ].r = (u8)( ( internal::default_palette[ i ] >> 16 ) & 0xff );
+		}
+	internal::update_color_indices( 0, internals->palette, 256 );
+	}
+	
+
 void pixie::load_palette( string const& filename )
 	{
 	internal::internals_t* internals = internal::internals();
@@ -5501,6 +5507,8 @@ void pixie::load_palette( string const& filename )
 	
 void pixie::load_palette( string const& filename, rgb colors[ 256 ] )   
 	{
+	internal::internals_t* internals = internal::internals();
+	internals->palette_splits.clear();
 	ref<binary> bin = bload( filename.c_str() );
 	PIXIE_ASSERTF( bin, ( "Failed to load palette: %s", filename.c_str() ) );
 	if( !bin ) return;
@@ -6401,6 +6409,7 @@ int pixie::clamp( int x, int min_val, int max_val )
 
 void pixie::mouse_pointer( pixie::bitmap const* bitmap, int hotspot_x, int hotspot_y )
 	{
+	if( !bitmap ) return mouse_pointer( 0, 0, 0, 0, hotspot_x, hotspot_y );
 	bitmap::lock_data lock;
 	((pixie::bitmap*)bitmap)->lock( &lock );
 	if( lock.pixels ) mouse_pointer( lock.pixels, lock.mask, lock.pitch_x, lock.pitch_y, hotspot_x, hotspot_y );
@@ -7044,6 +7053,20 @@ void pixie::stop_all_tweeners()
 	{
 	pixie::internal::internals_t* internals = pixie::internal::internals();
 	return internals->tween_system.stop_all();
+	}
+
+
+void pixie::pause_all_tweeners()
+	{
+	pixie::internal::internals_t* internals = pixie::internal::internals();
+	internals->tween_scale = 0.0f;
+	}
+
+
+void pixie::resume_all_tweeners()
+	{
+	pixie::internal::internals_t* internals = pixie::internal::internals();
+	internals->tween_scale = 1.0f;
 	}
 
 
@@ -7995,6 +8018,7 @@ pixie::game_state::~game_state()
 	internal::internals_t* internals = internal::internals();
 	internals->default_sprite_manager.remove_event_handler( this );
 	remove_event_handler( this );
+	stop_all_tweeners();
 	}
 
 
@@ -8706,7 +8730,7 @@ void pixie::bitmap::blit( int cel, int x1, int y1, int x2, int y2, bitmap* targe
 				{
 				for( int ix = 0; ix < src_blit.w; ++ix )
 					{
-					if( *src_mask++ )
+					if( *src_mask++ > 0x80 )
 						{
 						*dst_pixels = *src_pixels;
 						*dst_mask = 0xff;
@@ -8729,7 +8753,7 @@ void pixie::bitmap::blit( int cel, int x1, int y1, int x2, int y2, bitmap* targe
 				{
 				for( int ix = 0; ix < src_blit.w; ++ix )
 					{
-					if( *src_mask++ ) *dst_pixels = *src_pixels;
+					if( *src_mask++ >= 0x80 ) *dst_pixels = *src_pixels;
 					++src_pixels;
 					++dst_pixels;
 					}
@@ -11620,7 +11644,7 @@ pixie::tweener pixie::slowprint( label* lbl, string text, float delay )
 	{
 	lbl->text( text );
 	lbl->limit( 0.0f );
-	float len = (float) ( text.length() - 1 );
+	float len = (float) ( text.length() );
 	return tween( len * delay )
 		.property( property_limit( lbl ), len )
 		.ease( ease_linear )

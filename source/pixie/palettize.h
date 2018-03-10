@@ -230,8 +230,8 @@ static void priority_queue_pop( palettize_internal_priority_queue_t* queue )
 	}
 
 	
-static void palettize_internal_nth_element(palettize_internal_rgb_t* first, palettize_internal_rgb_t* nth, 
-	palettize_internal_rgb_t* last, int index) 
+static void palettize_internal_nth_element( palettize_internal_rgb_t* first, palettize_internal_rgb_t* nth, 
+	palettize_internal_rgb_t* last, int index ) 
 	{
 	while( last - first > 3 ) 
 		{

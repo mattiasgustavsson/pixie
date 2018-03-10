@@ -497,7 +497,7 @@ T& array_type<T, CAPACITY, POD>::insert( implementation<NOT_POD>, int index, T c
 	if( index < 0 || index > count_ ) return *items_;  // Return the first slot, just to return a valid address
 
 	// Make room
-	T& result = add( implementation<NOT_POD>() );
+	add( implementation<NOT_POD>() );
 
 	// Shift existing items 
 	for( int i = count_ - 1; i > index; --i )
