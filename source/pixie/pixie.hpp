@@ -2726,7 +2726,7 @@ struct pixie::internal::internals_t final
 	
 	gamestate::game_state_system<> game_states;
 	rnd_pcg_t rng_instance;
-	tween::tween_system tween_system;
+	tween_ns::tween_system tween_system;
 	float tween_scale;
 	objrepo::object_repo systems;
 
