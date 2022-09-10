@@ -6,5 +6,3 @@ Pixie is my own little game engine for C/C++. A basic framework for making small
 Currently, the code is very much in pre-beta stage. Expect lots of things not to work. There's no documentation. There are bits missing, and bits which are just plain wrong. I am putting it up here so I have a place to point people to when I ask them to look things over and give me feedback - but it is probably too early to start using it for a real project. 
 
 At this point, I am not accepting any pull requests - but feel free to report issues if you find them. Also, I am happy to answer questions and discuss the code - best way is to message me on twitter, I'm @Mattias_G
-
-Also, as there is virtually no documentation or sample code, I've set up a discord to complement twitter for discussions and questions. Feel free to join, everyone is welcome: https://discordapp.com/invite/RvDWEEU
